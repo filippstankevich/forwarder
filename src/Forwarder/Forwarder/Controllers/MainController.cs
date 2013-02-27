@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForwarderDAL.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,12 @@ namespace Forwarder.Controllers
 {
     public class MainController : Controller
     {
-        //
-        // GET: /Main/
+        private IForwarderRepository repository;
+
+        public MainController(IForwarderRepository repo)
+        {
+            repository = repo;
+        }
 
         public ActionResult Index()
         {
