@@ -16,6 +16,14 @@ namespace Forwarder.Controllers
             repository = repo;
         }
 
+        public PartialViewResult Menu()
+        {
+            IEnumerable<string> categories = repository.Stations
+            .Select(x => x.Name);
+            
+            return PartialView(categories);
+        }
+
         public ActionResult Index()
         {
             return View();

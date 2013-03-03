@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\ETSNG_Entity.cs" />
+    <Compile Include="Entity\GNG_Entity.cs" />
+    <Compile Include="Entity\StationEntity.cs" />
+    <Compile Include="Entity\TestingClass.cs" />
+    <Compile Include="Entity\TransportationEntity.cs" />
     <Compile Include="Entity\FRDbContext.cs" />
     <Compile Include="Entity\SomeObject.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
