@@ -194,6 +194,7 @@
     <Content Include="Views\Main\TestPage.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\ViewPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
