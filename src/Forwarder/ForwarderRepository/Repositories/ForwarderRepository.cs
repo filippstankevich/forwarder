@@ -6,6 +6,8 @@ using ForwarderDAL.Entity;
 
 namespace ForwarderDAL.Repositories
 {
+    //TODO: Filipp Stankevich Зачем в названии репозитория использовать слово Forwarder
+    //У нас будет еще какой-то репозиторий?
     public class ForwarderRepository : IForwarderRepository
     {
         private FRDbContext context = new FRDbContext();

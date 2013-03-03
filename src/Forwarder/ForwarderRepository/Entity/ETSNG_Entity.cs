@@ -6,6 +6,7 @@ using System.Text;
 
 namespace ForwarderDAL.Entity
 {
+    //TODO: Почему название класса через подчеркивание. Исправить или аргументировать.
     public class ETSNG_Entity
     {
         [Key]

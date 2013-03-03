@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ForwarderDAL.Entity
 {
+    //TODO: Что за класс? Исправить название или удалить.
     public class SomeObject
     {
         public int ObjectId { get; set; }

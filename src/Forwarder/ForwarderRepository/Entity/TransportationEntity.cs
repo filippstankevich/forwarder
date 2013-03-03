@@ -7,6 +7,8 @@ using System.Text;
 
 namespace ForwarderDAL.Entity
 {
+    //TODO: Filipp Stankevich Зачем использовать в названия POCO-классов слово Entity. 
+    //Мне кажеться в этом нет необходимости
     public class TransportationEntity
     {
         [Key]
