@@ -1,0 +1,47 @@
+﻿
+<!doctype html>
+<html>
+<head>
+<title>Grid</title>
+  <link href="../../Content/themes/jquery-ui-1.7.2.custom.css" media="screen" rel="Stylesheet" type="text/css" />
+  <link href="../../Content/themes/ui.jqgrid.css" media="screen" rel="Stylesheet" type="text/css" />
+  
+  <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js" />
+  <script type="text/javascript" src="../../Scripts/trirand/jquery.jqGrid.min.js" />
+  <script type="text/javascript" src="../../Scripts/trirand/i18n/grid.locale-ru.js" />
+</head> 
+<body>
+<script type = "text/javascript">
+ $(document).ready(function() {
+  var mygrid = $("#list").jqGrid({
+    url: '../../Grid/GridView',             // серверный метод для получения данных
+    datatype: 'json',                    // указывается формат данных которые будут получены
+    type: 'GET',
+    contentType: "application/json; charset=utf-8",                   
+    colNames: ['Ид', 'Фамилия', 'Имя', 'Email', 'Телефон'], // Массив с названиями колонок
+    colModel: [                       // Массив описывающи модель данных
+      { name: 'EmployeeId', width: 50 },
+      { name: 'FirstName', width: 100 },
+      { name: 'LastName', width: 100 },
+      { name: 'Email', width: 100 },
+      { name: 'PhoneNumber', width: 60}],
+    width: 700,
+    height: 'auto',
+    pager: $('#pager'),               // объявление страничного навигатора с указанием id div`а для формирования
+    rowNum: 10,                   // Сколько строк отображать на одной странице    
+    rowList: [10, 20, 30],             // массив для создания выпадающего списка с выбором количества отображаемых строк
+    gridview: true,
+    imgpath: '../../Content/themes/redmond/images',
+    caption: 'Список сотрудников'
+  })
+      .navGrid('#pager', { edit: false, add: false, del: false, search: false, refresh: false });
+})
+</script>
+
+<table id="list" class="scroll" cellpadding="0" cellspacing="0">
+  </table>
+  <div id="pager" class="scroll" style="text-align: center">
+  </div>
+
+</body>
+</html>
