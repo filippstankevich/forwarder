@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forwarder", "Forwarder\Forwarder.csproj", "{458ED562-72D0-4E44-9BB7-AE7B0A851723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForwarderDAL", "ForwarderRepository\ForwarderDAL.csproj", "{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForwarderTests", "ForwarderTests\ForwarderTests.csproj", "{2E754848-C9AA-40F2-89F1-EAECAA550239}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{458ED562-72D0-4E44-9BB7-AE7B0A851723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458ED562-72D0-4E44-9BB7-AE7B0A851723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458ED562-72D0-4E44-9BB7-AE7B0A851723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458ED562-72D0-4E44-9BB7-AE7B0A851723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E754848-C9AA-40F2-89F1-EAECAA550239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E754848-C9AA-40F2-89F1-EAECAA550239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E754848-C9AA-40F2-89F1-EAECAA550239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E754848-C9AA-40F2-89F1-EAECAA550239}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
