@@ -23,11 +23,10 @@ namespace Forwarder.Controllers
 
                            {
 
-                               new GridModel{Id = 1, FirstName = "Александр", LastName = "Македонский", Email = "alex.mak@test.com"},
-
-                               new GridModel {Id = 2, FirstName = "Иван", LastName = "Петров", Email = "ivan@test.com"},
-
-                               new GridModel{Id = 3, FirstName = "Сергей", LastName = "Сидоров", Email = "sarg@test.com"},
+                               new GridModel{  Id = 1, RegNumber = "12345", DispatchStation = "Томск", ArriveStattion = "Москва",GHGClassificator = "123",
+                                               ETSNGClassificator = "321", TransportCount = "8",FullWeight = "100", Comments = "ок",RegDate = "1.01.2012" },
+                                             
+                            
 
                            };
 
@@ -50,9 +49,16 @@ namespace Forwarder.Controllers
         public class GridModel
         {
             public int Id { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Email { get; set; }
+            public string RegNumber { get; set; }
+            public string DispatchStation { get; set; }
+            public string ArriveStattion { get; set; }
+            public string GHGClassificator { get; set; }
+            public string ETSNGClassificator { get; set; }
+            public string TransportCount { get; set; }
+            public string FullWeight { get; set; }
+            public string Comments { get; set; }
+            public string RegDate { get; set; }
+ 
 
         }
 

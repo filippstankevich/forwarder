@@ -23,12 +23,18 @@
                     repeatitems: false,
                     id: ""
                 },
-                colNames: ['Id', 'Имя', 'Фамилия', 'Email'],
+                colNames: ['Id', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Общий вес перевозки', 'Комментарии',''],
                 colModel: [
                 { name: 'Id', width: 20 },
-                { name: 'FirstName', width: 105 },
-                { name: 'LastName', width: 100 },
-                { name: 'Email', width: 150 }
+                { name: 'RegNumber', width: 105 },
+                { name: 'DispatchStation', width: 100 },
+                { name: 'ArriveStattion', width: 150 },
+                { name: 'GHGClassificator', width: 150 },
+                { name: 'ETSNGClassificator', width: 150 },
+                { name: 'TransportCount', width: 150 },
+                { name: 'FullWeight', width: 150 },
+                { name: 'Comments', width: 150 },
+                { name: 'RegDate', width: 150 }
                 ],
                 pager: '#GridTablePager',
                 viewrecords: true

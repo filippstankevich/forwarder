@@ -27,7 +27,7 @@
             <div id="menucontainer">
                 <ul id="menu">
                     <li>
-                        <%: Html.ActionLink("Сотрудники", "GridView", "GridModel")%></li>
+                        <%: Html.ActionLink("Перевозка", "GridView", "Grid")%></li>                     
                 </ul>
             </div>
         </div>
