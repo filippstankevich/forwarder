@@ -16,11 +16,11 @@ namespace ForwarderTests
         public void Can_Create_Stations()
         {
             Mock<IForwarderRepository> mock = new Mock<IForwarderRepository>();
-            mock.Setup(m => m.Stations).Returns(new StationEntity[] {
-                new StationEntity {ID = 1, Code = "KRG", Name = "Karagandy"},
-                new StationEntity {ID = 2, Code = "MSK", Name = "Moscow"},
-                new StationEntity {ID = 3, Code = "NSK", Name = "Novosibirsk"},
-                new StationEntity {ID = 4, Code = "AST", Name = "Astana"},
+            mock.Setup(m => m.Stations).Returns(new Station[] {
+                new Station {ID = 1, Code = "KRG", Name = "Karagandy"},
+                new Station {ID = 2, Code = "MSK", Name = "Moscow"},
+                new Station {ID = 3, Code = "NSK", Name = "Novosibirsk"},
+                new Station {ID = 4, Code = "AST", Name = "Astana"},
             }.AsQueryable());
 
             var target = new MainController(mock.Object);
