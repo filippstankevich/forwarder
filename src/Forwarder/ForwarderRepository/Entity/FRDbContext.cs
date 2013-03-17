@@ -6,6 +6,7 @@ using System.Data.Entity;
 
 namespace ForwarderDAL.Entity
 {
+    //TODO: Filipp Stankevich Убрать префикc FR  
     public class FRDbContext : DbContext
     {
         public DbSet<ETSNG> Etsngs { get; set; }

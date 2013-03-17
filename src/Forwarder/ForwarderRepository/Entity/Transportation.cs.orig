@@ -1,0 +1,40 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ForwarderDAL.Entity
+{
+<<<<<<< HEAD:src/Forwarder/ForwarderRepository/Entity/Transportation.cs
+    public class Transportation
+=======
+    //TODO: Filipp Stankevich Зачем использовать в названия POCO-классов слово Entity. 
+    //Мне кажеться в этом нет необходимости
+    public class TransportationEntity
+>>>>>>> f8cd6b06b6f835924b429c9f14fc87b19ff7bd5f:src/Forwarder/ForwarderRepository/Entity/TransportationEntity.cs
+    {
+        [Key]
+        public int ID { get; set; }
+
+        public string RegNumber { get; set; }
+        public string Comment { get; set; }
+        public int Volume { get; set; }
+        public int TransportCount { get; set; }
+        
+        public int EtsngId { get; set; }
+        [ForeignKey("EtsngId")]
+        public virtual ETSNG ETSNGs { get; set; }
+
+        public int GngId { get; set; }
+        [ForeignKey("GngId")]
+        public virtual GNG GNGs { get; set; }
+
+        public int SourceStationId { get; set; }
+        [ForeignKey("SourceStationId")]
+        public virtual Station SourceStations { get; set; }
+                
+        //public int DestinationStationId { get; set; }
+        //[ForeignKey("DestinationStationId")]
+        //public virtual Station DestinationStations { get; set; }
+
+
+    }
+}

@@ -18,12 +18,17 @@ namespace Forwarder.Controllers
             repository = repo;
         }
 
-        public PartialViewResult Menu()
+        public ViewResult Menu()
         {
-            IEnumerable<string> categories = repository.Stations
+            IEnumerable<string> stations = repository.Stations
             .Select(x => x.Name);
             
-            return PartialView(categories);
+            return ViewResult(stations);
+        }
+
+        private ViewResult ViewResult(IEnumerable<string> stations)
+        {
+            throw new NotImplementedException();
         }
         
         public PartialViewResult StationAdd()
