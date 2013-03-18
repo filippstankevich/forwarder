@@ -10,10 +10,12 @@ namespace ForwarderDAL.Repositories
     //У нас будет еще какой-то репозиторий?
     public interface IForwarderRepository
     {
-        IQueryable<SomeObject> SomeObjects { get; }
-        IQueryable<StationEntity> Stations { get; }
-        IQueryable<TransportationEntity> Transportations { get; }
-        IQueryable<GNG_Entity> Gngs { get; }
-        IQueryable<ETSNG_Entity> Etsngs { get; }
+        // IQueryable<SomeObject> SomeObjects { get; }
+        IQueryable<Station> Stations { get; }
+        IQueryable<Transportation> Transportations { get; }
+        IQueryable<GNG> Gngs { get; }
+        IQueryable<ETSNG> Etsngs { get; }
+
+        bool AddNewStation(Station NewStation);
     }
 }

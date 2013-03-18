@@ -34,6 +34,15 @@
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="policy.2.0.Npgsql">
+      <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\policy.2.0.Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -45,13 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\ETSNG_Entity.cs" />
-    <Compile Include="Entity\GNG_Entity.cs" />
-    <Compile Include="Entity\StationEntity.cs" />
-    <Compile Include="Entity\TestingClass.cs" />
-    <Compile Include="Entity\TransportationEntity.cs" />
+    <Compile Include="Entity\ETSNG.cs" />
+    <Compile Include="Entity\GNG.cs" />
+    <Compile Include="Entity\Station.cs" />
+    <Compile Include="Entity\Transportation.cs" />
     <Compile Include="Entity\FRDbContext.cs" />
-    <Compile Include="Entity\SomeObject.cs" />
+    <Compile Include="Migrations\201303171612401_Initial.cs" />
+    <Compile Include="Migrations\201303171612401_Initial.Designer.cs">
+      <DependentUpon>201303171612401_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
     <Compile Include="Repositories\IForwarderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +71,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201303171612401_Initial.resx">
+      <DependentUpon>201303171612401_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
