@@ -12,7 +12,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function () {
             jQuery('#GridTable').jqGrid({
-                url: '/GridModel/GridView',
+                url: '/Grid/GridView',
                 datatype: "json",
                 mtype: 'POST',
                 jsonReader: {
