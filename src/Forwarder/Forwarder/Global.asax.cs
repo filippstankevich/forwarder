@@ -24,15 +24,8 @@ namespace Forwarder
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-<<<<<<< HEAD
                 new { controller = "Grid", action = "GridView", id = UrlParameter.Optional } // Parameter defaults
             );
-=======
-                new { controller = "Grid", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-                
-        );
->>>>>>> 58d954570a6a005ff352d61cd8e93c89192b9aef
-
         }
 
         protected void Application_Start()
