@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+    <p class="span10">
+        <h2>Index</h2>
+        <table id="list2"></table>
+        <div id="pager2"></div>
+    </p>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        jQuery('#list2').jqGrid({
+            url: '/Grid/GridView',
+            datatype: "json",
+            colNames: ['Id', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Общий вес перевозки', 'Комментарии', ''],
+            colModel: [
+                { name: 'Id', width: 20 },
+                { name: 'RegNumber', width: 105 },
+                { name: 'DispatchStation', width: 100 },
+                { name: 'ArriveStattion', width: 150 },
+                { name: 'GHGClassificator', width: 150 },
+                { name: 'ETSNGClassificator', width: 150 },
+                { name: 'TransportCount', width: 150 },
+                { name: 'FullWeight', width: 150 },
+                { name: 'Comments', width: 150 },
+                { name: 'RegDate', width: 150 }
+            ],
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            pager: '#pager2',
+            sortname: 'Id',
+            viewrecords: true,
+            sortorder: "desc",
+            caption: "JSON Example"
+        });
+        jQuery("#list2").jqGrid('navGrid', '#pager2', { edit: false, add: false, del: false });
+    });
+        
+</script>
+

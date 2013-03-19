@@ -16,30 +16,40 @@ namespace Forwarder.Controllers
             return View();
         }
 
+
         public JsonResult GridView()
         {
-
-            var list = new List<GridModel>
-
-                           {
-
-                               new GridModel{  Id = 1, RegNumber = "12345", DispatchStation = "Томск", ArriveStattion = "Москва",GHGClassificator = "123",
-                                               ETSNGClassificator = "321", TransportCount = "8",FullWeight = "100", Comments = "ок",RegDate = "1.01.2012" },
-                                             
-                            
-
-                           };
-
-
+            var list = new List<object>
+                {
+                    new {
+                            id = 1,
+                            cell = new
+                                {
+                                    Id = 1,
+                                    RegNumber = "12345",
+                                    DispatchStation = "Томск",
+                                    ArriveStattion = "Москва",
+                                    GHGClassificator = "123",
+                                    ETSNGClassificator = "321",
+                                    TransportCount = "8",
+                                    FullWeight = "100",
+                                    Comments = "ок",
+                                    RegDate = "1.01.2012"
+                                }
+                    }
+                };
 
             var result = new JsonResult()
-
             {
-
-                Data = new { page = 0, total = 1, records = list.Count, rows = list }
+                Data = new
+                {
+                    page = 1,
+                    total = 1,
+                    records = list.Count,
+                    rows = list.ToArray()
+                }
 
             };
-
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return result;

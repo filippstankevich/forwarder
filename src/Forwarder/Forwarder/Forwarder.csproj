@@ -44,10 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Security">
       <HintPath>..\packages\Npgsql.2.0.12.1\lib\net40\Mono.Security.dll</HintPath>
     </Reference>
@@ -85,6 +81,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -113,218 +110,292 @@
     <Content Include="Content\images\glyphicons-halflings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery-ui.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.accordion.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.all.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.base.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.button.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.core.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.datepicker.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.dialog.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.progressbar.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.resizable.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.selectable.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.slider.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.tabs.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\jquery.ui.theme.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery-ui.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\jquery.jqGrid\ellipsis-xbl.xml" />
+    <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="README.jQuery.vsdoc.txt" />
-    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\i18n\grid.locale-ar.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-bg.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-bg1251.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-cat.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-cn.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-cs.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-da.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-de.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-dk.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-el.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-en.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-es.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-fa.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-fi.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-fr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-gl.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-he.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-hr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-hr1250.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-hu.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-id.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-is.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-it.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-ja.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-kr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-lt.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-mne.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-nl.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-no.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-pl.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-pt-br.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-pt.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-ro.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-ru.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-sk.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-sr-latin.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-sr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-sv.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-th.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-tr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-tw.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-ua.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\i18n\grid.locale-vi.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-1.9.1-vsdoc.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-1.9.1.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery-1.9.1.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\jquery-ui-1.8.24.js" />
-    <Content Include="Scripts\jquery-ui-1.8.24.min.js">
+    <Content Include="Scripts\jquery-ui-1.10.1.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery-ui-1.10.1.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.jqGrid.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.jqGrid.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.validate-vsdoc.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery.validate.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery.validate.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\modernizr-1.7.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\MicrosoftAjax.debug.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\MicrosoftMvcAjax.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\MicrosoftMvcValidation.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Error.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
@@ -336,17 +407,29 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Main\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Main\TestPage.cshtml">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Main\Menu.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Main\StationAdd.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Grid\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.9.1.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Views\Main\TestPage.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Main\Menu.cshtml" />
-    <Content Include="Views\Main\StationAdd.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
