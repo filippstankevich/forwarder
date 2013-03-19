@@ -23,18 +23,18 @@ namespace Forwarder.Controllers
                 {
                     new {
                             id = 1,
-                            cell = new
-                                {
-                                    Id = 1,
-                                    RegNumber = "12345",
-                                    DispatchStation = "Томск",
-                                    ArriveStattion = "Москва",
-                                    GHGClassificator = "123",
-                                    ETSNGClassificator = "321",
-                                    TransportCount = "8",
-                                    FullWeight = "100",
-                                    Comments = "ок",
-                                    RegDate = "1.01.2012"
+                            cell = new string[]
+                               {
+                                    "1",
+                                    "12345",
+                                    "Томск",
+                                    "Москва",
+                                    "123",
+                                    "321",
+                                    "8",
+                                    "100",
+                                    "ок",
+                                    "1.01.2012"
                                 }
                     }
                 };
