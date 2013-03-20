@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ForwarderDAL.Entity;
 
 namespace Forwarder.Controllers
 {
@@ -13,9 +14,13 @@ namespace Forwarder.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(new List<Station>() { new Station() { Code = "1", ID = 1, Name = "name" } });
         }
 
+        public ActionResult NewView()
+        {
+            return PartialView(new List<Station>() {new Station() {Code = "1", ID = 1, Name = "name"}});
+        }
 
         public JsonResult GridView()
         {
