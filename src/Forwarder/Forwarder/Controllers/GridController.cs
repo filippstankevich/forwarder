@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using ForwarderDAL.Entity;
 
+
+
 namespace Forwarder.Controllers
 {
     public class GridController : Controller
@@ -24,8 +26,15 @@ namespace Forwarder.Controllers
 
         public JsonResult GridView()
         {
+            string search = Request.Params["_search"]; //Булево значение, если запрос с условием поиска оно принимает истинное значение
+            string filters =  Request.Params["filters"]; // Объект с условиями в представлении json;
+            string searchField =  Request.Params["searchField"]; // Имя поля для поиска (если условие простое);
+            string searchOper =  Request.Params["searchOper"]; //Операция сравнения поля для поиска (если условие простое);
+            string searchString = Request.Params["searchString"]; // Значение поля для поиска (если условие простое);
+            
             var list = new List<object>
                 {
+                    
                     new {
                             id = 1,
                             cell = new string[]
@@ -41,9 +50,43 @@ namespace Forwarder.Controllers
                                     "ок",
                                     "1.01.2012"
                                 }
+                    },
+                    new {
+                            id = 2,
+                            cell = new string[]
+                               {
+                                    "2",
+                                    "12345",
+                                    "новосиб",
+                                    "Москва",
+                                    "32323",
+                                    "321",
+                                    "9",
+                                    "100",
+                                    "ок",
+                                    "2.01.2012"
+                                }
+                    },
+                    new {
+                            id = 3,
+                            cell = new string[]
+                               {
+                                    "3",
+                                    "12345",
+                                    "Красноярск",
+                                    "Москва",
+                                    "32323",
+                                    "321",
+                                    "10",
+                                    "200",
+                                    "ок",
+                                    "3.01.2012"
+                                }
                     }
                 };
 
+           
+           
             var result = new JsonResult()
             {
                 Data = new
