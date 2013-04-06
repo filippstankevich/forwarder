@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ForwarderDAL.Entity;
+using Forwarder.Models;
+
+
 
 
 
@@ -24,84 +27,128 @@ namespace Forwarder.Controllers
             return PartialView(new List<Station>() {new Station() {Code = "1", ID = 1, Name = "name"}});
         }
 
-        public JsonResult GridView()
+
+        public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion, string GHGClassificator, string ETSNGClassificator,string RegDate)
         {
-            string search = Request.Params["_search"]; //Булево значение, если запрос с условием поиска оно принимает истинное значение
-            string filters =  Request.Params["filters"]; // Объект с условиями в представлении json;
-            string searchField =  Request.Params["searchField"]; // Имя поля для поиска (если условие простое);
-            string searchOper =  Request.Params["searchOper"]; //Операция сравнения поля для поиска (если условие простое);
-            string searchString = Request.Params["searchString"]; // Значение поля для поиска (если условие простое);
-            
-            var list = new List<object>
-                {
-                    
-                    new {
-                            id = 1,
-                            cell = new string[]
-                               {
-                                    "1",
-                                    "12345",
-                                    "Томск",
-                                    "Москва",
-                                    "123",
-                                    "321",
-                                    "8",
-                                    "100",
-                                    "ок",
-                                    "1.01.2012"
-                                }
-                    },
-                    new {
-                            id = 2,
-                            cell = new string[]
-                               {
-                                    "2",
-                                    "12345",
-                                    "новосиб",
-                                    "Москва",
-                                    "32323",
-                                    "321",
-                                    "9",
-                                    "100",
-                                    "ок",
-                                    "2.01.2012"
-                                }
-                    },
-                    new {
-                            id = 3,
-                            cell = new string[]
-                               {
-                                    "3",
-                                    "12345",
-                                    "Красноярск",
-                                    "Москва",
-                                    "32323",
-                                    "321",
-                                    "10",
-                                    "200",
-                                    "ок",
-                                    "3.01.2012"
-                                }
-                    }
-                };
 
-           
-           
-            var result = new JsonResult()
-            {
-                Data = new
+                
+                var listresult1 = new List<GridModel>();                
+                var gridRow1 = new GridModel() { RegNumber = "123", DispatchStation = "2", ArriveStattion = "1" };
+                var gridRow2 = new GridModel() { RegNumber = "124", DispatchStation = "3", ArriveStattion = "2" };
+                var gridRow3 = new GridModel() { RegNumber = "125", DispatchStation = "4", ArriveStattion = "5" };
+                listresult1 .Add(gridRow1);
+                listresult1 .Add(gridRow2);
+                listresult1 .Add(gridRow3);
+                
+
+            if ( !string.IsNullOrEmpty(RegNumber) )
+                listresult1 = listresult1.Where(d => d.RegNumber == RegNumber).ToList();
+            if (!string.IsNullOrEmpty(DispatchStation) )
+                listresult1 = listresult1.Where(d => d.DispatchStation == DispatchStation).ToList();
+            if (!string.IsNullOrEmpty(ArriveStattion) )
+                listresult1 = listresult1.Where(d => d.ArriveStattion == ArriveStattion).ToList();
+            if (!string.IsNullOrEmpty(GHGClassificator) )
+                listresult1 = listresult1.Where(d => d.GHGClassificator == GHGClassificator).ToList();
+            if (!string.IsNullOrEmpty(ETSNGClassificator))
+                listresult1 = listresult1.Where(d => d.ETSNGClassificator == ETSNGClassificator).ToList();
+            if (!string.IsNullOrEmpty(RegDate))
+                listresult1 = listresult1.Where(d => d.RegDate == RegDate).ToList();
+
+                var list = new List<object>();
+                var counter = 0;
+
+         
+
+                foreach (var item in listresult1)
                 {
-                    page = 1,
-                    total = 1,
-                    records = list.Count,
-                    rows = list.ToArray()
+                    list.Add(new
+                    {
+                        id = ++counter,
+                        cell = new string[]
+                               {
+                                    (counter + 1).ToString(),
+                                    !string.IsNullOrEmpty(item.RegNumber) ? item.RegNumber.ToString() : string.Empty,
+                                    !string.IsNullOrEmpty(item.DispatchStation)?item.DispatchStation.ToString():string.Empty,
+                                    !string.IsNullOrEmpty(item.ArriveStattion)?item.ArriveStattion.ToString():string.Empty,
+                                    !string.IsNullOrEmpty(item.GHGClassificator)?item.GHGClassificator.ToString():string.Empty,
+                                    !string.IsNullOrEmpty(item.ETSNGClassificator)?item.ETSNGClassificator.ToString():string.Empty,
+                                    !string.IsNullOrEmpty(item.RegDate)?item.RegDate.ToString():string.Empty,
+                                    item.TransportCount != null ? item.TransportCount.Value.ToString():string.Empty,
+                                    !string.IsNullOrEmpty(item.Comments)?item.Comments.ToString():string.Empty
+                               }
+                    });                   
                 }
+                //var list = new List<object>
+                //    {
 
-            };
+                //        new {
+                //                id = 1,
+                //                cell = new string[]
+                //                   {
+                //                        listnew[0].ArriveStattion.ToString(),
+                //                        "12345",
+                //                        "Томск",
+                //                        "Москва",
+                //                        "123",
+                //                        "321",
+                //                        "8",
+                //                        "100",
+                //                        "ок",
+                //                        "1.01.2012"
+                //                    }
+                //        },
+                //        new {
+                //                id = 2,
+                //                cell = new string[]
+                //                   {
+                //                        "2",
+                //                        "12345",
+                //                        "новосиб",
+                //                        "Москва",
+                //                        "32323",
+                //                        "321",
+                //                        "9",
+                //                        "100",
+                //                        "ок",
+                //                        "2.01.2012"
+                //                    }
+                //        },
+                //        new {
+                //                id = 3,
+                //                cell = new string[]
+                //                   {
+                //                        "3",
+                //                        "12345",
+                //                        "Красноярск",
+                //                        "Москва",
+                //                        "32323",
+                //                        "321",
+                //                        "10",
+                //                        "200",
+                //                        "ок",
+                //                        "3.01.2012"
+                //                    }
+                //        }
+                //    };
 
-            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;
 
+
+            
+                var result = new JsonResult()
+                {
+                    Data = new
+                    {
+                        page = 1,
+                        total = 1,
+                        records = list.Count,
+                        rows = list.ToArray()
+                    }
+
+                };
+            
+                result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+                return result;
+            
         }
 
         public class GridModel
@@ -112,7 +159,7 @@ namespace Forwarder.Controllers
             public string ArriveStattion { get; set; }
             public string GHGClassificator { get; set; }
             public string ETSNGClassificator { get; set; }
-            public string TransportCount { get; set; }
+            public int? TransportCount { get; set; }
             public string FullWeight { get; set; }
             public string Comments { get; set; }
             public string RegDate { get; set; }

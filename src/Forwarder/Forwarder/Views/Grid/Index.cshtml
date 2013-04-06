@@ -1,9 +1,12 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Index";
 }
 
     <div class="span12">
         <h2>Index</h2>
+        @Html.Partial("FilterView")
+        <button id = "search_btn">Поиск</button>
         <table id="list2"></table>
         <div id="pager2"></div>
         @Html.Partial("NewView")
@@ -12,7 +15,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        jQuery('#list2').jqGrid({
+        $('#list2').jqGrid({
             url: '/Grid/GridView',
             datatype: "json",
             colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Общий вес перевозки', 'Комментарии', 'Дата регистрации'],
@@ -35,9 +38,19 @@
             sortname: 'Id',
             viewrecords: true,
             sortorder: "desc",
-            caption: "Перевозка"
+            caption: "Перевозка",
+            onSelectRow: function(id) {
+                alert(id);
+            },
         });
-        jQuery("#list2").jqGrid('navGrid', '#pager2', 
+
+        $('#search_btn').click(function() {
+            var url = '/Grid/GridView?' + 'RegNumber=' + $('#RegNumber').val();
+            $('#list2').jqGrid('setGridParam', { url: url });
+            $('#list2').trigger('reloadGrid');
+        });
+
+        $("#list2").jqGrid('navGrid', '#pager2', 
         { edit: false, add: false, del: false },
         {}, // Опции окон редактирования
         {}, // Опции окон добавления
@@ -47,7 +60,9 @@
         }  // Опции окон поиска
         
         );
+
     });
+
         
 </script>
 
