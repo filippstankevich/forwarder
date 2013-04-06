@@ -1,18 +1,7 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
-<<<<<<< HEAD
-
-    <div class="span12">
-        <h2>Index</h2>
-        @Html.Partial("FilterView")
-        <button id = "search_btn">Поиск</button>
-        <table id="list2"></table>
-        <div id="pager2"></div>
-        @Html.Partial("NewView")
-        @Html.ActionLink("Новый вью", "NewView")
-=======
+        
 <div class="span12">
     <div id="tabs">
         <ul>
@@ -22,10 +11,13 @@
         </ul>
         <div id="tabs-1">
             <h2>Index</h2>
+            @Html.Partial("FilterView")
+            <button id = "search_btn">Поиск</button>
             <table id="list2"></table>
             <div id="pager2"></div>
             @Html.Partial("NewView")
             @Html.ActionLink("Новый вью", "NewView")
+
         </div>
         <div id="tabs-2">
             @Html.Partial("NewView")
@@ -36,7 +28,6 @@
                 <button id="BUTTON_dialog">Показать диалог</button>
             </div>
         </div>
->>>>>>> 3b258c0abeccc44c09cddd355a9631e75a14b4ed
     </div>
 </div>
 <div id="dialog" title="Basic dialog" action = @Url.Action("PartView", "Grid")>
@@ -47,32 +38,32 @@
             $("#tabs").tabs();
         });
 
-		$( "#dialog" ).dialog({
-			autoOpen: false,
-			show: {
-				effect: "blind",
-				duration: 100
-			},
-			hide: {
-				effect: "explode",
-				duration: 100
-			},
-			buttons: {
-			    "Ok":function() {
-			        alert($('#dialog').attr('action'));
-			    },
-			    "Отмена": function() {
-			        $('#dialog').empty();
-			        $(this).dialog("close");
-			    }
-			}
-		});
+        $( "#dialog" ).dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 100
+            },
+            hide: {
+                effect: "explode",
+                duration: 100
+            },
+            buttons: {
+                "Ok":function() {
+                    alert($('#dialog').attr('action'));
+                },
+                "Отмена": function() {
+                    $('#dialog').empty();
+                    $(this).dialog("close");
+                }
+            }
+        });
 
         $('#BUTTON_dialog').click(function() {
             var action = $('#dialog').attr('action');
             $.get($('#dialog').attr('action'), null, function(data) {
                 $('#dialog').html(data);}, 'html').complete(function() { $("#dialog").dialog("open"); 
-            });
+                });
         });
 
         $('#list2').jqGrid({
@@ -111,18 +102,16 @@
         });
 
         $("#list2").jqGrid('navGrid', '#pager2', 
-        { edit: false, add: false, del: false },
-        {}, // Опции окон редактирования
-        {}, // Опции окон добавления
-        {}, // Опции окон удаления
-        {
-         width:700,        
-        }  // Опции окон поиска
+            { edit: false, add: false, del: false },
+            {}, // Опции окон редактирования
+            {}, // Опции окон добавления
+            {}, // Опции окон удаления
+            {
+                width:700,        
+            }  // Опции окон поиска
         
         );
 
     });
-
         
 </script>
-

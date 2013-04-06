@@ -89,6 +89,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoCContainer.cs" />
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +116,7 @@
     </Content>
     <Content Include="Content\jquery.jqGrid\ellipsis-xbl.xml" />
     <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
+    <Content Include="Content\text.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -438,11 +440,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Views\Grid\NewView.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Grid\FilterView.cshtml" />
-=======
     <Content Include="Views\Grid\PartView.cshtml" />
->>>>>>> 3b258c0abeccc44c09cddd355a9631e75a14b4ed
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
