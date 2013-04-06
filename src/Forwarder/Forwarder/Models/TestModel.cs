@@ -8,11 +8,12 @@ namespace Forwarder.Models
 {
     public class TestModel
     {
-        [Required(ErrorMessage="Enter name")]
-        [Display(Name="Test field")]
-        public string Name = "Тестовая строка";
+        //[Required(ErrorMessage="Enter name")]
+        //[Display(Name="Test field")]
+        //public string Name = "Тестовая строка";
 
-        [Display(Name = "Success???")]
-        public string Result;
+        //[Display(Name = "Success???")]
+        //public string Result;
+        public IEnumerable<string> Stations { get; set; } 
     }
 }

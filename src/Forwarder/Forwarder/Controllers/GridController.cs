@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Forwarder.Models;
 using ForwarderDAL.Entity;
 using Forwarder.Models;
 
@@ -27,8 +28,18 @@ namespace Forwarder.Controllers
             return PartialView(new List<Station>() {new Station() {Code = "1", ID = 1, Name = "name"}});
         }
 
+<<<<<<< HEAD
 
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion, string GHGClassificator, string ETSNGClassificator,string RegDate)
+=======
+        public PartialViewResult PartView()
+        {
+            var model = new StationModel {Station = new Station {Code = "QWERTYUIOP", ID = 1, Name = "ASDFGHJKL"}, Result = "ЧТОТО"};
+            return PartialView("PartView", model);
+        }
+
+        public JsonResult GridView()
+>>>>>>> 3b258c0abeccc44c09cddd355a9631e75a14b4ed
         {
 
                 

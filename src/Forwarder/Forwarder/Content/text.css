@@ -1,0 +1,12 @@
+label
+{
+   font-size: 18px;
+   text-align:right;
+}
+
+input[type="text"]
+{
+   width: 150px;
+   height:15px;
+   margin:0 15px 0 10px;
+}
