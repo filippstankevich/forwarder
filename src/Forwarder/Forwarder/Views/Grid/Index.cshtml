@@ -1,16 +1,66 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
-    <div class="span12">
-        <h2>Index</h2>
-        <table id="list2"></table>
-        <div id="pager2"></div>
-        @Html.Partial("NewView")
-        @Html.ActionLink("Новый вью", "NewView")
+<div class="span12">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Главная таблица</a></li>
+            <li><a href="#tabs-2">Proin dolor</a></li>
+            <li><a href="#tabs-3">Aenean lacinia</a></li>
+        </ul>
+        <div id="tabs-1">
+            <h2>Index</h2>
+            <table id="list2"></table>
+            <div id="pager2"></div>
+            @Html.Partial("NewView")
+            @Html.ActionLink("Новый вью", "NewView")
+        </div>
+        <div id="tabs-2">
+            @Html.Partial("NewView")
+        </div>
+        <div id="tabs-3">
+            @Html.Partial("NewView")
+            <div class="btn btn-info">
+                <button id="BUTTON_dialog">Показать диалог</button>
+            </div>
+        </div>
     </div>
+</div>
+<div id="dialog" title="Basic dialog" action = @Url.Action("PartView", "Grid")>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $(function() {
+            $("#tabs").tabs();
+        });
+
+		$( "#dialog" ).dialog({
+			autoOpen: false,
+			show: {
+				effect: "blind",
+				duration: 100
+			},
+			hide: {
+				effect: "explode",
+				duration: 100
+			},
+			buttons: {
+			    "Ok":function() {
+			        alert($('#dialog').attr('action'));
+			    },
+			    "Отмена": function() {
+			        $('#dialog').empty();
+			        $(this).dialog("close");
+			    }
+			}
+		});
+
+        $('#BUTTON_dialog').click(function() {
+            var action = $('#dialog').attr('action');
+            $.get($('#dialog').attr('action'), null, function(data) {
+                $('#dialog').html(data);}, 'html').complete(function() { $("#dialog").dialog("open"); 
+            });
+        });
 
         jQuery('#list2').jqGrid({
             url: '/Grid/GridView',
