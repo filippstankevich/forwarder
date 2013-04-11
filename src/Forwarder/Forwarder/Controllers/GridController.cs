@@ -43,15 +43,15 @@ namespace Forwarder.Controllers
             listresult1.Add(gridRow3);
             
             if (!string.IsNullOrEmpty(RegNumber))
-                listresult1 = listresult1.Where(d => d.RegNumber == RegNumber).ToList();
+                listresult1 = listresult1.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
             if (!string.IsNullOrEmpty(DispatchStation))
-                listresult1 = listresult1.Where(d => d.DispatchStation == DispatchStation).ToList();
+                listresult1 = listresult1.Where(d => d.DispatchStation.Contains(DispatchStation)).ToList();
             if (!string.IsNullOrEmpty(ArriveStattion))
-                listresult1 = listresult1.Where(d => d.ArriveStattion == ArriveStattion).ToList();
+                listresult1 = listresult1.Where(d => d.ArriveStattion.Contains(ArriveStattion)).ToList();
             if (!string.IsNullOrEmpty(GHGClassificator))
-                listresult1 = listresult1.Where(d => d.GHGClassificator == GHGClassificator).ToList();
+                listresult1 = listresult1.Where(d => d.GHGClassificator.Contains(GHGClassificator)).ToList();
             if (!string.IsNullOrEmpty(ETSNGClassificator))
-                listresult1 = listresult1.Where(d => d.ETSNGClassificator == ETSNGClassificator).ToList();
+                listresult1 = listresult1.Where(d => d.ETSNGClassificator.Contains(ETSNGClassificator)).ToList();
             if (!string.IsNullOrEmpty(RegDate))
                 listresult1 = listresult1.Where(d => d.RegDate == RegDate).ToList();
 
