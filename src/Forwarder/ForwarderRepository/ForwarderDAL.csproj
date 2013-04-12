@@ -59,6 +59,10 @@
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="Entity\FRDbContext.cs" />
+    <Compile Include="Migrations\201304111302005_Destination_Station_Add.cs" />
+    <Compile Include="Migrations\201304111302005_Destination_Station_Add.Designer.cs">
+      <DependentUpon>201304111302005_Destination_Station_Add.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
     <Compile Include="Repositories\IForwarderRepository.cs" />
@@ -67,6 +71,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201304111302005_Destination_Station_Add.resx">
+      <DependentUpon>201304111302005_Destination_Station_Add.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

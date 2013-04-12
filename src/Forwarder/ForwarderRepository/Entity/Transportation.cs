@@ -25,9 +25,9 @@ namespace ForwarderDAL.Entity
         [ForeignKey("SourceStationId")]
         public virtual Station SourceStations { get; set; }
                 
-        //public int DestinationStationId { get; set; }
-        //[ForeignKey("DestinationStationId")]
-        //public virtual Station DestinationStations { get; set; }
+        public int DestinationStationId { get; set; }
+        [ForeignKey("DestinationStationId")]
+        public virtual Station DestinationStations { get; set; }
 
 
     }
