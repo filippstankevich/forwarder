@@ -13,7 +13,7 @@ namespace Forwarder.Controllers
 
         public ActionResult Index()
         {
-            return View(new List<Station>() {new Station() {Code = "1", ID = 1, Name = "name"}});
+            return View(new List<Station>() { new Station() { Code = "1", ID = 1, Name = "name" } });
         }
 
         public ActionResult NewView()

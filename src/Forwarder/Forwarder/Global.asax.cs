@@ -26,6 +26,12 @@ namespace Forwarder
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Grid", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
+
+            routes.MapRoute(
+                "Transportation", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "Transportation", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            );
         }
 
         protected void Application_Start()

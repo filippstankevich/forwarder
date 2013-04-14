@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -448,6 +449,7 @@
     <Content Include="Views\Grid\NewView.cshtml" />
     <Content Include="Views\Grid\FilterView.cshtml" />
     <Content Include="Views\Grid\PartView.cshtml" />
+    <Content Include="Views\Transportation\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
