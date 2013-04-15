@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -108,6 +109,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\CustomCSS\vinnikovan.css" />
+    <Content Include="Content\down_pager.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\glyphicons-halflings-white.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -187,6 +191,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\bootstrap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\DataGrid.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\i18n\grid.locale-ar.js">
@@ -442,6 +449,7 @@
     <Content Include="Views\Grid\NewView.cshtml" />
     <Content Include="Views\Grid\FilterView.cshtml" />
     <Content Include="Views\Grid\PartView.cshtml" />
+    <Content Include="Views\Transportation\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
