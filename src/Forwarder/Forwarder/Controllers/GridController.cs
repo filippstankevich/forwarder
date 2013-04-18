@@ -13,19 +13,19 @@ namespace Forwarder.Controllers
 
         public ActionResult Index()
         {
-            return View(new List<Station>() { new Station() { Code = "1", ID = 1, Name = "name" } });
+            return View(new List<Station>() { new Station() { Code = "1", Id = 1, Name = "name" } });
         }
 
         public ActionResult NewView()
         {
-            return PartialView(new List<Station>() {new Station() {Code = "1", ID = 1, Name = "name"}});
+            return PartialView(new List<Station>() {new Station() {Code = "1", Id = 1, Name = "name"}});
         }
         
         public PartialViewResult PartView()
         {
             var model = new StationModel
                 {
-                    Station = new Station {Code = "QWERTYUIOP", ID = 1, Name = "ASDFGHJKL"},
+                    Station = new Station {Code = "QWERTYUIOP", Id = 1, Name = "ASDFGHJKL"},
                     Result = "ЧТОТО"
                 };
             return PartialView("PartView", model);

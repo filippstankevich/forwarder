@@ -34,7 +34,7 @@ namespace Forwarder.Controllers
         
         public PartialViewResult StationAdd()
         {
-            var model = new StationModel {Station = new Station {Code = "QWERTYUIOP", ID = 1, Name = "ASDFGHJKL"}, Result = "ЧТОТО"};
+            var model = new StationModel {Station = new Station {Code = "QWERTYUIOP", Id = 1, Name = "ASDFGHJKL"}, Result = "ЧТОТО"};
             return PartialView(model);
         }
 
@@ -44,7 +44,7 @@ namespace Forwarder.Controllers
             var newStation = new Station();
             newStation.Name = model.Station.Name;
             newStation.Code = model.Station.Code;
-            newStation.ID = model.Station.ID;
+            newStation.Id = model.Station.Id;
             var flag = repository.AddNewStation(newStation);
             model.Result = flag ? "Успешно" : "Не удалось";
             var newModel = new StationModel()

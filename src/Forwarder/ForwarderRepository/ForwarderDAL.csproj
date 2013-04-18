@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -54,12 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Carrier.cs" />
+    <Compile Include="Entity\Client.cs" />
     <Compile Include="Entity\ETSNG.cs" />
     <Compile Include="Entity\GNG.cs" />
+    <Compile Include="Entity\Loading.cs" />
+    <Compile Include="Entity\Outgo.cs" />
+    <Compile Include="Entity\Road.cs" />
+    <Compile Include="Entity\Route.cs" />
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="Entity\FRDbContext.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
     <Compile Include="Repositories\IForwarderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +72,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
