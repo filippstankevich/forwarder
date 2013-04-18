@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ForwarderDAL.Entity;
-using Npgsql;
 
 namespace ForwarderDAL.Repositories
 {
@@ -16,11 +11,18 @@ namespace ForwarderDAL.Repositories
         
         // IQueryable<SomeObject> SomeObjects { get { return context.Objects; } }
         public IQueryable<Station> Stations { get { return context.Stations; } }
-        public IQueryable<GNG> Gngs { get { return context.Gngs; } }
-        public IQueryable<ETSNG> Etsngs { get { return context.Etsngs; } }
-        public bool AddNewStation(Station NewStation)
+        public IQueryable<Gng> Gngs { get { return context.Gngs; } }
+        public IQueryable<Etsng> Etsngs { get { return context.Etsngs; } }
+        public IQueryable<Carrier> Carriers { get { return context.Carriers; } }
+        public IQueryable<Client> Clients { get { return context.Clients; } }
+        public IQueryable<Loading> Loadings { get { return context.Loadings; } }
+        public IQueryable<Outgo> Outgoes { get { return context.Outgoes; } }
+        public IQueryable<Road> Roads { get { return context.Roads; } }
+        public IQueryable<Route> Routes { get { return context.Routes; } }
+
+        public bool AddNewStation(Station newStation)
         {
-            context.Stations.Add(NewStation);
+            context.Stations.Add(newStation);
             context.SaveChanges();
             return true;
         }
