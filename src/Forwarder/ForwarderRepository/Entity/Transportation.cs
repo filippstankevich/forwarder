@@ -24,14 +24,6 @@ namespace ForwarderDAL.Entity
         public int SourceStationId { get; set; }
         [ForeignKey("SourceStationId")]
         public virtual Station SourceStations { get; set; }
-<<<<<<< HEAD
-=======
-                
-        public int DestinationStationId { get; set; }
-        [ForeignKey("DestinationStationId")]
-        public virtual Station DestinationStations { get; set; }
-
->>>>>>> 5591935c24c8c971e0f4e49382a802d56c00c50b
 
         public int DestinationStationId { get; set; }
         [ForeignKey("DestinationStationId")]

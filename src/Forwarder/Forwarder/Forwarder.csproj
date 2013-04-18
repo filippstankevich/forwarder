@@ -414,12 +414,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
-      <Project>{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}</Project>
-      <Name>ForwarderDAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

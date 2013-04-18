@@ -85,10 +85,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
-      <Project>{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}</Project>
-      <Name>ForwarderDAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forwarder\Forwarder.csproj">
       <Project>{458ED562-72D0-4E44-9BB7-AE7B0A851723}</Project>
       <Name>Forwarder</Name>

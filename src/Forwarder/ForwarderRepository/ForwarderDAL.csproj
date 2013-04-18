@@ -59,16 +59,6 @@
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="Entity\FRDbContext.cs" />
-<<<<<<< HEAD
-    <Compile Include="Migrations\201304111454590_Name0.cs" />
-    <Compile Include="Migrations\201304111454590_Name0.Designer.cs">
-      <DependentUpon>201304111454590_Name0.cs</DependentUpon>
-=======
-    <Compile Include="Migrations\201304111302005_Destination_Station_Add.cs" />
-    <Compile Include="Migrations\201304111302005_Destination_Station_Add.Designer.cs">
-      <DependentUpon>201304111302005_Destination_Station_Add.cs</DependentUpon>
->>>>>>> 5591935c24c8c971e0f4e49382a802d56c00c50b
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
     <Compile Include="Repositories\IForwarderRepository.cs" />
@@ -79,14 +69,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Migrations\201304111454590_Name0.resx">
-      <DependentUpon>201304111454590_Name0.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\201304111302005_Destination_Station_Add.resx">
-      <DependentUpon>201304111302005_Destination_Station_Add.cs</DependentUpon>
->>>>>>> 5591935c24c8c971e0f4e49382a802d56c00c50b
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
