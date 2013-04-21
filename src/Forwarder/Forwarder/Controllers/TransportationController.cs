@@ -39,5 +39,11 @@ namespace Forwarder.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public void StationAdd(TransportationModel model)
+        {
+            
+        }
+
     }
 }

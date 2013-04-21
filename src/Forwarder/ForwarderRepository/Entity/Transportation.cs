@@ -20,11 +20,11 @@ namespace ForwarderDAL.Entity
 
         public int SourceStationId { get; set; }
         [ForeignKey("SourceStationId")]
-        public virtual Station SourceStations { get; set; }
+        public virtual Station SourceStation { get; set; }
         
         public int DestinationStationId { get; set; }
         [ForeignKey("DestinationStationId")]
-        public virtual Station DestinationStations { get; set; }
+        public virtual Station DestinationStation { get; set; }
 
         public string RegNumber { get; set; }
         public DateTime CreateDate { get; set; }
