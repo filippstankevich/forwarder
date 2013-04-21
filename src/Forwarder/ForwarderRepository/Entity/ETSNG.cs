@@ -8,7 +8,7 @@ namespace ForwarderDAL.Entity
         [Key]
         public int Id { get; set; }
 
-        public int GngId { get; set; }
+        //public int GngId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
 

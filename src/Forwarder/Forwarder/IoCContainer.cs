@@ -11,12 +11,25 @@ namespace Forwarder
 {
     public class IoCContainer : DefaultControllerFactory
     {
+        //singleton
+        private static IoCContainer instance;
+
         private IKernel ninjectKernel;
 
-        public IoCContainer()
-        {
+        private IoCContainer() {
+
             ninjectKernel = new StandardKernel();
             AddBindings();
+        }
+
+        public static IoCContainer GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new IoCContainer();
+            }
+
+            return instance;
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext,
@@ -30,6 +43,22 @@ namespace Forwarder
         private void AddBindings()
         {
             ninjectKernel.Bind<IForwarderRepository>().To<ForwarderRepository>();
+        }
+
+        public IForwarderRepository GetForwarderRepository()
+        {
+            return ninjectKernel.Get<IForwarderRepository>();
+        }
+
+        //static method for GetForwarderRepository. To simplify  access
+        public static IForwarderRepository GetRepository()
+        {
+            if (instance == null)
+            {
+                throw new ArgumentException("Instance is not initialized");
+            }
+
+            return instance.GetForwarderRepository();
         }
     }
 }

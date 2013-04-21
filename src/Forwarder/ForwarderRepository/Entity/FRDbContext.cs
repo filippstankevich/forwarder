@@ -20,5 +20,23 @@ namespace ForwarderDAL.Entity
         public DbSet<Road> Roads { get; set; }
         public DbSet<Route> Routes { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Transportation>()
+                        .HasRequired(t => t.SourceStation)
+                        .WithMany(s => s.TransportationBySourceStation)
+                        .HasForeignKey(t => t.SourceStationId)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Transportation>()
+                        .HasRequired(t => t.DestinationStation)
+                        .WithMany(s => s.TransportationByDestinationStation)
+                        .HasForeignKey(t => t.DestinationStationId)
+                        .WillCascadeOnDelete(false);
+
+        }
+
     }
 }

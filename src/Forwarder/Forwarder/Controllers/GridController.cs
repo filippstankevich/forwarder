@@ -3,11 +3,15 @@ using System.Linq;
 using System.Web.Mvc;
 using Forwarder.Models;
 using ForwarderDAL.Entity;
+using ForwarderDAL.Repositories;
 
 namespace Forwarder.Controllers
 {
     public class GridController : Controller
     {
+
+        private IForwarderRepository repository = IoCContainer.GetRepository();
+
         //
         // GET: /Grid/
 
@@ -34,31 +38,40 @@ namespace Forwarder.Controllers
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion,
                                    string GHGClassificator, string ETSNGClassificator, string RegDate)
         {
-            var listresult1 = new List<GridModel>();
-            var gridRow1 = new GridModel() {RegNumber = "123", DispatchStation = "2", ArriveStattion = "1"};
-            var gridRow2 = new GridModel() {RegNumber = "124", DispatchStation = "3", ArriveStattion = "2"};
-            var gridRow3 = new GridModel() {RegNumber = "125", DispatchStation = "4", ArriveStattion = "5"};
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
+            IList<Transportation> transporatations = repository.Transportations.ToList();
+
+            IEnumerable<GridModel> resultList = transporatations.Select(t => new GridModel() 
+            {
+                RegNumber = t.RegNumber, 
+                DispatchStation = t.DestinationStation.Name,
+                ArriveStattion = t.SourceStation.Name
+            }); 
+
+            //var result = new List<GridModel>();
+            //var gridRow1 = new GridModel() {RegNumber = "123", DispatchStation = "2", ArriveStattion = "1"};
+            //var gridRow2 = new GridModel() {RegNumber = "124", DispatchStation = "3", ArriveStattion = "2"};
+            //var gridRow3 = new GridModel() {RegNumber = "125", DispatchStation = "4", ArriveStattion = "5"};
+            //result.Add(gridRow1);
+            //result.Add(gridRow2);
+            //result.Add(gridRow3);
             
             if (!string.IsNullOrEmpty(RegNumber))
-                listresult1 = listresult1.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
+                resultList = resultList.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
             if (!string.IsNullOrEmpty(DispatchStation))
-                listresult1 = listresult1.Where(d => d.DispatchStation.Contains(DispatchStation)).ToList();
+                resultList = resultList.Where(d => d.DispatchStation.Contains(DispatchStation)).ToList();
             if (!string.IsNullOrEmpty(ArriveStattion))
-                listresult1 = listresult1.Where(d => d.ArriveStattion.Contains(ArriveStattion)).ToList();
+                resultList = resultList.Where(d => d.ArriveStattion.Contains(ArriveStattion)).ToList();
             if (!string.IsNullOrEmpty(GHGClassificator))
-                listresult1 = listresult1.Where(d => d.GHGClassificator.Contains(GHGClassificator)).ToList();
+                resultList = resultList.Where(d => d.GHGClassificator.Contains(GHGClassificator)).ToList();
             if (!string.IsNullOrEmpty(ETSNGClassificator))
-                listresult1 = listresult1.Where(d => d.ETSNGClassificator.Contains(ETSNGClassificator)).ToList();
+                resultList = resultList.Where(d => d.ETSNGClassificator.Contains(ETSNGClassificator)).ToList();
             if (!string.IsNullOrEmpty(RegDate))
-                listresult1 = listresult1.Where(d => d.RegDate == RegDate).ToList();
+                resultList = resultList.Where(d => d.RegDate == RegDate).ToList();
 
             var list = new List<object>();
             var counter = 0;
 
-            foreach (var item in listresult1)
+            foreach (var item in resultList)
             {
                 list.Add(new
                     {

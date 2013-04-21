@@ -27,6 +27,13 @@ namespace ForwarderDAL.Repositories
             return true;
         }
 
+        public bool AddNewTransportation(Transportation transportation)
+        {
+            context.Transportations.Add(transportation);
+            context.SaveChanges();
+            return true;
+        }
+
         public IQueryable<Transportation> Transportations { get { return context.Transportations; } }
     }
 }

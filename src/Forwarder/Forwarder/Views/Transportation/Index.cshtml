@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Forwarder.Models.TransportationModel
+
+@{
     ViewBag.Title = "Index";
 }
 
@@ -12,11 +14,41 @@
                     @Html.TextBox("RegNumber")
                 </div>
             </div>
-      <div class="control-group">
-            <div id ="reg_btn" class="btn btn-primary controls">
-                Зарегистрировать
+            <div class="control-group">
+                <label class="span3 text-left">Груз по ГНГ</label>
+                <div class="controls">   
+                    @Html.DropDownList("GngItems")
+                </div>
             </div>
-     </div>
+            <div class="control-group">
+                <label class="span3 text-left">Груз по ЕТСНГ</label>
+                <div class="controls">   
+                    @Html.DropDownList("EtsngItems")
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Станция назначения</label>
+                <div class="controls">   
+                    @Html.DropDownList("StationItems")
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Станция прибытия</label>
+                <div class="controls">   
+                    @Html.DropDownList("StationItems")
+                </div>
+            </div>
+             <div class="control-group">
+                <label class="span3 text-left">Коментарий</label>
+                <div class="controls">   
+                    @Html.TextBox("Comment")
+                </div>
+            </div>
+            <div class="control-group">
+                <div id ="reg_btn" class="btn btn-primary controls">
+                    Зарегистрировать
+                </div>
+            </div>
         </form>
     </div>
 </div>
