@@ -41,7 +41,9 @@ namespace Forwarder
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            ControllerBuilder.Current.SetControllerFactory(new IoCContainer());
+            IoCContainer container = IoCContainer.GetInstance();
+
+            ControllerBuilder.Current.SetControllerFactory(container);
         }
     }
 }

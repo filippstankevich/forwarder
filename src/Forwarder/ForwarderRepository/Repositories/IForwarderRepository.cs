@@ -20,6 +20,6 @@ namespace ForwarderDAL.Repositories
         IQueryable<Route> Routes { get; }
 
         bool AddNewStation(Station newStation);
-         
+        bool AddNewTransportation(Transportation transportation);
     }
 }

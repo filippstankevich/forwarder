@@ -93,6 +93,7 @@
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Models\TransportationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
