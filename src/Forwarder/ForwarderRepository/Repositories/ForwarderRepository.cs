@@ -20,8 +20,13 @@ namespace ForwarderDAL.Repositories
         public IQueryable<ETSNG> Etsngs { get { return context.Etsngs; } }
         public bool AddNewStation(Station NewStation)
         {
-            context.Stations.Add(NewStation);
+            var station = Stations.FirstOrDefault();
+            station = new Station();
+            station.Code = "1";
+            station.Name = "1";
+            context.Stations.Add(station);
             context.SaveChanges();
+            // TODO: Сделать нормальный метод
             return true;
         }
 

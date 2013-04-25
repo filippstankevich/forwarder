@@ -8,8 +8,6 @@ namespace ForwarderDAL.Entity
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        
         public ICollection<Transportation> TransportationEntity { get; set; }
-        public ICollection<ETSNG> EtsngEntity { get; set; }
     }
 }
