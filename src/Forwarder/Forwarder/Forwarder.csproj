@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="IoCContainer.cs" />
     <Compile Include="Models\FilterModel.cs" />
+    <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TransportationModel.cs" />

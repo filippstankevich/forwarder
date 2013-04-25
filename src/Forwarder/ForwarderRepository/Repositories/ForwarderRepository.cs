@@ -20,6 +20,15 @@ namespace ForwarderDAL.Repositories
         public IQueryable<Road> Roads { get { return context.Roads; } }
         public IQueryable<Route> Routes { get { return context.Routes; } }
 
+        public int GetTransportCount(Transportation transportation)
+        {
+            var result = 0;
+            foreach (var loading in transportation.LoadingEntity)
+            {
+                result += loading.Count;
+            }
+            return result;
+        }
         public bool AddNewStation(Station newStation)
         {
             context.Stations.Add(newStation);
