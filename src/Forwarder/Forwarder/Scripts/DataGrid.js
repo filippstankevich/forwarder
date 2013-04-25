@@ -1,35 +1,32 @@
  $(document).ready(function () {
-        $(function() {
-            $("#tabs").tabs();
-        });
 
-        $( "#dialog" ).dialog({
-            autoOpen: false,
-            show: {
-                effect: "blind",
-                duration: 100
-            },
-            hide: {
-                effect: "explode",
-                duration: 100
-            },
-            buttons: {
-                "Ok":function() {
-                    alert($('#dialog').attr('action'));
-                },
-                "Отмена": function() {
-                    $('#dialog').empty();
-                    $(this).dialog("close");
-                }
-            }
-        });
+//        $( "#dialog" ).dialog({
+//            autoOpen: false,
+//            show: {
+//                effect: "blind",
+//                duration: 100
+//            },
+//            hide: {
+//                effect: "explode",
+//                duration: 100
+//            },
+//            buttons: {
+//                "Ok":function() {
+//                    alert($('#dialog').attr('action'));
+//                },
+//                "Отмена": function() {
+//                    $('#dialog').empty();
+//                    $(this).dialog("close");
+//                }
+//            }
+//        });
 
-        $('#BUTTON_dialog').click(function() {
-            var action = $('#dialog').attr('action');
-            $.get($('#dialog').attr('action'), null, function(data) {
-                $('#dialog').html(data);}, 'html').complete(function() { $("#dialog").dialog("open"); 
-                });
-        });
+//        $('#BUTTON_dialog').click(function() {
+//            var action = $('#dialog').attr('action');
+//            $.get($('#dialog').attr('action'), null, function(data) {
+//                $('#dialog').html(data);}, 'html').complete(function() { $("#dialog").dialog("open"); 
+//                });
+//        });
 
         $('#list2').jqGrid({
             url: '/Grid/GridView',

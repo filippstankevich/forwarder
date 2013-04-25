@@ -445,6 +445,12 @@
     <Content Include="Views\Grid\PartView.cshtml" />
     <Content Include="Views\Transportation\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
+      <Project>{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}</Project>
+      <Name>ForwarderDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

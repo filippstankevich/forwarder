@@ -1,51 +1,62 @@
 ﻿<div class="row">
-    <div class="span3">
-        <form class = "form-inline">
-            <div class="control-group">
-                <label class="span3 text-left">Регистрационный номер</label>
-                <div class="controls">   
-                    @Html.TextBox("RegNumber")
+    <fieldset>
+        <div class="span3">
+            <form class = "form-inline">
+                <div class="control-group">
+                    <label class="span3 text-left">Регистрационный номер</label>
+                    <div class="controls">   
+                        @Html.TextBox("RegNumber")
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="span3 text-left">Дата регистрации</label>
-                <div class="controls">
-                    @Html.TextBox("RegDate")
+                <div class="control-group">
+                    <label class="span3 text-left">Дата регистрации</label>
+                    <div class="controls">
+                        @Html.TextBox("RegDate")
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <div class="span3">
-        <form class = "form-inline">
-            <div class="control-group">
-                <label class="span3 text-left">Станция отправления</label>
-                <div class="controls">
-                    @Html.TextBox("DispatchStation")
+            </form>
+        </div>
+        <div class="span3">
+            <form class = "form-inline">
+                <div class="control-group">
+                    <label class="span3 text-left">Станция отправления</label>
+                    <div class="controls">
+                        @Html.TextBox("DispatchStation")
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="span3 text-left">Станция прибытия</label>
-                <div class="controls">
-                    @Html.TextBox("ArriveStation")
+                <div class="control-group">
+                    <label class="span3 text-left">Станция прибытия</label>
+                    <div class="controls">
+                        @Html.TextBox("ArriveStation")
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <div class="span3">
-        <form class = "form-inline">
-            <div class="control-group">
-                <label class="span3 text-left">Классификатор ГНГ</label>
-                <div class="controls">
-                    @Html.TextBox("GHGClassificator")
+            </form>
+        </div>
+        <div class="span3">
+            <form class = "form-inline">
+                <div class="control-group">
+                    <label class="span3 text-left">Классификатор ГНГ</label>
+                    <div class="controls">
+                        @Html.TextBox("GHGClassificator")
+                    </div>
                 </div>
-            </div>
 
+                <div class="control-group">
+                    <label class="span3 text-left">Классификатор ЕТСНГ</label>
+                    <div class="controls">
+                        @Html.TextBox("ETSNGClassificator")
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="span10">
             <div class="control-group">
-                <label class="span3 text-left">Классификатор ЕТСНГ</label>
-                <div class="controls">
-                    @Html.TextBox("ETSNGClassificator")
+                <div id ="search_btn" class="btn btn-primary controls">
+                    Поиск
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    
+    </fieldset>
 </div>
