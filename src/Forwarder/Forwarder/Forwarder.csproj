@@ -95,6 +95,7 @@
     <Compile Include="Models\RouterModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Models\TransportationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +114,7 @@
     <Content Include="Content\CustomCSS\vinnikovan.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\down_pager.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -413,12 +415,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
-      <Project>{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}</Project>
-      <Name>ForwarderDAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -451,6 +447,12 @@
     <Content Include="Views\Grid\PartView.cshtml" />
     <Content Include="Views\Grid\Loader.cshtml" />
     <Content Include="Views\Transportation\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
+      <Project>{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}</Project>
+      <Name>ForwarderDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

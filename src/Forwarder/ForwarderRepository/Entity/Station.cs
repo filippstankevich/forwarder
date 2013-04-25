@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ForwarderDAL.Entity
 {
     public class Station
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "Введите название станции")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Введите код станции")]

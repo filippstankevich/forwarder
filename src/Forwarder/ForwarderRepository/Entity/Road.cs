@@ -3,15 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ForwarderDAL.Entity
 {
-    public class Etsng
+    public class Road
     {
         [Key]
         public int Id { get; set; }
 
-        //public int GngId { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
+        public string ShortName { get; set; }
 
-        public virtual ICollection<Transportation> TransportationEntity { get; set; }
+        public virtual ICollection<Route> RouteEntity { get; set; }
     }
 }

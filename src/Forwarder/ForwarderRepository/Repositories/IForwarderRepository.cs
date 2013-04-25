@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ForwarderDAL.Entity;
 
 namespace ForwarderDAL.Repositories
@@ -13,9 +10,17 @@ namespace ForwarderDAL.Repositories
         // IQueryable<SomeObject> SomeObjects { get; }
         IQueryable<Station> Stations { get; }
         IQueryable<Transportation> Transportations { get; }
-        IQueryable<GNG> Gngs { get; }
-        IQueryable<ETSNG> Etsngs { get; }
+        IQueryable<Gng> Gngs { get; }
+        IQueryable<Etsng> Etsngs { get; }
+        IQueryable<Carrier> Carriers { get; }
+        IQueryable<Client> Clients { get; }
+        IQueryable<Loading> Loadings { get; }
+        IQueryable<Outgo> Outgoes { get; }
+        IQueryable<Road> Roads { get; }
+        IQueryable<Route> Routes { get; }
 
-        bool AddNewStation(Station NewStation);
+        int GetTransportCount(Transportation transportation);
+        bool AddNewStation(Station newStation);
+        bool AddNewTransportation(Transportation transportation);
     }
 }

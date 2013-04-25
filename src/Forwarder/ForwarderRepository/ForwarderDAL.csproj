@@ -54,8 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Carrier.cs" />
+    <Compile Include="Entity\Client.cs" />
     <Compile Include="Entity\ETSNG.cs" />
     <Compile Include="Entity\GNG.cs" />
+    <Compile Include="Entity\Loading.cs" />
+    <Compile Include="Entity\Outgo.cs" />
+    <Compile Include="Entity\Road.cs" />
+    <Compile Include="Entity\Route.cs" />
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="Entity\FRDbContext.cs" />
