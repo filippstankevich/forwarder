@@ -28,7 +28,6 @@
 
 
      $('#consumpt_btn').click(function() {
-         var action = $('#consumpt_dialog').attr('action');
          $.get($('#consumpt_dialog').attr('action'), null, function(data) {
 
              $('#consumpt_dialog').html(data);
