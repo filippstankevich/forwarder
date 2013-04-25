@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +10,7 @@ namespace ForwarderDAL.Entity
         [Key]
         public int Id { get; set; }
 
+        public int TransportCount { get; set; }
         public int EtsngId { get; set; }
         [ForeignKey("EtsngId")]
         public virtual Etsng Etsngs { get; set; }
@@ -21,7 +22,7 @@ namespace ForwarderDAL.Entity
         public int SourceStationId { get; set; }
         [ForeignKey("SourceStationId")]
         public virtual Station SourceStation { get; set; }
-        
+
         public int DestinationStationId { get; set; }
         [ForeignKey("DestinationStationId")]
         public virtual Station DestinationStation { get; set; }

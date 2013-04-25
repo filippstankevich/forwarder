@@ -9,7 +9,7 @@ namespace ForwarderDAL.Repositories
     {
         private FRDbContext context = new FRDbContext();
         
-        // IQueryable<SomeObject> SomeObjects { get { return context.Objects; } }
+        
         public IQueryable<Station> Stations { get { return context.Stations; } }
         public IQueryable<Gng> Gngs { get { return context.Gngs; } }
         public IQueryable<Etsng> Etsngs { get { return context.Etsngs; } }
@@ -33,6 +33,7 @@ namespace ForwarderDAL.Repositories
         {
             context.Stations.Add(newStation);
             context.SaveChanges();
+            // TODO: Сделать нормальный метод
             return true;
         }
 

@@ -38,12 +38,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Build\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PrecompileBeforePublish>true</PrecompileBeforePublish>
-    <DeployIisAppPath>Default Web Site/Forwarder_Site</DeployIisAppPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Security">
@@ -90,8 +88,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoCContainer.cs" />
+    <Compile Include="Models\ConsumptionModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\GridModel.cs" />
+    <Compile Include="Models\LoaderModel.cs" />
+    <Compile Include="Models\RouterModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TransportationModel.cs" />
@@ -110,10 +111,10 @@
     <Content Include="Content\bootstrap.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\CustomCSS\vinnikovan.css" />
-    <Content Include="Content\down_pager.css">
+    <Content Include="Content\CustomCSS\vinnikovan.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\down_pager.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -187,8 +188,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootbox.js" />
-    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -444,7 +443,9 @@
     </None>
     <Content Include="Views\Grid\NewView.cshtml" />
     <Content Include="Views\Grid\FilterView.cshtml" />
+    <Content Include="Views\Grid\Consumption.cshtml" />
     <Content Include="Views\Grid\PartView.cshtml" />
+    <Content Include="Views\Grid\Loader.cshtml" />
     <Content Include="Views\Transportation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
