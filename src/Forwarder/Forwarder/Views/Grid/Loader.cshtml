@@ -1,0 +1,48 @@
+﻿@model Forwarder.Models.LoaderModel
+ 
+<div class="row">
+    <div class="span3">
+        <form class = "form-inline">
+            <div class="control-group">
+                <label class="span3 text-left">Загрузка</label>
+                <div class="controls">   
+           
+                    @Html.TextBoxFor(m => m.Loading)
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Ставка</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Rate)
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="span3">
+        <form class = "form-inline">
+            <div class="control-group">
+                <label class="span3 text-left">Расход</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Сonsumption)
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Метод расчета</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Method)
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="span3">
+        <form class = "form-inline">
+            <div class="control-group">
+                <label class="span3 text-left">Количество</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Count)
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

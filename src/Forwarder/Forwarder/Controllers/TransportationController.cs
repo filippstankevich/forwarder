@@ -40,7 +40,7 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public void StationAdd(TransportationModel model)
+        public void Save(TransportationModel model)
         {
             
         }
