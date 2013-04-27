@@ -1,38 +1,32 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Главная страница";
 }
         
-<div class="span12">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Главная таблица</a></li>
-            <li><a href="#tabs-2">Proin dolor</a></li>
-            <li><a href="#tabs-3">Aenean lacinia</a></li>
-        </ul>
-        <div id="tabs-1">
-          
+<div class="span12 form-actions" style="padding-top: 20px">
+    <div class="ui-corner-all" style="background-color: lightblue; padding: 10px; margin-bottom: 20px" id="spoilerClick">
+        <h4 class="btn-link" style="padding-left: 10px">фильтры</h4>
+        <div  id="spoiler">
             @Html.Partial("FilterView")
-            <div class="control-group">
-            <div id ="search_btn" class="btn btn-primary controls">
-                Поиск
-            </div>
-            </div>
-            <table id="list2"></table>
-            <div id="pager2"></div>
-            @Html.Partial("NewView")
-            @Html.ActionLink("Новый вью", "NewView")
-
-        </div>
-        <div id="tabs-2">
-            @Html.Partial("NewView")
-        </div>
-        <div id="tabs-3">
-            @Html.Partial("NewView")
-            <div class="btn btn-info">
-                <button id="BUTTON_dialog">Показать диалог</button>
-            </div>
         </div>
     </div>
+    <table id="list2"></table>
+    <div id="pager2"></div>
+    <div id ="consumpt_btn" class="btn btn-primary controls">Расход</div>
+                
+    <table id = "loaders"></table>
+    <div id ="add_loading" class="btn btn-primary controls">+</div>
+    <div id ="delete_loading" class="btn btn-primary controls">-</div>
+
+    <table id = "route"></table>
+    <div id ="add_route" class="btn btn-primary controls">+</div>
+
+    <div id ="delete_route" class="btn btn-primary controls">-</div>
+    <div id ="shipment_btn" class="btn btn-primary controls">Отгрузка</div>
+    <div id ="print_btn" class="btn btn-primary controls">Печать</div>
+
+    <div>
+        @Html.ActionLink("Create New", "Index", "Transportation")
+    </div>
 </div>
-<div id="dialog" title="Basic dialog" action = @Url.Action("PartView", "Grid")>
-</div>
+<div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>
+<div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Grid")></div>

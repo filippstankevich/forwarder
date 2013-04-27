@@ -1,2 +1,0 @@
-cd CUsersFranzKZDocumentsGitHubforwardersrcForwarder
-msbuild forwarder.sln pConfiguration=Release pPlatform=Any CPU
