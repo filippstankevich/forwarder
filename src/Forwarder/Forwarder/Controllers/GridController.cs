@@ -313,13 +313,14 @@ namespace Forwarder.Controllers
             TransportationModel model = new TransportationModel();
 
             //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
-            IEnumerable<Gng> gngList = repository.Gngs.ToList();
+            //TODO: Временно посмтавил выбор первых 100 значений
+            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
             model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
-            IEnumerable<Gng> etsngList = repository.Gngs.ToList();
+            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
             model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
-            IEnumerable<Station> stations = repository.Stations.ToList();
+            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
             model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });            
 
             return View(model);
