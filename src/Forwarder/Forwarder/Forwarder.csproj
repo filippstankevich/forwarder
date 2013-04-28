@@ -83,7 +83,6 @@
   <ItemGroup>
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -446,7 +445,7 @@
     <Content Include="Views\Grid\Consumption.cshtml" />
     <Content Include="Views\Grid\PartView.cshtml" />
     <Content Include="Views\Grid\Loader.cshtml" />
-    <Content Include="Views\Transportation\Index.cshtml" />
+    <Content Include="Views\Grid\TransportationEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">

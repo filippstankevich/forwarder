@@ -12,25 +12,26 @@ namespace Forwarder
     public class IoCContainer : DefaultControllerFactory
     {
         //singleton
-        private static IoCContainer instance;
+        //private static IoCContainer instance;
 
         private IKernel ninjectKernel;
 
-        private IoCContainer() {
+        public IoCContainer()
+        {
 
             ninjectKernel = new StandardKernel();
             AddBindings();
         }
 
-        public static IoCContainer GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new IoCContainer();
-            }
+        //public static IoCContainer GetInstance()
+        //{
+        //    if (instance == null)
+        //    {
+        //        instance = new IoCContainer();
+        //    }
 
-            return instance;
-        }
+        //    return instance;
+        //}
 
         protected override IController GetControllerInstance(RequestContext requestContext,
         Type controllerType)
@@ -45,20 +46,20 @@ namespace Forwarder
             ninjectKernel.Bind<IForwarderRepository>().To<ForwarderRepository>();
         }
 
-        public IForwarderRepository GetForwarderRepository()
-        {
-            return ninjectKernel.Get<IForwarderRepository>();
-        }
+        //public IForwarderRepository GetForwarderRepository()
+        //{
+        //    return ninjectKernel.Get<IForwarderRepository>();
+        //}
 
-        //static method for GetForwarderRepository. To simplify  access
-        public static IForwarderRepository GetRepository()
-        {
-            if (instance == null)
-            {
-                throw new ArgumentException("Instance is not initialized");
-            }
+        ////static method for GetForwarderRepository. To simplify  access
+        //public static IForwarderRepository GetRepository()
+        //{
+        //    if (instance == null)
+        //    {
+        //        throw new ArgumentException("Instance is not initialized");
+        //    }
 
-            return instance.GetForwarderRepository();
-        }
+        //    return instance.GetForwarderRepository();
+        //}
     }
 }

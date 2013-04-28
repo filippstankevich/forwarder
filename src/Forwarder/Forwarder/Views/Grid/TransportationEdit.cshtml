@@ -1,57 +1,77 @@
 ﻿@model Forwarder.Models.TransportationModel
 
+
 @{
     ViewBag.Title = "Перевозка";
 }
 
 <div class="row">
     <div class="span3">
-       @using (Html.BeginForm("Save", "Transportation"))
+       @using (Html.BeginForm())
        {
            <div class = "form-inline">
                <div class="control-group">
                    <label class="span3 text-left">Регистрационный номер</label>
                    <div class="controls">   
-                       @Html.TextBox("RegNumber")
+                       @Html.TextBoxFor(m=>m.RegNumber)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Груз по ГНГ</label>
                    <div class="controls">   
-                       @Html.DropDownList("GngItems")
+                       @Html.DropDownListFor(m=>m.Gng, Model.GngItems))
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Груз по ЕТСНГ</label>
                    <div class="controls">   
-                       @Html.DropDownList("EtsngItems")
+                      @Html.DropDownListFor(m=>m.Etsng, Model.EtsngItems)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Станция назначения</label>
                    <div class="controls">   
-                       @Html.DropDownList("StationItems")
+                       @Html.DropDownListFor(m => m.SourceStation, Model.StationItems)
+
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Станция прибытия</label>
                    <div class="controls">   
-                       @Html.DropDownList("StationItems")
+                      @Html.DropDownListFor(m => m.DestinationStation, Model.StationItems)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Коментарий</label>
                    <div class="controls">   
-                       @Html.TextBox("Comment")
+                       @Html.TextBoxFor(m=>m.Comment)
                    </div>
                </div>
-               <div class="control-group">
-                   <div class="form-actions">
-                       <button type="submit" class="btn btn-primary">Создать</button>
-                   </div>
+               <div class="control-group">       
+                    <button type="submit" class="btn btn-primary">Создать</button>          
                </div>
            </div>
        }
     </div>
 </div>
+
+<div>
+   <div id="pager2"></div>
+
+    <div id ="consumpt_btn" class="btn btn-primary controls">Расход</div>
+                
+    <table id = "loaders"></table>
+    <div id ="add_loading" class="btn btn-primary controls">+</div>
+    <div id ="delete_loading" class="btn btn-primary controls">-</div>
+
+    <table id = "route"></table>
+    <div id ="add_route" class="btn btn-primary controls">+</div>
+
+    <div id ="delete_route" class="btn btn-primary controls">-</div>
+    <div id ="shipment_btn" class="btn btn-primary controls">Отгрузка</div>
+    <div id ="print_btn" class="btn btn-primary controls">Печать</div>
+
+    <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>
+    <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Grid")></div>
+ </div>
     
