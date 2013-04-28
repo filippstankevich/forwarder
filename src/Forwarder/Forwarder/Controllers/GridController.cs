@@ -263,9 +263,9 @@ namespace Forwarder.Controllers
             if (!string.IsNullOrEmpty(ArriveStattion))
                 listresult1 = listresult1.Where(d => d.SourceStation.Name.Contains(ArriveStattion)).ToList();
             if (!string.IsNullOrEmpty(GHGClassificator))
-                listresult1 = listresult1.Where(d => d.Gngs.Code.Contains(GHGClassificator)).ToList();
+                listresult1 = listresult1.Where(d => d.Gng.Code.Contains(GHGClassificator)).ToList();
             if (!string.IsNullOrEmpty(ETSNGClassificator))
-                listresult1 = listresult1.Where(d => d.Etsngs.Code.Contains(ETSNGClassificator)).ToList();
+                listresult1 = listresult1.Where(d => d.Etsng.Code.Contains(ETSNGClassificator)).ToList();
             if (RegDate != null)
                 listresult1 = listresult1.Where(d => d.CreateDate == RegDate.Value).ToList();
 
@@ -283,8 +283,8 @@ namespace Forwarder.Controllers
                                 !string.IsNullOrEmpty(item.RegNumber) ? item.RegNumber : string.Empty,
                                 item.DestinationStation != null ? item.DestinationStation.Name : string.Empty,
                                 item.SourceStation != null ? item.SourceStation.Name : string.Empty,
-                                item.Gngs != null ? item.Gngs.Code : string.Empty,
-                                item.Etsngs != null ? item.Etsngs.Code : string.Empty,
+                                item.Gng != null ? item.Gng.Code : string.Empty,
+                                item.Etsng != null ? item.Etsng.Code : string.Empty,
                                 item.CreateDate != null ? item.CreateDate.ToString() : string.Empty,
                                 // TODO: Сделать подсчет транспорта и коментарий
                                 item.LoadingEntity != null ? repository.GetTransportCount(item).ToString() : string.Empty,
@@ -308,5 +308,44 @@ namespace Forwarder.Controllers
             return result;
         }
 
+        public ViewResult TransportationEdit()
+        {
+            TransportationModel model = new TransportationModel();
+
+            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
+            //TODO: Временно посмтавил выбор первых 100 значений
+            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
+            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
+            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });            
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult TransportationEdit(TransportationModel model)
+        {
+            int sourceStationId =  Int32.Parse(model.SourceStation);
+            int destinationStationId = Int32.Parse(model.SourceStation);
+            int gngId = Int32.Parse(model.Gng);
+            int etsngId = Int32.Parse(model.Etsng);
+
+            Transportation transportation = new Transportation()
+            {
+                CreateDate = DateTime.Now,
+                RegNumber = model.RegNumber,
+                SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
+                DestinationStation = repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
+                Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
+                Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
+            };
+            repository.AddNewTransportation(transportation);
+
+            return View("Index");
+        }
     }
 }

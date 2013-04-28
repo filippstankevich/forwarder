@@ -13,11 +13,11 @@ namespace ForwarderDAL.Entity
         public int TransportCount { get; set; }
         public int EtsngId { get; set; }
         [ForeignKey("EtsngId")]
-        public virtual Etsng Etsngs { get; set; }
+        public virtual Etsng Etsng { get; set; }
 
         public int GngId { get; set; }
         [ForeignKey("GngId")]
-        public virtual Gng Gngs { get; set; }
+        public virtual Gng Gng { get; set; }
 
         public int SourceStationId { get; set; }
         [ForeignKey("SourceStationId")]

@@ -35,7 +35,7 @@ namespace Forwarder
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            IoCContainer container = IoCContainer.GetInstance();
+            IoCContainer container = new IoCContainer();
 
             ControllerBuilder.Current.SetControllerFactory(container);
         }
