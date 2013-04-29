@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forwarder", "Forwarder\Forw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForwarderDAL", "ForwarderRepository\ForwarderDAL.csproj", "{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFor", "TestFor\TestFor.csproj", "{021B2B64-A9DB-489A-856A-6918EFA6A62A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE6D581F-DEE0-4876-9C45-D9621DA3FE8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021B2B64-A9DB-489A-856A-6918EFA6A62A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021B2B64-A9DB-489A-856A-6918EFA6A62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021B2B64-A9DB-489A-856A-6918EFA6A62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021B2B64-A9DB-489A-856A-6918EFA6A62A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
