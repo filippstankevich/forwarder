@@ -1,4 +1,9 @@
  $(document).ready(function() {
+
+     $("#spoilerClick").click(function() {
+         $("#spoiler").toggle("slow");
+     });
+
      $("#consumpt_dialog").dialog({       
          autoOpen: false,
          minWidth: 800,
@@ -28,7 +33,6 @@
 
 
      $('#consumpt_btn').click(function() {
-         var action = $('#consumpt_dialog').attr('action');
          $.get($('#consumpt_dialog').attr('action'), null, function(data) {
 
              $('#consumpt_dialog').html(data);
