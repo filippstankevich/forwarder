@@ -18,6 +18,32 @@
          },
      });
 
+     $('#delno_dialog').dialog({
+          autoOpen: false,
+    
+
+         show: {
+             effect: "blind",
+             duration: 100,
+         },
+         hide: {
+             effect: "explode",
+             duration: 100
+         },
+          buttons: {
+                "Ок":function() {
+                   $('#loaders').jqGrid('delRowData',$("#loaders").jqGrid('getGridParam','selrow'));
+                   $('#delno_dialog').empty();
+                   $(this).dialog("close");
+                },
+                "Отмена": function() {
+                    $('#delno_dialog').empty();
+                    $(this).dialog("close");
+                }
+            }
+          
+     });
+
 
      $("#loader_dialog").dialog({       
          autoOpen: false,
@@ -29,43 +55,11 @@
              effect: "explode",
              duration: 100
          },
-     });
-
-
-     $('#consumpt_btn').click(function() {
-         $.get($('#consumpt_dialog').attr('action'), null, function(data) {
-
-             $('#consumpt_dialog').html(data);
-         }, 'html').complete(function() {
-             var lastSel;
-             $('#consumption2').jqGrid({                       
-                 url: '/Grid/ConsumptionView',
-                 datatype: "json",
-                 colNames: ['№', 'Загрузка', 'Тип', 'Расход', 'Метод расчета'],
-                 colModel: [
-                     { name: 'Id', index: 'id', align: "center" },
-                     { name: 'Loading', index: 'Loading', align: "center", editable: true, edittype: "text" },
-                     { name: 'Type', index: 'Type', align: "center", editable: true, edittype: "text" },
-                     { name: 'Consumption', index: 'Consumption', align: "center", editable: true, edittype: "text" },
-                     { name: 'Method', index: 'Method', align: "center", editable: true, edittype: "text" },
-                 ],
-                 height: 'auto',
-                 sortorder: "desc",
-                 sortname: 'id',
-                 ondblClickRow: function(id) {
-                     if (id && id != lastSel) {
-                         jQuery("#consumption2").restoreRow(lastSel);
-                         jQuery("#consumption2").editRow(id, true);
-                         lastSel = id;
-                     }
-                 },
-                 editurl: '/Grid/EditView'
-             });
-             $("#consumpt_dialog").dialog("open");
-         });
-
+         
+       
 
      });
+
 
      $('#list2').jqGrid({
          url: '/Grid/GridView',
@@ -103,6 +97,30 @@
          $('#list2').trigger('reloadGrid');
      });
 
+     $('#add_loading').click(function() {
+                
+                 $.ajax({
+                 url: $('#loader_dialog').attr('action'),
+                 type: "POST",
+                 success: function(data) {
+                     $('#loader_dialog').html(data);
+                     $("#loader_dialog").dialog("open");
+                 }
+             });
+
+     });
+
+     $('#delete_loading').click(function() {
+
+         if ($("#loaders").jqGrid('getGridParam', 'selrow')) {
+             $("#delno_dialog").dialog("open");
+         } else
+             alert("Нет выделенных строк для удаления!");        
+
+         
+     });
+        
+
      $("#list2").jqGrid('navGrid', '#pager2',
          { edit: false, add: false, del: false },
          {}, // Опции окон редактирования
@@ -129,7 +147,7 @@
          height: 'auto',
          sortorder: "desc",
          caption: "Загрузки",
-         onSelectRow: function(id) {
+         ondblClickRow: function(id) {
              $.ajax({
                  url: $('#loader_dialog').attr('action'),
                  type: "POST",
@@ -146,6 +164,7 @@
                  }
              });
          },
+      
      });
 
         
@@ -162,9 +181,43 @@
          height: 'auto',
          sortorder: "desc",
          caption: "Маршрут",
-         onSelectRow: function(id) {
-             alert(id);
+         onCellSelect : function(rowid, iCol, cellcontent) {
+             if (iCol == 3) {
+                 
+                      $.get($('#consumpt_dialog').attr('action'), null, function(data) {
+
+             $('#consumpt_dialog').html(data);
+         }, 'html').complete(function() {
+             var lastSel;
+             $('#consumption2').jqGrid({                       
+                 url: '/Grid/ConsumptionView',
+                 datatype: "json",
+                 colNames: ['№', 'Загрузка', 'Тип', 'Расход', 'Метод расчета'],
+                 colModel: [
+                     { name: 'Id', index: 'id', align: "center" },
+                     { name: 'Loading', index: 'Loading', align: "center", editable: true, edittype: "text" },
+                     { name: 'Type', index: 'Type', align: "center", editable: true, edittype: "text" },
+                     { name: 'Consumption', index: 'Consumption', align: "center", editable: true, edittype: "text" },
+                     { name: 'Method', index: 'Method', align: "center", editable: true, edittype: "text" },
+                 ],
+                 height: 'auto',
+                 sortorder: "desc",
+                 sortname: 'id',
+                 ondblClickRow: function(id) {
+                     if (id && id != lastSel) {
+                         jQuery("#consumption2").restoreRow(lastSel);
+                         jQuery("#consumption2").editRow(id, true);
+                         lastSel = id;
+                     }
+                 },
+                 editurl: '/Grid/EditView'
+             });
+             $("#consumpt_dialog").dialog("open");
+         });
+             }
+
          },
+         
      });
 
      $('#consumption').jqGrid({

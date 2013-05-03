@@ -12,6 +12,7 @@ namespace Forwarder.Models
         public IEnumerable<SelectListItem> GngItems { get; set; }
         public IEnumerable<SelectListItem> EtsngItems { get; set; }
         public IEnumerable<SelectListItem> StationItems { get; set; }
+        public LoaderModel Loaders; 
 
         public string Gng { get; set; }
         public string Etsng { get; set; }

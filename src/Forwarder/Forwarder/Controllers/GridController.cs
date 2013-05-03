@@ -36,21 +36,21 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
+
+
         [HttpPost]
-        public PartialViewResult Loader(string Loading, string Rate, string Сonsumption, string Method, string Count)
+        public PartialViewResult Loader(LoaderModel model)
         {
+          /*
             var model = new LoaderModel
             {
                 Loading = !string.IsNullOrEmpty(Loading) ?int.Parse(Loading) : 0,
                 Rate = !string.IsNullOrEmpty(Rate) ? int.Parse(Rate) : 0,
                 Сonsumption = !string.IsNullOrEmpty(Сonsumption) ? int.Parse(Сonsumption) : 0,
                 Method = !string.IsNullOrEmpty(Method) ? Method : string.Empty,
-                Count = !string.IsNullOrEmpty(Count) ? int.Parse(Count) : 0
-                
-                
-                
+                Count = !string.IsNullOrEmpty(Count) ? int.Parse(Count) : 0            
             };
-
+           */            
             return PartialView("Loader",model);
         }
 
@@ -329,22 +329,25 @@ namespace Forwarder.Controllers
         [HttpPost]
         public ActionResult TransportationEdit(TransportationModel model)
         {
-            int sourceStationId =  Int32.Parse(model.SourceStation);
-            int destinationStationId = Int32.Parse(model.SourceStation);
-            int gngId = Int32.Parse(model.Gng);
-            int etsngId = Int32.Parse(model.Etsng);
 
-            Transportation transportation = new Transportation()
-            {
-                CreateDate = DateTime.Now,
-                RegNumber = model.RegNumber,
-                SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
-                DestinationStation = repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
-                Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
-                Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
-            };
-            repository.AddNewTransportation(transportation);
+                int sourceStationId = Int32.Parse(model.SourceStation);
+                int destinationStationId = Int32.Parse(model.SourceStation);
+                int gngId = Int32.Parse(model.Gng);
+                int etsngId = Int32.Parse(model.Etsng);
 
+
+                Transportation transportation = new Transportation()
+                    {
+                        CreateDate = DateTime.Now,
+                        RegNumber = model.RegNumber,
+                        SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
+                        DestinationStation =
+                            repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
+                        Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
+                        Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
+                    };
+                repository.AddNewTransportation(transportation);
+            
             return View("Index");
         }
     }
