@@ -36,7 +36,14 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
-
+        public PartialViewResult Route(RouterModel model)
+        {
+            return PartialView("Route", model);
+        }
+        public PartialViewResult Consumpt(ConsumptionModel model)
+        {
+            return PartialView("ConsumptEdit", model);
+        }
 
         [HttpPost]
         public PartialViewResult Loader(LoaderModel model)

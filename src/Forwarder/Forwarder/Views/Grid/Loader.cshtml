@@ -1,48 +1,56 @@
 ﻿@model Forwarder.Models.LoaderModel
  
-@using (Html.BeginForm("TransportationEdit", "Grid", "Post"))
+@using (Html.BeginForm("Loader", "Grid", "Post"))
 {    
     <div class="row">
         <div class="span3">
-           
-                <div class="control-group">
-                    <label class="span3 text-left">Загрузка</label>
-                    <div class="controls">              
-                        @Html.TextBoxFor(m => m.Loading)
-                    </div>
+            <div class="control-group">
+                <label class="span3 text-left">№ Загрузки</label>
+                <div class="controls"> 
+                    @Html.TextBoxFor(m => m.Id, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
-                <div class="control-group">
-                    <label class="span3 text-left">Ставка</label>
-                    <div class="controls">
-                        @Html.TextBoxFor(m => m.Rate)
-                    </div>
+            </div>
+        </div>
+            <div class="span3">
+                
+            <div class="control-group">
+                <label class="span3 text-left">Загрузка</label>
+                <div class="controls">              
+                    @Html.TextBoxFor(m => m.Loading)
                 </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Ставка</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Rate)
+                </div>
+            </div>
            
         </div>
         <div class="span3">
            
-                <div class="control-group">
-                    <label class="span3 text-left">Расход</label>
-                    <div class="controls">
-                        @Html.TextBoxFor(m => m.Сonsumption)
-                    </div>
+            <div class="control-group">
+                <label class="span3 text-left">Расход</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Сonsumption)
                 </div>
-                <div class="control-group">
-                    <label class="span3 text-left">Метод расчета</label>
-                    <div class="controls">
-                        @Html.TextBoxFor(m => m.Method)
-                    </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Метод расчета</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Method)
                 </div>
+            </div>
         
         </div>
         <div class="span3">
            
-                <div class="control-group">
-                    <label class="span3 text-left">Количество</label>
-                    <div class="controls">
-                        @Html.TextBoxFor(m => m.Count)
-                    </div>
+            <div class="control-group">
+                <label class="span3 text-left">Количество</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Count)
                 </div>
+            </div>
 
           
         </div>

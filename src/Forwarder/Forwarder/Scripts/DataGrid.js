@@ -18,6 +18,53 @@
          },
      });
 
+     $('#consumpt_edit').dialog({
+          autoOpen: false,
+          
+         show: {
+             effect: "blind",
+             duration: 100
+         },
+         hide: {
+             effect: "explode",
+             duration: 100
+         }
+     });
+
+     $("#route_dialog").dialog({
+         autoOpen: false,
+
+         show: {
+             effect: "blind",
+             duration: 100
+         },
+         hide: {
+             effect: "explode",
+             duration: 100
+         }
+
+     });
+
+     $('#add_route').click(function() {
+     
+           $.ajax({
+                 url: $('#route_dialog').attr('action'),
+                 type: "POST",
+                 success: function(data) {
+                     $('#route_dialog').html(data);
+                     $("#route_dialog").dialog("open");
+                 }
+             });
+     
+     });
+
+     $('#add_consumpt').click(function() {
+         alert();
+            
+     });
+
+
+
      $('#delno_dialog').dialog({
           autoOpen: false,
     
@@ -55,9 +102,6 @@
              effect: "explode",
              duration: 100
          },
-         
-       
-
      });
 
 
@@ -152,6 +196,7 @@
                  url: $('#loader_dialog').attr('action'),
                  type: "POST",
                  data: {
+                     Id: $('#loaders').jqGrid('getCell',id,'Id'),
                      Loading: $('#loaders').jqGrid('getCell', id, 'Loading'),
                      Rate: $('#loaders').jqGrid('getCell', id, 'Rate'),
                      Сonsumption: $('#loaders').jqGrid('getCell', id, 'Сonsumption'),
@@ -192,13 +237,12 @@
              $('#consumption2').jqGrid({                       
                  url: '/Grid/ConsumptionView',
                  datatype: "json",
-                 colNames: ['№', 'Загрузка', 'Тип', 'Расход', 'Метод расчета'],
+                 colNames: ['№', 'Тип', 'Расход', 'Метод расчета'],
                  colModel: [
                      { name: 'Id', index: 'id', align: "center" },
-                     { name: 'Loading', index: 'Loading', align: "center", editable: true, edittype: "text" },
-                     { name: 'Type', index: 'Type', align: "center", editable: true, edittype: "text" },
+                     { name: 'Type', index: 'Type', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
                      { name: 'Consumption', index: 'Consumption', align: "center", editable: true, edittype: "text" },
-                     { name: 'Method', index: 'Method', align: "center", editable: true, edittype: "text" },
+                     { name: 'Method', index: 'Method', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
                  ],
                  height: 'auto',
                  sortorder: "desc",
@@ -216,6 +260,21 @@
          });
              }
 
+         },
+            ondblClickRow: function(id) {
+             $.ajax({
+                 url: $('#route_dialog').attr('action'),
+                 type: "POST",
+                 data: {
+                     Id: $('#route').jqGrid('getCell',id,'Id'),
+                     Road: $('#route').jqGrid('getCell', id, 'Road'),
+                     Carrier: $('#route').jqGrid('getCell', id, 'Carrier'),                
+                 },
+                 success: function(data) {
+                     $('#route_dialog').html(data);
+                     $("#route_dialog").dialog("open");
+                 }
+             });
          },
          
      });

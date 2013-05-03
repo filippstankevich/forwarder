@@ -446,6 +446,8 @@
     <Content Include="Views\Grid\PartView.cshtml" />
     <Content Include="Views\Grid\Loader.cshtml" />
     <Content Include="Views\Grid\TransportationEdit.cshtml" />
+    <Content Include="Views\Grid\Route.cshtml" />
+    <Content Include="Views\Grid\ConsumptEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">
