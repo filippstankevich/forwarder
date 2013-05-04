@@ -18,6 +18,8 @@
          },
      });
 
+   
+
      $('#consumpt_edit').dialog({
           autoOpen: false,
           
@@ -129,9 +131,23 @@
          viewrecords: true,
          sortorder: "desc",
          caption: "Перевозка",
-         onSelectRow: function(id) {
-             alert(id);
-         },
+         ondblClickRow: function(id) {
+
+             var RegNumber = $('#list2').jqGrid('getCell', id, 'RegNumber');
+             var Gng = $('#list2').jqGrid('getCell', id, 'GHGClassificator');
+             var ETSNG = $('#list2').jqGrid('getCell', id, 'ETSNGClassificator');
+             var SourceStation = $('#list2').jqGrid('getCell', id, 'DispatchStation');
+             var DestinationStation = $('#list2').jqGrid('getCell', id, 'ArriveStattion');
+             var Comment = $('#list2').jqGrid('getCell', id, 'Comments');
+             
+             var url = '/Grid/TransportationEdit?' + 'RegNumber=' +  RegNumber + 
+                                                      '&GHGClassificator=' + Gng + 
+                                                      '&ETSNGClassificator=' + ETSNG +
+                                                      '&DispatchStation=' + SourceStation +
+                                                      '&ArriveStattion=' + DestinationStation +
+                                                       '&Comment=' + Comment;
+             document.location = url;
+         }
      });
 
      $('#search_btn').click(function() {
