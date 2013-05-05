@@ -10,6 +10,9 @@
        @using (Html.BeginForm())
        {
            <div class = "form-inline">
+
+               @Html.HiddenFor(m=>m.Id)
+
                <div class="control-group">
                    <label class="span3 text-left">Регистрационный номер</label>
                    <div class="controls">   
@@ -19,26 +22,26 @@
                <div class="control-group">
                    <label class="span3 text-left">Груз по ГНГ</label>
                    <div class="controls">   
-                       @Html.DropDownListFor(m=>m.Gng, Model.GngItems)
+                       @Html.DropDownListFor(m=>m.GngId, Model.GngItems)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Груз по ЕТСНГ</label>
                    <div class="controls">   
-                      @Html.DropDownListFor(m=>m.Etsng, Model.EtsngItems)
+                      @Html.DropDownListFor(m=>m.EtsngId, Model.EtsngItems)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Станция назначения</label>
                    <div class="controls">   
-                       @Html.DropDownListFor(m => m.SourceStation, Model.StationItems)
+                       @Html.DropDownListFor(m => m.SourceStationId, Model.StationItems)
 
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Станция прибытия</label>
                    <div class="controls">   
-                      @Html.DropDownListFor(m => m.DestinationStation, Model.StationItems)
+                      @Html.DropDownListFor(m => m.DestinationStationId, Model.StationItems)
                    </div>
                </div>
                <div class="control-group">

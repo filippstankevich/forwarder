@@ -111,8 +111,8 @@
          url: '/Grid/GridView',
          datatype: "json",
          colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Общий вес перевозки', 'Комментарии', 'Дата регистрации'],
-         colModel: [
-             { name: 'Id', width: 20, align: "center" },
+         colModel: [                
+             { name: 'RowNumber', width: 20, align: "center" },
              { name: 'RegNumber', width: 150, align: "center" },
              { name: 'DispatchStation', width: 150, align: "center" },
              { name: 'ArriveStattion', width: 150, align: "center" },
@@ -127,7 +127,7 @@
          rowNum: 10,
          rowList: [10, 20, 30],
          pager: '#pager2',
-         sortname: 'Id',
+         sortname: 'RowNumber',
          viewrecords: true,
          sortorder: "desc",
          caption: "Перевозка",
@@ -140,12 +140,13 @@
              var DestinationStation = $('#list2').jqGrid('getCell', id, 'ArriveStattion');
              var Comment = $('#list2').jqGrid('getCell', id, 'Comments');
              
-             var url = '/Grid/TransportationEdit?' + 'RegNumber=' +  RegNumber + 
+             var url = '/Grid/TransportationEdit?' +  'id=' + id; /*+
+                                                      '&RegNumber=' +  RegNumber + 
                                                       '&GHGClassificator=' + Gng + 
                                                       '&ETSNGClassificator=' + ETSNG +
                                                       '&DispatchStation=' + SourceStation +
                                                       '&ArriveStattion=' + DestinationStation +
-                                                       '&Comment=' + Comment;
+                                                       '&Comment=' + Comment;*/
              document.location = url;
          }
      });
@@ -193,7 +194,7 @@
      );
 
      $('#loaders').jqGrid({
-         url: '/Grid/LoadersView',
+         url: '/Grid/LoadersView?id=' +  $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Загрузка', 'Ставка', 'Расход', 'Метод расчета', 'Количество'],
          colModel: [
@@ -230,7 +231,7 @@
 
         
      $('#route').jqGrid({
-         url: '/Grid/RouteView',
+         url: '/Grid/RouteView?id=' +  $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Дорога', 'Перевозчик', 'Расход'],
          colModel: [

@@ -92,7 +92,7 @@ namespace Forwarder.Controllers
         }
 
 
-        public JsonResult LoadersView()
+        public JsonResult LoadersView(string Id)
         {
 
             var listresult1 = new List<LoaderModel>();
@@ -240,7 +240,7 @@ namespace Forwarder.Controllers
           
         }
 
-        public JsonResult RouteView()
+        public JsonResult RouteView(string Id)
         {
 
 
@@ -290,29 +290,29 @@ namespace Forwarder.Controllers
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion,
                                    string GHGClassificator, string ETSNGClassificator, DateTime? RegDate)
         {
-            var listresult1 = repository.Transportations.ToList();
+            var transportations = repository.Transportations.ToList();
 
             if (!string.IsNullOrEmpty(RegNumber))
-                listresult1 = listresult1.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
+                transportations = transportations.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
             if (!string.IsNullOrEmpty(DispatchStation))
-                listresult1 = listresult1.Where(d => d.DestinationStation.Name.Contains(DispatchStation)).ToList();
+                transportations = transportations.Where(d => d.DestinationStation.Name.Contains(DispatchStation)).ToList();
             if (!string.IsNullOrEmpty(ArriveStattion))
-                listresult1 = listresult1.Where(d => d.SourceStation.Name.Contains(ArriveStattion)).ToList();
+                transportations = transportations.Where(d => d.SourceStation.Name.Contains(ArriveStattion)).ToList();
             if (!string.IsNullOrEmpty(GHGClassificator))
-                listresult1 = listresult1.Where(d => d.Gng.Code.Contains(GHGClassificator)).ToList();
+                transportations = transportations.Where(d => d.Gng.Code.Contains(GHGClassificator)).ToList();
             if (!string.IsNullOrEmpty(ETSNGClassificator))
-                listresult1 = listresult1.Where(d => d.Etsng.Code.Contains(ETSNGClassificator)).ToList();
+                transportations = transportations.Where(d => d.Etsng.Code.Contains(ETSNGClassificator)).ToList();
             if (RegDate != null)
-                listresult1 = listresult1.Where(d => d.CreateDate == RegDate.Value).ToList();
+                transportations = transportations.Where(d => d.CreateDate == RegDate.Value).ToList();
 
             var list = new List<object>();
-            var counter = 0;
+            var counter = 1;
 
-            foreach (var item in listresult1)
+            foreach (var item in transportations)
             {
                 list.Add(new
                     {
-                        id = ++counter,
+                        id = item.Id,
                         cell = new string[]
                             {
                                 counter.ToString(),
@@ -327,6 +327,7 @@ namespace Forwarder.Controllers
                                 // !string.IsNullOrEmpty(item.Comments) ? item.Comments.ToString() : string.Empty
                             }
                     });
+                counter++;
             }
 
             var result = new JsonResult()
@@ -345,10 +346,29 @@ namespace Forwarder.Controllers
         }
 
 
-        public ViewResult TransportationEdit(string RegNumber, string GHGClassificator, string ETSNGClassificator,
-                                              string DispatchStation, string ArriveStattion, string Comment  )
+        public ViewResult TransportationEdit(string Id, string RegNumber, string GHGClassificator, string ETSNGClassificator,
+                                              string DispatchStation, string ArriveStattion, string Comment)
         {
             TransportationModel model = new TransportationModel();
+
+            //Подтягивание данных по выбранной перевозке
+            if (Id != null && Id.Length > 0)
+            {
+                int id = Int32.Parse(Id);
+                Transportation transportation = repository.Transportations.Where(o => o.Id == id).Single();
+                model.RegNumber = transportation.RegNumber;
+                model.EtsngId = transportation.Etsng != null ?
+                    transportation.Etsng.Id.ToString() : string.Empty;
+                model.GngId = transportation.Gng != null ? 
+                    transportation.Gng.Id.ToString() : string.Empty;
+                model.SourceStationId = transportation.SourceStation != null ?
+                    transportation.SourceStation.Id.ToString() : string.Empty;
+                model.DestinationStationId = transportation.DestinationStation != null ?
+                    transportation.DestinationStation.Id.ToString() : string.Empty;
+            }
+
+
+            //Инициализация справочников
 
             //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
             //TODO: Временно посмтавил выбор первых 100 значений
@@ -359,8 +379,7 @@ namespace Forwarder.Controllers
             model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
             IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
-            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-            
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });            
 
             return View(model);
         }
@@ -371,10 +390,10 @@ namespace Forwarder.Controllers
         public ActionResult TransportationEdit(TransportationModel model)
         {
 
-                int sourceStationId = Int32.Parse(model.SourceStation);
-                int destinationStationId = Int32.Parse(model.SourceStation);
-                int gngId = Int32.Parse(model.Gng);
-                int etsngId = Int32.Parse(model.Etsng);
+                int sourceStationId = Int32.Parse(model.SourceStationId);
+                int destinationStationId = Int32.Parse(model.SourceStationId);
+                int gngId = Int32.Parse(model.GngId);
+                int etsngId = Int32.Parse(model.EtsngId);
 
 
                 Transportation transportation = new Transportation()
