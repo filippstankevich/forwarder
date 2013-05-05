@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Forwarder.Models
 {
-    public class Shipping_Model
+    public class ShippingModel
     {
         public string RegNumber { get; set; }
         public string ContainerNumber  { get; set; }

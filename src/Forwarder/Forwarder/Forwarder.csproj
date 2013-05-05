@@ -92,6 +92,7 @@
     <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\LoaderModel.cs" />
     <Compile Include="Models\RouterModel.cs" />
+    <Compile Include="Models\ShippingModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TransportationModel.cs" />
@@ -446,6 +447,7 @@
     <Content Include="Views\Grid\PartView.cshtml" />
     <Content Include="Views\Grid\Loader.cshtml" />
     <Content Include="Views\Grid\TransportationEdit.cshtml" />
+    <Content Include="Views\Grid\Shipping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">

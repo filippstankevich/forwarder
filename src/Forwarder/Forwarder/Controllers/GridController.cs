@@ -36,7 +36,7 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
-        public PartialViewResult Shipping(Shipping_Model model)
+        public PartialViewResult Shipping(ShippingModel model)
         {
             return PartialView("Shipping", model);
         }
@@ -196,7 +196,7 @@ namespace Forwarder.Controllers
 
         public JsonResult ShippingView()
         {
-            var listresult1 = new List<Shipping_Model>();
+            var listresult1 = new List<ShippingModel>();
 
             var list = new List<object>();
             var counter = 0;
