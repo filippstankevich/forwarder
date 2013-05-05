@@ -36,6 +36,11 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
+        public PartialViewResult Shipping(Shipping_Model model)
+        {
+            return PartialView("Shipping", model);
+        }
+
         public PartialViewResult Route(RouterModel model)
         {
             return PartialView("Route", model);
@@ -189,6 +194,30 @@ namespace Forwarder.Controllers
             return result;
         }
 
+        public JsonResult ShippingView()
+        {
+            var listresult1 = new List<Shipping_Model>();
+
+            var list = new List<object>();
+            var counter = 0;
+
+            var result = new JsonResult()
+            {
+                Data = new
+                {
+                    page = 1,
+                    total = 1,
+                    records = list.Count,
+                    rows = list.ToArray()
+                }
+            };
+
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return result;
+
+
+
+        }
        
         public JsonResult ConsumptionView()
         {
@@ -286,6 +315,8 @@ namespace Forwarder.Controllers
 
         
         }
+
+
 
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion,
                                    string GHGClassificator, string ETSNGClassificator, DateTime? RegDate)

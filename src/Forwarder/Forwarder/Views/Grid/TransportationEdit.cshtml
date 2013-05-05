@@ -70,14 +70,18 @@
     <table id = "route"></table>
     <div id ="add_route" class="btn btn-primary controls">+</div>
     <div id ="delete_route" class="btn btn-primary controls">-</div>
-
-    <div id ="shipment_btn" class="btn btn-primary controls">Отгрузка</div>
-    <div id ="print_btn" class="btn btn-primary controls">Печать</div>
+    
+      @Html.ActionLink("Отгрузка", "Shipping")
+      @Html.ActionLink("Печать","#")
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>
     <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Grid")></div>
     <div id="route_dialog" title="Маршрут" action = @Url.Action("Route", "Grid")></div>
     <div id="edit_consumpt" title="Расход" action = @Url.Action("Consumpt", "Grid")></div>
+    <div id="shipping_dialog" title="Отгрузка" action = @Url.Action("Shipping", "Grid")></div>
     <div id="delno_dialog" title="Подтвердите удаление данных"></div>
+
+      
+
  </div>
     
