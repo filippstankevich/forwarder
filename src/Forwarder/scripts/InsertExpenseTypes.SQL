@@ -1,0 +1,11 @@
+INSERT INTO ExpenseTypes (NAME) VALUES ('ЖД-тариф');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Доп.сбор');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Декларирование');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Таможенный сбор');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Охрана');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Агентирование');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Штраф');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Телеграмма');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Перегруз');
+INSERT INTO ExpenseTypes (NAME) VALUES ('Карантинный сбор');
+INSERT INTO ExpenseTypes (NAME) VALUES ('НДС');

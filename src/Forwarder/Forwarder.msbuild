@@ -27,7 +27,7 @@
     <PropertyGroup>
       <TestSuccess>1</TestSuccess>
     </PropertyGroup>
-    <Exec Command='"$(VS100COMNTOOLS)..\IDE\mstest.exe" /testcontainer:@(BuildArtifactsDir)TestFor.dll' >
+    <Exec Command='"$(VS100COMNTOOLS)..\IDE\mstest.exe" /testcontainer:@(BuildArtifactsDir)ForwarderTest.dll' >
       <Output TaskParameter="ExitCode" PropertyName="TestSuccess"/>
     </Exec>
   </Target>

@@ -196,10 +196,9 @@ namespace Forwarder.Controllers
 
         public JsonResult ShippingView()
         {
-            var listresult1 = new List<ShippingModel>();
+            var shipments = new List<ShippingModel>();
 
             var list = new List<object>();
-            var counter = 0;
 
             var result = new JsonResult()
             {
@@ -352,9 +351,9 @@ namespace Forwarder.Controllers
                                 item.SourceStation != null ? item.SourceStation.Name : string.Empty,
                                 item.Gng != null ? item.Gng.Code : string.Empty,
                                 item.Etsng != null ? item.Etsng.Code : string.Empty,
-                                item.CreateDate != null ? item.CreateDate.ToString() : string.Empty,
+                                item.CreateDate.ToString(),
                                 // TODO: Сделать подсчет транспорта и коментарий
-                                item.LoadingEntity != null ? repository.GetTransportCount(item).ToString() : string.Empty,
+                                item.Loads != null ? repository.GetTransportCount(item).ToString() : string.Empty,
                                 // !string.IsNullOrEmpty(item.Comments) ? item.Comments.ToString() : string.Empty
                             }
                     });
