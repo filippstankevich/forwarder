@@ -47,20 +47,49 @@ namespace Forwarder.Controllers
 
         [HttpPost]
         public PartialViewResult Loader(LoaderModel model)
-        {
-          /*
-            var model = new LoaderModel
-            {
-                Loading = !string.IsNullOrEmpty(Loading) ?int.Parse(Loading) : 0,
-                Rate = !string.IsNullOrEmpty(Rate) ? int.Parse(Rate) : 0,
-                Сonsumption = !string.IsNullOrEmpty(Сonsumption) ? int.Parse(Сonsumption) : 0,
-                Method = !string.IsNullOrEmpty(Method) ? Method : string.Empty,
-                Count = !string.IsNullOrEmpty(Count) ? int.Parse(Count) : 0            
-            };
-           */            
+        {           
             return PartialView("Loader",model);
         }
 
+        [HttpPost]
+        public ViewResult LoaderData(LoaderModel loadermodel)
+        {
+            TransportationModel model = new TransportationModel();
+
+            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
+            //TODO: Временно посмтавил выбор первых 100 значений
+            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
+            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
+            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+
+            return View("TransportationEdit",model);
+        }
+
+        [HttpPost]
+        public ViewResult RouterData(RouterModel routermodel)
+        {
+            TransportationModel model = new TransportationModel();
+
+            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
+            //TODO: Временно посмтавил выбор первых 100 значений
+            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
+            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
+            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+
+            return View("TransportationEdit", model);
+        }
 
 
         public JsonResult LoadersView()
@@ -315,7 +344,9 @@ namespace Forwarder.Controllers
             return result;
         }
 
-        public ViewResult TransportationEdit()
+
+        public ViewResult TransportationEdit(string RegNumber, string GHGClassificator, string ETSNGClassificator,
+                                              string DispatchStation, string ArriveStattion, string Comment  )
         {
             TransportationModel model = new TransportationModel();
 
@@ -323,15 +354,18 @@ namespace Forwarder.Controllers
             //TODO: Временно посмтавил выбор первых 100 значений
             IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
             model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
+            
             IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
             model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
             IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
-            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });            
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+            
 
             return View(model);
         }
+
+       
 
         [HttpPost]
         public ActionResult TransportationEdit(TransportationModel model)

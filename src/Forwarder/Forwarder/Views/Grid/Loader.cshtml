@@ -1,6 +1,6 @@
 ﻿@model Forwarder.Models.LoaderModel
  
-@using (Html.BeginForm("Loader", "Grid", "Post"))
+@using (Html.BeginForm("LoaderData", "Grid", "Post"))
 {    
     <div class="row">
         <div class="span3">
@@ -55,7 +55,7 @@
           
         </div>
         <div class="form-actions">
-            <button type = "submit"  style="margin: 0 0 0 100px;">Сохранить</button>
+            <button type = "submit" id = "save_btn" style="margin: 0 0 0 100px;">Сохранить</button>
         </div>
     </div>
 }
