@@ -14,7 +14,7 @@ namespace ForwarderDAL.Entity
 
         public int Rate { get; set; }
 
-        public bool Metod { get; set; }
+        public bool Method { get; set; }
 
         public int Count { get; set; }
 

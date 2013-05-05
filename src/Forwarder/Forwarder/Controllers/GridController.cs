@@ -97,39 +97,32 @@ namespace Forwarder.Controllers
         }
 
 
-        public JsonResult LoadersView(string Id)
+        public JsonResult LoadersView(string id)
         {
-
-            var listresult1 = new List<LoaderModel>();
-            var gridRow1 = new LoaderModel() { Loading = 1, Rate = 2, Сonsumption = 3 };
-            var gridRow2 = new LoaderModel() { Loading = 2, Rate = 4, Сonsumption = 4 };
-            var gridRow3 = new LoaderModel() { Loading = 4, Rate = 3, Сonsumption = 3 };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
+            int transportationId = Int32.Parse(id);
+            List<Load> loads = repository.Loads.Where(o => o.TransportationId == transportationId).ToList();
 
             var list = new List<object>();
-            var counter = 0;
+            var counter = 1;
 
-            foreach (var item in listresult1)
+            foreach (var item in loads)
             {
                 list.Add(new
                 {
-                    id = ++counter,
+                    id = item.Id,
                     cell = new string[]
                             {
-                                counter.ToString(),         
-                                item.Loading != null ? item.Loading.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
-                                item.Rate!= null ? item.Rate.Value.ToString() : string.Empty,
-                                item.Сonsumption!= null ? item.Сonsumption.Value.ToString() : string.Empty,
-                                item.Count != null ? item.Count.Value.ToString() : string.Empty,
-                                                              
+                                counter.ToString(),                     
+                                item.Volume.ToString(),
+                                item.Rate.ToString(),
+                                 //Filipp Stankevich TODO: посчитать расход по загрузке
+                                 "0",
+                                item.Method.ToString(),
+                                item.Count.ToString()    
                             }
                 });
+                counter++;
             }
-
-
             
             
             var result = new JsonResult()
@@ -262,28 +255,17 @@ namespace Forwarder.Controllers
             };
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;
-
-         
-          
+            return result;          
         }
 
-        public JsonResult RouteView(string Id)
+        public JsonResult RouteView(string id)
         {
+            int transportationId = Int32.Parse(id);
+            List<Route> routes = repository.Routes.Where(o => o.TransportationId == transportationId).ToList(); 
 
-
-            var listresult1 = new List<RouterModel>();
-            var gridRow1 = new RouterModel() { Road = "123", Carrier = "sss", Сonsumption = 1 };
-            var gridRow2 = new RouterModel() { Road = "143", Carrier = "aaa", Сonsumption = 2 };
-            var gridRow3 = new RouterModel() { Road = "133", Carrier = "ccc", Сonsumption = 3 };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
-
+            var counter = 1;
             var list = new List<object>();
-            var counter = 0;
-
-            foreach (var item in listresult1)
+            foreach (var item in routes)
             {
                 list.Add(new
                 {
@@ -291,13 +273,14 @@ namespace Forwarder.Controllers
                     cell = new string[]
                             {
                                 counter.ToString(),
-                                !string.IsNullOrEmpty(item.Road) ? item.Road.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Carrier) ? item.Carrier.ToString() : string.Empty,
-                                item.Сonsumption!= null ? item.Сonsumption.Value.ToString() : string.Empty,
+                                item.Road != null ? item.Road.ShortName : string.Empty,
+                                item.Carrier != null ? item.Carrier.ShortName: string.Empty,
+                                //Filipp Stankevich TODO: Посчитать общие расходы по маршруту
+                                "0"
                             }
                 });
             }
-            
+         
             var result = new JsonResult()
             {
                 Data = new
@@ -310,12 +293,8 @@ namespace Forwarder.Controllers
             };
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;
-
-        
+            return result;        
         }
-
-
 
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion,
                                    string GHGClassificator, string ETSNGClassificator, DateTime? RegDate)

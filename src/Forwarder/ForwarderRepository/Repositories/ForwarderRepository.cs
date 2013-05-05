@@ -15,7 +15,7 @@ namespace ForwarderDAL.Repositories
         public IQueryable<Etsng> Etsngs { get { return context.Etsngs; } }
         public IQueryable<Carrier> Carriers { get { return context.Carriers; } }
         public IQueryable<Client> Clients { get { return context.Clients; } }
-        public IQueryable<Load> Loadings { get { return context.Loadings; } }
+        public IQueryable<Load> Loads { get { return context.Loadings; } }
         public IQueryable<Expense> Outgoes { get { return context.Outgoes; } }
         public IQueryable<Road> Roads { get { return context.Roads; } }
         public IQueryable<Route> Routes { get { return context.Routes; } }

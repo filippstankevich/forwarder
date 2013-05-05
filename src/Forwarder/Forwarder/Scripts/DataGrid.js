@@ -219,9 +219,9 @@
          colNames: ['№', 'Загрузка', 'Ставка', 'Расход', 'Метод расчета', 'Количество'],
          colModel: [
              { name: 'Id', width: 20, align: "center" },
-             { name: 'Loading', width: 100, align: "center" },
+             { name: 'Volume', width: 100, align: "center" },
              { name: 'Rate', width: 100, align: "center" },
-             { name: 'Сonsumption', width: 100, align: "center" },
+             { name: 'Expense', width: 100, align: "center" },
              { name: 'Method', width: 200, align: "center" },
              { name: 'Count', width: 100, align: "center" }
          ],
