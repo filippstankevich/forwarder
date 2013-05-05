@@ -1,7 +1,7 @@
  $(document).ready(function() {
 
      $("#spoilerClick").click(function() {
-         $("#spoiler").toggle("slow");
+       //  $("#spoiler").toggle("slow");
      });
 
      $("#consumpt_dialog").dialog({       
@@ -17,8 +17,21 @@
              duration: 100
          },
      });
+     
 
-   
+      $("#shipping_dialog").dialog({       
+         autoOpen: false,
+         minWidth: 1200,
+
+         show: {
+             effect: "blind",
+             duration: 100,
+         },
+         hide: {
+             effect: "explode",
+             duration: 100
+         },
+     });
 
      $('#consumpt_edit').dialog({
           autoOpen: false,
@@ -61,8 +74,15 @@
      });
 
      $('#add_consumpt').click(function() {
-         alert();
             
+                 $.ajax({
+                 url: $('#consumpt_edit').attr('action'),
+                 type: "POST",
+                 success: function(data) {
+                     $('#consumpt_edit').html(data);
+                     $("#consumpt_edit").dialog("open");
+                 }
+             });           
      });
 
 
@@ -313,6 +333,26 @@
              alert(id);
          }
      });
+     
+     $('#shipping').jqGrid({                       
+                 url: '/Grid/ShippingView',
+                 datatype: "json",
+                 colNames: ['№', 'Рег.номер', 'Номер вагона', 'Номер накладной', 'Вес','Грузоподъемность','Дата','Дата прибытия'],
+                 colModel: [
+                     { name: 'Id', index: 'id', align: "center",width: 30 },
+                     { name: 'RegNumber', index: 'RegNumber', align: "center"  },
+                     { name: 'ContainerNumber', index: 'ContainerNumber', align: "center" },
+                     { name: 'InvoiceNumber', index: 'InvoiceNumber', align: "center",width:180 },
+                     { name: 'Weight', index: 'Weight', align: "center",width:50 },
+                     { name: 'Capacity', index: 'Capacity', align: "center",width:180  },
+                     { name: 'Date', index: 'Date', align: "center",width:100  },
+                     { name: 'ArriveDate', index: 'ArriveDate', align: "center"}
+                 ],
+                 height: 'auto',
+                 sortorder: "desc",
+                 sortname: 'id',
+                 caption: "Отгрузка",
+             });
 
           
  });
