@@ -230,13 +230,13 @@
          caption: "Загрузки",
          ondblClickRow: function(id) {
              $.ajax({
-                 url: $('#loader_dialog').attr('action'),
+                 url: $('#loader_dialog').attr('action') + "?id=" +  id,
                  type: "POST",
                  data: {
                      Id: $('#loaders').jqGrid('getCell',id,'Id'),
-                     Loading: $('#loaders').jqGrid('getCell', id, 'Loading'),
+                     Loading: $('#loaders').jqGrid('getCell', id, 'Volume'),
                      Rate: $('#loaders').jqGrid('getCell', id, 'Rate'),
-                     Сonsumption: $('#loaders').jqGrid('getCell', id, 'Сonsumption'),
+                     Сonsumption: $('#loaders').jqGrid('getCell', id, 'Expense'),
                      Method: $('#loaders').jqGrid('getCell', id, 'Method'),
                      Count: $('#loaders').jqGrid('getCell', id, 'Count')
                  },

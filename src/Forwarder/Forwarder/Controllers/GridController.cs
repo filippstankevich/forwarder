@@ -41,8 +41,12 @@ namespace Forwarder.Controllers
             return PartialView("Shipping", model);
         }
 
-        public PartialViewResult Route(RouterModel model)
+        public PartialViewResult Route(RouterModel model, string id)
         {
+            if (!string.IsNullOrEmpty(id))
+            {
+                model.Id = Int32.Parse(id);
+            }
             return PartialView("Route", model);
         }
         public PartialViewResult Consumpt(ConsumptionModel model)
@@ -51,13 +55,17 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult Loader(LoaderModel model)
-        {           
+        public PartialViewResult Loader(LoaderModel model, string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                model.Id = Int32.Parse(id);
+            }
             return PartialView("Loader",model);
         }
 
         [HttpPost]
-        public ViewResult LoaderData(LoaderModel loadermodel)
+        public ViewResult LoaderData(LoaderModel loadermodel, string id)
         {
             TransportationModel model = new TransportationModel();
 
@@ -393,30 +401,30 @@ namespace Forwarder.Controllers
             return View(model);
         }
 
-       
+
 
         [HttpPost]
         public ActionResult TransportationEdit(TransportationModel model)
         {
+            int sourceStationId = Int32.Parse(model.SourceStationId);
+            int destinationStationId = Int32.Parse(model.SourceStationId);
+            int gngId = Int32.Parse(model.GngId);
+            int etsngId = Int32.Parse(model.EtsngId);
 
-                int sourceStationId = Int32.Parse(model.SourceStationId);
-                int destinationStationId = Int32.Parse(model.SourceStationId);
-                int gngId = Int32.Parse(model.GngId);
-                int etsngId = Int32.Parse(model.EtsngId);
 
+            Transportation transportation = new Transportation()
+                {
+                    Id = !string.IsNullOrEmpty(model.Id) ? Int32.Parse(model.Id) : -1,
+                    CreateDate = DateTime.Now,
+                    RegNumber = model.RegNumber,
+                    SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
+                    DestinationStation =
+                        repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
+                    Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
+                    Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
+                };
+            repository.AddNewTransportation(transportation);
 
-                Transportation transportation = new Transportation()
-                    {
-                        CreateDate = DateTime.Now,
-                        RegNumber = model.RegNumber,
-                        SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
-                        DestinationStation =
-                            repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
-                        Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
-                        Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
-                    };
-                repository.AddNewTransportation(transportation);
-            
             return View("Index");
         }
     }

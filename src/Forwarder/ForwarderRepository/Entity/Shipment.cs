@@ -15,7 +15,7 @@ namespace ForwarderDAL.Entity
 
         public DateTime Date { get; set; }
 
-        public DateTime ArrivalDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
 
         public string BillNumber { get; set; }
 
@@ -23,7 +23,7 @@ namespace ForwarderDAL.Entity
 
         public int Weight { get; set; }
 
-        public int Capacity { get; set; }
+        public int? Capacity { get; set; }
 
         public int TransportationId { get; set; }
         [ForeignKey("TransportationId")]
