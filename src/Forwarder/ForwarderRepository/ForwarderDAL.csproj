@@ -63,6 +63,7 @@
     <Compile Include="Entity\Expense.cs" />
     <Compile Include="Entity\Road.cs" />
     <Compile Include="Entity\Route.cs" />
+    <Compile Include="Entity\Shipment.cs" />
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="FRDbContext.cs" />

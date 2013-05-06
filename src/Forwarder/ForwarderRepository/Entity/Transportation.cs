@@ -40,5 +40,7 @@ namespace ForwarderDAL.Entity
         public virtual ICollection<Load> Loads { get; set; }
 
         public virtual ICollection<Route> Routes { get; set; }
+
+        public virtual ICollection<Shipment> Shipments { get; set; }
     }
 }
