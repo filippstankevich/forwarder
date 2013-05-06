@@ -12,11 +12,13 @@ namespace Forwarder.Models
         public IEnumerable<SelectListItem> GngItems { get; set; }
         public IEnumerable<SelectListItem> EtsngItems { get; set; }
         public IEnumerable<SelectListItem> StationItems { get; set; }
+        public LoaderModel Loaders;
 
-        public string Gng { get; set; }
-        public string Etsng { get; set; }
-        public string SourceStation { get; set; }
-        public string DestinationStation { get; set; }
+        public string Id { get; set; }
+        public string GngId { get; set; }
+        public string EtsngId { get; set; }
+        public string SourceStationId { get; set; }
+        public string DestinationStationId { get; set; }
         public string RegNumber {get; set;}
         public string Comment {get; set;}
     }

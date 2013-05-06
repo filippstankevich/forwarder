@@ -36,59 +36,93 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
-        [HttpPost]
-        public PartialViewResult Loader(string Loading, string Rate, string Сonsumption, string Method, string Count)
+        public PartialViewResult Shipping(ShippingModel model)
         {
-            var model = new LoaderModel
-            {
-                Loading = !string.IsNullOrEmpty(Loading) ?int.Parse(Loading) : 0,
-                Rate = !string.IsNullOrEmpty(Rate) ? int.Parse(Rate) : 0,
-                Сonsumption = !string.IsNullOrEmpty(Сonsumption) ? int.Parse(Сonsumption) : 0,
-                Method = !string.IsNullOrEmpty(Method) ? Method : string.Empty,
-                Count = !string.IsNullOrEmpty(Count) ? int.Parse(Count) : 0
-                
-                
-                
-            };
+            return PartialView("Shipping", model);
+        }
 
+        public PartialViewResult Route(RouterModel model)
+        {
+            return PartialView("Route", model);
+        }
+        public PartialViewResult Consumpt(ConsumptionModel model)
+        {
+            return PartialView("ConsumptEdit", model);
+        }
+
+        [HttpPost]
+        public PartialViewResult Loader(LoaderModel model)
+        {           
             return PartialView("Loader",model);
         }
 
-
-
-        public JsonResult LoadersView()
+        [HttpPost]
+        public ViewResult LoaderData(LoaderModel loadermodel)
         {
+            TransportationModel model = new TransportationModel();
 
-            var listresult1 = new List<LoaderModel>();
-            var gridRow1 = new LoaderModel() { Loading = 1, Rate = 2, Сonsumption = 3 };
-            var gridRow2 = new LoaderModel() { Loading = 2, Rate = 4, Сonsumption = 4 };
-            var gridRow3 = new LoaderModel() { Loading = 4, Rate = 3, Сonsumption = 3 };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
+            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
+            //TODO: Временно посмтавил выбор первых 100 значений
+            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
+            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
+            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+
+            return View("TransportationEdit",model);
+        }
+
+        [HttpPost]
+        public ViewResult RouterData(RouterModel routermodel)
+        {
+            TransportationModel model = new TransportationModel();
+
+            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
+            //TODO: Временно посмтавил выбор первых 100 значений
+            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
+            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
+            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+
+            return View("TransportationEdit", model);
+        }
+
+
+        public JsonResult LoadersView(string id)
+        {
+            int transportationId = Int32.Parse(id);
+            List<Load> loads = repository.Loads.Where(o => o.TransportationId == transportationId).ToList();
 
             var list = new List<object>();
-            var counter = 0;
+            var counter = 1;
 
-            foreach (var item in listresult1)
+            foreach (var item in loads)
             {
                 list.Add(new
                 {
-                    id = ++counter,
+                    id = item.Id,
                     cell = new string[]
                             {
-                                counter.ToString(),         
-                                item.Loading != null ? item.Loading.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
-                                item.Rate!= null ? item.Rate.Value.ToString() : string.Empty,
-                                item.Сonsumption!= null ? item.Сonsumption.Value.ToString() : string.Empty,
-                                item.Count != null ? item.Count.Value.ToString() : string.Empty,
-                                                              
+                                counter.ToString(),                     
+                                item.Volume.ToString(),
+                                item.Rate.ToString(),
+                                 //Filipp Stankevich TODO: посчитать расход по загрузке
+                                 "0",
+                                item.Method.ToString(),
+                                item.Count.ToString()    
                             }
                 });
+                counter++;
             }
-
-
             
             
             var result = new JsonResult()
@@ -153,6 +187,29 @@ namespace Forwarder.Controllers
             return result;
         }
 
+        public JsonResult ShippingView()
+        {
+            var shipments = new List<ShippingModel>();
+
+            var list = new List<object>();
+
+            var result = new JsonResult()
+            {
+                Data = new
+                {
+                    page = 1,
+                    total = 1,
+                    records = list.Count,
+                    rows = list.ToArray()
+                }
+            };
+
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return result;
+
+
+
+        }
        
         public JsonResult ConsumptionView()
         {
@@ -198,28 +255,17 @@ namespace Forwarder.Controllers
             };
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;
-
-         
-          
+            return result;          
         }
 
-        public JsonResult RouteView()
+        public JsonResult RouteView(string id)
         {
+            int transportationId = Int32.Parse(id);
+            List<Route> routes = repository.Routes.Where(o => o.TransportationId == transportationId).ToList(); 
 
-
-            var listresult1 = new List<RouterModel>();
-            var gridRow1 = new RouterModel() { Road = "123", Carrier = "sss", Сonsumption = 1 };
-            var gridRow2 = new RouterModel() { Road = "143", Carrier = "aaa", Сonsumption = 2 };
-            var gridRow3 = new RouterModel() { Road = "133", Carrier = "ccc", Сonsumption = 3 };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
-
+            var counter = 1;
             var list = new List<object>();
-            var counter = 0;
-
-            foreach (var item in listresult1)
+            foreach (var item in routes)
             {
                 list.Add(new
                 {
@@ -227,13 +273,14 @@ namespace Forwarder.Controllers
                     cell = new string[]
                             {
                                 counter.ToString(),
-                                !string.IsNullOrEmpty(item.Road) ? item.Road.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Carrier) ? item.Carrier.ToString() : string.Empty,
-                                item.Сonsumption!= null ? item.Сonsumption.Value.ToString() : string.Empty,
+                                item.Road != null ? item.Road.ShortName : string.Empty,
+                                item.Carrier != null ? item.Carrier.ShortName: string.Empty,
+                                //Filipp Stankevich TODO: Посчитать общие расходы по маршруту
+                                "0"
                             }
                 });
             }
-            
+         
             var result = new JsonResult()
             {
                 Data = new
@@ -246,37 +293,35 @@ namespace Forwarder.Controllers
             };
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;
-
-        
+            return result;        
         }
 
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion,
                                    string GHGClassificator, string ETSNGClassificator, DateTime? RegDate)
         {
-            var listresult1 = repository.Transportations.ToList();
+            var transportations = repository.Transportations.ToList();
 
             if (!string.IsNullOrEmpty(RegNumber))
-                listresult1 = listresult1.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
+                transportations = transportations.Where(d => d.RegNumber.Contains(RegNumber)).ToList();
             if (!string.IsNullOrEmpty(DispatchStation))
-                listresult1 = listresult1.Where(d => d.DestinationStation.Name.Contains(DispatchStation)).ToList();
+                transportations = transportations.Where(d => d.DestinationStation.Name.Contains(DispatchStation)).ToList();
             if (!string.IsNullOrEmpty(ArriveStattion))
-                listresult1 = listresult1.Where(d => d.SourceStation.Name.Contains(ArriveStattion)).ToList();
+                transportations = transportations.Where(d => d.SourceStation.Name.Contains(ArriveStattion)).ToList();
             if (!string.IsNullOrEmpty(GHGClassificator))
-                listresult1 = listresult1.Where(d => d.Gng.Code.Contains(GHGClassificator)).ToList();
+                transportations = transportations.Where(d => d.Gng.Code.Contains(GHGClassificator)).ToList();
             if (!string.IsNullOrEmpty(ETSNGClassificator))
-                listresult1 = listresult1.Where(d => d.Etsng.Code.Contains(ETSNGClassificator)).ToList();
+                transportations = transportations.Where(d => d.Etsng.Code.Contains(ETSNGClassificator)).ToList();
             if (RegDate != null)
-                listresult1 = listresult1.Where(d => d.CreateDate == RegDate.Value).ToList();
+                transportations = transportations.Where(d => d.CreateDate == RegDate.Value).ToList();
 
             var list = new List<object>();
-            var counter = 0;
+            var counter = 1;
 
-            foreach (var item in listresult1)
+            foreach (var item in transportations)
             {
                 list.Add(new
                     {
-                        id = ++counter,
+                        id = item.Id,
                         cell = new string[]
                             {
                                 counter.ToString(),
@@ -285,12 +330,13 @@ namespace Forwarder.Controllers
                                 item.SourceStation != null ? item.SourceStation.Name : string.Empty,
                                 item.Gng != null ? item.Gng.Code : string.Empty,
                                 item.Etsng != null ? item.Etsng.Code : string.Empty,
-                                item.CreateDate != null ? item.CreateDate.ToString() : string.Empty,
+                                item.CreateDate.ToString(),
                                 // TODO: Сделать подсчет транспорта и коментарий
-                                item.LoadingEntity != null ? repository.GetTransportCount(item).ToString() : string.Empty,
+                                item.Loads != null ? repository.GetTransportCount(item).ToString() : string.Empty,
                                 // !string.IsNullOrEmpty(item.Comments) ? item.Comments.ToString() : string.Empty
                             }
                     });
+                counter++;
             }
 
             var result = new JsonResult()
@@ -308,15 +354,36 @@ namespace Forwarder.Controllers
             return result;
         }
 
-        public ViewResult TransportationEdit()
+
+        public ViewResult TransportationEdit(string Id, string RegNumber, string GHGClassificator, string ETSNGClassificator,
+                                              string DispatchStation, string ArriveStattion, string Comment)
         {
             TransportationModel model = new TransportationModel();
+
+            //Подтягивание данных по выбранной перевозке
+            if (Id != null && Id.Length > 0)
+            {
+                int id = Int32.Parse(Id);
+                Transportation transportation = repository.Transportations.Where(o => o.Id == id).Single();
+                model.RegNumber = transportation.RegNumber;
+                model.EtsngId = transportation.Etsng != null ?
+                    transportation.Etsng.Id.ToString() : string.Empty;
+                model.GngId = transportation.Gng != null ? 
+                    transportation.Gng.Id.ToString() : string.Empty;
+                model.SourceStationId = transportation.SourceStation != null ?
+                    transportation.SourceStation.Id.ToString() : string.Empty;
+                model.DestinationStationId = transportation.DestinationStation != null ?
+                    transportation.DestinationStation.Id.ToString() : string.Empty;
+            }
+
+
+            //Инициализация справочников
 
             //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
             //TODO: Временно посмтавил выбор первых 100 значений
             IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
             model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
+            
             IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
             model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
@@ -326,25 +393,30 @@ namespace Forwarder.Controllers
             return View(model);
         }
 
+       
+
         [HttpPost]
         public ActionResult TransportationEdit(TransportationModel model)
         {
-            int sourceStationId =  Int32.Parse(model.SourceStation);
-            int destinationStationId = Int32.Parse(model.SourceStation);
-            int gngId = Int32.Parse(model.Gng);
-            int etsngId = Int32.Parse(model.Etsng);
 
-            Transportation transportation = new Transportation()
-            {
-                CreateDate = DateTime.Now,
-                RegNumber = model.RegNumber,
-                SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
-                DestinationStation = repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
-                Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
-                Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
-            };
-            repository.AddNewTransportation(transportation);
+                int sourceStationId = Int32.Parse(model.SourceStationId);
+                int destinationStationId = Int32.Parse(model.SourceStationId);
+                int gngId = Int32.Parse(model.GngId);
+                int etsngId = Int32.Parse(model.EtsngId);
 
+
+                Transportation transportation = new Transportation()
+                    {
+                        CreateDate = DateTime.Now,
+                        RegNumber = model.RegNumber,
+                        SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
+                        DestinationStation =
+                            repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
+                        Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
+                        Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
+                    };
+                repository.AddNewTransportation(transportation);
+            
             return View("Index");
         }
     }

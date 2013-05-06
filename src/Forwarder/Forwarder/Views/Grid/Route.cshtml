@@ -1,0 +1,32 @@
+﻿@model Forwarder.Models.RouterModel
+ 
+@using (Html.BeginForm("RouterData", "Grid", "Post"))
+{    
+    <div class="row">
+        <div class="span3">
+                <div class="control-group">
+                    <label class="span3 text-left">№ Маршрута</label>
+                    <div class="controls">              
+                        @Html.TextBoxFor(m => m.Id, new Dictionary<string, object>() { { "readonly", "true" } })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="span3 text-left">Дорога</label>
+                    <div class="controls">              
+                        @Html.TextBoxFor(m => m.Road)
+                    </div>
+                </div>  
+                <div class="control-group">
+                    <label class="span3 text-left">Перевозчик</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Carrier)
+                    </div>
+                </div>
+           
+        </div>     
+
+        <div class="form-actions">
+            <button type = "submit"  style="margin: 0 0 0 100px;">Сохранить</button>
+        </div>
+    </div>
+}

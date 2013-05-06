@@ -57,17 +57,18 @@
     <Compile Include="Entity\Carrier.cs" />
     <Compile Include="Entity\Client.cs" />
     <Compile Include="Entity\ETSNG.cs" />
+    <Compile Include="Entity\ExpenseType.cs" />
     <Compile Include="Entity\GNG.cs" />
-    <Compile Include="Entity\Loading.cs" />
-    <Compile Include="Entity\Outgo.cs" />
+    <Compile Include="Entity\Load.cs" />
+    <Compile Include="Entity\Expense.cs" />
     <Compile Include="Entity\Road.cs" />
     <Compile Include="Entity\Route.cs" />
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
-    <Compile Include="Entity\FRDbContext.cs" />
-    <Compile Include="Migrations\201304280805324_Forwarder.cs" />
-    <Compile Include="Migrations\201304280805324_Forwarder.Designer.cs">
-      <DependentUpon>201304280805324_Forwarder.cs</DependentUpon>
+    <Compile Include="FRDbContext.cs" />
+    <Compile Include="Migrations\201305051525003_Forwarder.cs" />
+    <Compile Include="Migrations\201305051525003_Forwarder.Designer.cs">
+      <DependentUpon>201305051525003_Forwarder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
@@ -79,8 +80,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201304280805324_Forwarder.resx">
-      <DependentUpon>201304280805324_Forwarder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201305051525003_Forwarder.resx">
+      <DependentUpon>201305051525003_Forwarder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

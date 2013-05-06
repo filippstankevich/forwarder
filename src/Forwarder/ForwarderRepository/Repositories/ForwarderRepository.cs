@@ -15,15 +15,15 @@ namespace ForwarderDAL.Repositories
         public IQueryable<Etsng> Etsngs { get { return context.Etsngs; } }
         public IQueryable<Carrier> Carriers { get { return context.Carriers; } }
         public IQueryable<Client> Clients { get { return context.Clients; } }
-        public IQueryable<Loading> Loadings { get { return context.Loadings; } }
-        public IQueryable<Outgo> Outgoes { get { return context.Outgoes; } }
+        public IQueryable<Load> Loads { get { return context.Loadings; } }
+        public IQueryable<Expense> Outgoes { get { return context.Outgoes; } }
         public IQueryable<Road> Roads { get { return context.Roads; } }
         public IQueryable<Route> Routes { get { return context.Routes; } }
 
         public int GetTransportCount(Transportation transportation)
         {
             var result = 0;
-            foreach (var loading in transportation.LoadingEntity)
+            foreach (var loading in transportation.Loads)
             {
                 result += loading.Count;
             }

@@ -1,12 +1,21 @@
 ﻿@model Forwarder.Models.LoaderModel
  
-<div class="row">
-    <div class="span3">
-        <form class = "form-inline">
+@using (Html.BeginForm("LoaderData", "Grid", "Post"))
+{    
+    <div class="row">
+        <div class="span3">
+            <div class="control-group">
+                <label class="span3 text-left">№ Загрузки</label>
+                <div class="controls"> 
+                    @Html.TextBoxFor(m => m.Id, new Dictionary<string, object>() { { "readonly", "true" } })
+                </div>
+            </div>
+        </div>
+            <div class="span3">
+                
             <div class="control-group">
                 <label class="span3 text-left">Загрузка</label>
-                <div class="controls">   
-           
+                <div class="controls">              
                     @Html.TextBoxFor(m => m.Loading)
                 </div>
             </div>
@@ -16,10 +25,10 @@
                     @Html.TextBoxFor(m => m.Rate)
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="span3">
-        <form class = "form-inline">
+           
+        </div>
+        <div class="span3">
+           
             <div class="control-group">
                 <label class="span3 text-left">Расход</label>
                 <div class="controls">
@@ -32,10 +41,10 @@
                     @Html.TextBoxFor(m => m.Method)
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="span3">
-        <form class = "form-inline">
+        
+        </div>
+        <div class="span3">
+           
             <div class="control-group">
                 <label class="span3 text-left">Количество</label>
                 <div class="controls">
@@ -43,6 +52,10 @@
                 </div>
             </div>
 
-        </form>
+          
+        </div>
+        <div class="form-actions">
+            <button type = "submit" id = "save_btn" style="margin: 0 0 0 100px;">Сохранить</button>
+        </div>
     </div>
-</div>
+}

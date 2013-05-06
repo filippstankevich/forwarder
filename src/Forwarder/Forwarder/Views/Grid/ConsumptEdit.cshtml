@@ -1,0 +1,32 @@
+﻿@model Forwarder.Models.ConsumptionModel
+ 
+@using (Html.BeginForm("Consumpt", "Grid", "Post"))
+{    
+    <div class="row">
+        <div class="span3">
+           
+                <div class="control-group">
+                    <label class="span3 text-left">Тип</label>
+                    <div class="controls">              
+                        @Html.TextBoxFor(m => m.Type)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="span3 text-left">Расход</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Consumption)
+                    </div>
+                </div>   
+                <div class="control-group">
+                    <label class="span3 text-left">Метод расчета</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Method)
+                    </div>
+                </div>      
+           
+        </div>
+        <div class="form-actions">
+            <button type = "submit"  style="margin: 0 0 0 100px;">Сохранить</button>
+        </div>
+    </div>
+}
