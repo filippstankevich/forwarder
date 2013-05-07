@@ -24,7 +24,6 @@ namespace ForwarderDAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Transportation>()
                         .HasRequired(t => t.SourceStation)
                         .WithMany(s => s.TransportationsBySourceStation)
