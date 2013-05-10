@@ -21,5 +21,9 @@ namespace Forwarder.Models
         public string DestinationStationId { get; set; }
         public string RegNumber {get; set;}
         public string Comment {get; set;}
+
+        public int PlannedExpense { get; set; }
+        public int PlannedPrice { get; set; }
+        public int PlannedProfit { get; set; }
     }
 }

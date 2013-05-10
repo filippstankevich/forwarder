@@ -14,14 +14,14 @@ namespace ForwarderDAL.Entity
 
         public int Rate { get; set; }
 
-        public bool Method { get; set; }
+        public bool Method { get; set; } // true - плата за тонну, false - за вагон
 
         public int Count { get; set; }
 
         public int TransportationId { get; set; }
         [ForeignKey("TransportationId")]
         public virtual Transportation Transportation { get; set; }
-       
-        public ICollection<Expense> Expenses { get; set; }
+
+        public virtual ICollection<Expense> Expenses { get; set; }
     }
 }

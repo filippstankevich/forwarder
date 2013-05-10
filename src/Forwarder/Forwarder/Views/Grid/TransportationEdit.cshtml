@@ -1,6 +1,5 @@
 ﻿@model Forwarder.Models.TransportationModel
 
-
 @{
     ViewBag.Title = "Перевозка";
 }
@@ -63,19 +62,19 @@
             <div class="control-group">
                 <label class="span3 text-left">Планируемый расход</label>
                     <div class="controls">   
-                        @Html.TextBoxFor(m=>m.Comment, new { @readonly = "true" })
+                        @Html.TextBoxFor(m=>m.PlannedExpense, new { @readonly = "true" })
                     </div>
             </div>
             <div class="control-group">
                 <label class="span3 text-left">Планируемая сумма с клиента</label>
                     <div class="controls">   
-                        @Html.TextBox("2")
+                        @Html.TextBoxFor(m => m.PlannedPrice, new { @readonly = "true" })
                     </div>
             </div>
              <div class="control-group">
                 <label class="span3 text-left">Планируемая прибыль</label>
                     <div class="controls">   
-                        @Html.TextBox("3")
+                        @Html.TextBoxFor(m => m.PlannedProfit, new { @readonly = "true" })
                     </div>
             </div>
        </div>
@@ -83,9 +82,7 @@
 </div>
 
 <div>
-   <div id="pager2"></div>
-
- 
+   <div id="pager2"></div> 
                 
     <table id = "loaders"></table>
     <div id ="add_loading" class="btn btn-primary controls">+</div>
@@ -93,19 +90,17 @@
 
     <table id = "route"></table>
     <div id ="add_route" class="btn btn-primary controls">+</div>
-    <div id ="delete_route" class="btn btn-primary controls">-</div>
-    
-      @Html.ActionLink("Отгрузка", "Shipping")
-      @Html.ActionLink("Печать","#")
+    <div id ="delete_route" class="btn btn-primary controls">-</div>    
+
+     @Html.ActionLink("Отгрузка", "Shipping")
+     @Html.ActionLink("Печать","#")
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>
     <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Grid")></div>
     <div id="route_dialog" title="Маршрут" action = @Url.Action("Route", "Grid")></div>
     <div id="edit_consumpt" title="Расход" action = @Url.Action("Consumpt", "Grid")></div>
     <div id="shipping_dialog" title="Отгрузка" action = @Url.Action("Shipping", "Grid")></div>
-    <div id="delno_dialog" title="Подтвердите удаление данных"></div>
-
-      
+    <div id="delno_dialog" title="Подтвердите удаление данных"></div>     
 
  </div>
     

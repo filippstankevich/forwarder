@@ -5,12 +5,15 @@ using System.Web.Mvc;
 using Forwarder.Models;
 using ForwarderDAL.Entity;
 using ForwarderDAL.Repositories;
+using Forwarder.Helper;
 
 namespace Forwarder.Controllers
 {
     public class GridController : Controller
     {
         private IForwarderRepository repository;
+
+        private TransportationHelper helper = new TransportationHelper();
 
         public GridController(IForwarderRepository repo)
         {
@@ -107,31 +110,31 @@ namespace Forwarder.Controllers
 
         public JsonResult LoadersView(string id)
         {
-            int transportationId = Int32.Parse(id);
-            List<Load> loads = repository.Loads.Where(o => o.TransportationId == transportationId).ToList();
-
             var list = new List<object>();
-            var counter = 1;
-
-            foreach (var item in loads)
+            if (!string.IsNullOrEmpty(id))
             {
-                list.Add(new
+                int transportationId = Int32.Parse(id);
+                List<Load> loads = repository.Loads.Where(o => o.TransportationId == transportationId).ToList();
+
+                var counter = 1;
+                foreach (var item in loads)
                 {
-                    id = item.Id,
-                    cell = new string[]
+                    list.Add(new
+                    {
+                        id = item.Id,
+                        cell = new string[]
                             {
                                 counter.ToString(),                     
                                 item.Volume.ToString(),
                                 item.Rate.ToString(),
-                                 //Filipp Stankevich TODO: посчитать расход по загрузке
-                                 "0",
+                                item.Expenses != null ? item.Expenses.Sum(o=>o.Value).ToString() : "0",
                                 item.Method.ToString(),
                                 item.Count.ToString()    
                             }
-                });
-                counter++;
-            }
-            
+                    });
+                    counter++;
+                }
+            }            
             
             var result = new JsonResult()
             {
@@ -150,20 +153,19 @@ namespace Forwarder.Controllers
 
         public JsonResult EditView(string Loading, string Type, string Consumption, string Method)
         {
-
  
-            var listresult1 = new List<ConsumptionModel>();
+            var modelList = new List<ConsumptionModel>();
             var gridRow1 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
             var gridRow2 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
             var gridRow3 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
+            modelList.Add(gridRow1);
+            modelList.Add(gridRow2);
+            modelList.Add(gridRow3);
             
             var list = new List<object>();
             var counter = 0;
 
-            foreach (var item in listresult1)
+            foreach (var item in modelList)
             {
                 list.Add(new
                 {
@@ -214,9 +216,6 @@ namespace Forwarder.Controllers
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return result;
-
-
-
         }
        
         public JsonResult ConsumptionView(string id)
@@ -226,7 +225,6 @@ namespace Forwarder.Controllers
 
             var list = new List<object>();
             var counter = 1;
-
             foreach (var item in expenses)
             {
                 list.Add(new
@@ -259,26 +257,28 @@ namespace Forwarder.Controllers
 
         public JsonResult RouteView(string id)
         {
-            int transportationId = Int32.Parse(id);
-            List<Route> routes = repository.Routes.Where(o => o.TransportationId == transportationId).ToList(); 
+               var list = new List<object>();
+               if (!string.IsNullOrEmpty(id))
+               {
+                   int transportationId = Int32.Parse(id);
+                   List<Route> routes = repository.Routes.Where(o => o.TransportationId == transportationId).ToList();
 
-            var counter = 1;
-            var list = new List<object>();
-            foreach (var item in routes)
-            {
-                list.Add(new
-                {
-                    id = item.Id,
-                    cell = new string[]
+                   var counter = 1;
+                   foreach (var item in routes)
+                   {
+                       list.Add(new
+                       {
+                           id = item.Id,
+                           cell = new string[]
                             {
                                 counter.ToString(),
                                 item.Road != null ? item.Road.ShortName : string.Empty,
                                 item.Carrier != null ? item.Carrier.ShortName: string.Empty,
-                                //Filipp Stankevich TODO: Посчитать общие расходы по маршруту
-                                "0"
+                                item.Expenses.Sum(o=>o.Value).ToString()
                             }
-                });
-            }
+                       });
+                   }
+               }
          
             var result = new JsonResult()
             {
@@ -330,9 +330,7 @@ namespace Forwarder.Controllers
                                 item.Gng != null ? item.Gng.Code : string.Empty,
                                 item.Etsng != null ? item.Etsng.Code : string.Empty,
                                 item.CreateDate.ToString(),
-                                // TODO: Сделать подсчет транспорта и коментарий
                                 item.Loads != null ? repository.GetTransportCount(item).ToString() : string.Empty,
-                                // !string.IsNullOrEmpty(item.Comments) ? item.Comments.ToString() : string.Empty
                             }
                     });
                 counter++;
@@ -367,12 +365,16 @@ namespace Forwarder.Controllers
                 model.RegNumber = transportation.RegNumber;
                 model.EtsngId = transportation.Etsng != null ?
                     transportation.Etsng.Id.ToString() : string.Empty;
-                model.GngId = transportation.Gng != null ? 
+                model.GngId = transportation.Gng != null ?
                     transportation.Gng.Id.ToString() : string.Empty;
                 model.SourceStationId = transportation.SourceStation != null ?
                     transportation.SourceStation.Id.ToString() : string.Empty;
                 model.DestinationStationId = transportation.DestinationStation != null ?
                     transportation.DestinationStation.Id.ToString() : string.Empty;
+
+                model.PlannedExpense = helper.GetPlannedExpense(transportation);
+                model.PlannedPrice = helper.GetPlannedPrice(transportation);
+                model.PlannedProfit = model.PlannedPrice - model.PlannedExpense;
             }
 
 
@@ -392,8 +394,6 @@ namespace Forwarder.Controllers
             return View(model);
         }
 
-
-
         [HttpPost]
         public ActionResult TransportationEdit(TransportationModel model)
         {
@@ -401,7 +401,6 @@ namespace Forwarder.Controllers
             int destinationStationId = Int32.Parse(model.SourceStationId);
             int gngId = Int32.Parse(model.GngId);
             int etsngId = Int32.Parse(model.EtsngId);
-
 
             Transportation transportation = new Transportation()
                 {

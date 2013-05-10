@@ -21,6 +21,8 @@ namespace ForwarderDAL.Entity
         [ForeignKey("ExpenseTypeId")]
         public ExpenseType ExpenseType { get; set; }
 
+        public bool Method { get; set; } // true - плата за тонну, false - за вагон
+
         public int Value { get; set; }
     }
 }
