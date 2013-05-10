@@ -12,7 +12,7 @@ namespace Forwarder.Models
         public string InvoiceNumber  { get; set; } 
         public string Weight  { get; set; }
         public string Capacity  { get; set; }
-        public DateTime Date  { get; set; }
-        public DateTime ArriveDate  { get; set; }
+        public string Date  { get; set; }
+        public string ArriveDate  { get; set; }
     }
 }

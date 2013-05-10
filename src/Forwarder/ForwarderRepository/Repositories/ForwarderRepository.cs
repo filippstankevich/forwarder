@@ -44,6 +44,13 @@ namespace ForwarderDAL.Repositories
             return true;
         }
 
+        public bool ExportFromExcel(Shipment shipment)
+        {
+            context.Shipments.Add(shipment);
+            context.SaveChanges();
+            return true;
+        }
+
         public IQueryable<Transportation> Transportations { get { return context.Transportations; } }
     }
 }

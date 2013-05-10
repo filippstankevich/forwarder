@@ -39,9 +39,6 @@ namespace Forwarder.Controllers
         [HttpPost]
         public void ExportData()
         {
-
-            ShippingModel model = new ShippingModel();
-
             Microsoft.Office.Interop.Excel.Application ObjExcel = new Microsoft.Office.Interop.Excel.Application();
             //Открываем книгу.                                                                                                                                                        
             Microsoft.Office.Interop.Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open("D:/loadd2007.xls", 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
@@ -51,25 +48,42 @@ namespace Forwarder.Controllers
             Microsoft.Office.Interop.Excel.Range rg = null;
 
 
-            Int32 row = 1;
-            List<String> ExcelCell = new List<string>();
-            List<List<string>> ExcelString = new List<List<string>>();
-            
+            Int32 row = 2;
+            List<String> ExcelString = new List<string>();
+
             while ( row < 10 )
             {
                 for (int i = 0; i < 7; i++)
                 {
                     string Column = ((char) (65 + i)).ToString();
-                    rg = ObjWorkSheet.get_Range(Column + row, Column + row);
-                    ExcelCell.Add(rg.Text.ToString());
+                    rg = ObjWorkSheet.get_Range(Column + row, Column + row);           
+                    ExcelString.Add(rg.Text.ToString());
                 }
-                ExcelString.Add(ExcelCell);
+ 
+                Shipment shipment = new Shipment
+                {
+                    Id = row - 1,
+                 //  RegNumber = ExcelString[0],
+                    WagonNumber = ExcelString[1],
+                    BillNumber = ExcelString[2],
+                    Weight = Int32.Parse(ExcelString[3]),
+                    Capacity = Int32.Parse(ExcelString[4]),
+                    Date = DateTime.Parse(ExcelString[5]),
+                    ArrivalDate = DateTime.Parse(ExcelString[6]),
+                    TransportationId = row - 1
+                };
+                repository.ExportFromExcel(shipment);
                 row++;
+                ExcelString.Clear();
             }
-          
-            ObjExcel.Quit();
             
+            ObjExcel.Quit();
+           
+        }
 
+        protected object Date       
+        {
+            get { throw new NotImplementedException(); }
         }
 
         public PartialViewResult Shipping(ShippingModel model)
