@@ -243,9 +243,9 @@
                  type: "POST",
                  data: {
                      Id: $('#loaders').jqGrid('getCell',id,'Id'),
-                     Loading: $('#loaders').jqGrid('getCell', id, 'Volume'),
+                     Volume: $('#loaders').jqGrid('getCell', id, 'Volume'),
                      Rate: $('#loaders').jqGrid('getCell', id, 'Rate'),
-                     Сonsumption: $('#loaders').jqGrid('getCell', id, 'Expense'),
+                     Expense: $('#loaders').jqGrid('getCell', id, 'Expense'),
                      Method: $('#loaders').jqGrid('getCell', id, 'Method'),
                      Count: $('#loaders').jqGrid('getCell', id, 'Count')
                  },
@@ -272,10 +272,10 @@
          height: 'auto',
          sortorder: "desc",
          caption: "Маршрут",
-         onCellSelect : function(rowid, iCol, cellcontent, id) {
+         onCellSelect : function(id, iCol, cellcontent) {
              if (iCol == 3) {                 
                       $.get(
-                      $('#consumpt_dialog').attr('action') + '?id=1', null, 
+                      $('#consumpt_dialog').attr('action'), null, 
                       function(data) 
                       {
                             $('#consumpt_dialog').html(data);
@@ -283,7 +283,7 @@
              function() {
              var lastSel;
              $('#consumption2').jqGrid({                       
-                 url: '/Grid/ConsumptionView',
+                 url: '/Grid/ConsumptionView?id=' + id,
                  datatype: "json",
                  colNames: ['№', 'Тип', 'Расход', 'Метод расчета'],
                  colModel: [

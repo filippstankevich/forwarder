@@ -263,23 +263,21 @@ namespace Forwarder.Controllers
             List<Expense> expenses = repository.Expenses.Where(o => o.RouteId == routeId).ToList();
 
             var list = new List<object>();
-            var counter = 0;
+            var counter = 1;
 
             foreach (var item in expenses)
             {
                 list.Add(new
                 {
-                    id = ++counter,
+                    id = item.Id,
                     cell = new string[]
                             {
-                                //counter.ToString(),
-                                //item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
-                                //!string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
-                                //item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
-                                //!string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
-                               
+                                counter.ToString(),
+                                item.ExpenseType != null ? item.ExpenseType.Name : string.Empty,
+                                item.Value.ToString()
                             }
                 });
+                counter++;
             }
 
             var result = new JsonResult()
@@ -308,7 +306,7 @@ namespace Forwarder.Controllers
             {
                 list.Add(new
                 {
-                    id = ++counter,
+                    id = item.Id,
                     cell = new string[]
                             {
                                 counter.ToString(),

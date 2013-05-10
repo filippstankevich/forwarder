@@ -368,6 +368,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Styles\Styles.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -455,6 +456,7 @@
       <Name>ForwarderDAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
