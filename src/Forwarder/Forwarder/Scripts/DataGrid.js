@@ -17,6 +17,15 @@
              duration: 100
          },
      });
+
+     $('#export_btn').click(function() {
+         alert();
+            $.ajax({
+                 url: '/Grid/ExportData',
+                 type: "POST",
+                 
+             });
+     });
      
 
       $("#shipping_dialog").dialog({       

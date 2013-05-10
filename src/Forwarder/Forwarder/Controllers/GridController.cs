@@ -36,6 +36,42 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
+        [HttpPost]
+        public void ExportData()
+        {
+
+            ShippingModel model = new ShippingModel();
+
+            Microsoft.Office.Interop.Excel.Application ObjExcel = new Microsoft.Office.Interop.Excel.Application();
+            //Открываем книгу.                                                                                                                                                        
+            Microsoft.Office.Interop.Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open("D:/loadd2007.xls", 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+            //Выбираем таблицу(лист).
+            Microsoft.Office.Interop.Excel.Worksheet ObjWorkSheet;
+            ObjWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ObjWorkBook.Sheets[1];
+            Microsoft.Office.Interop.Excel.Range rg = null;
+
+
+            Int32 row = 1;
+            List<String> ExcelCell = new List<string>();
+            List<List<string>> ExcelString = new List<List<string>>();
+            
+            while ( row < 10 )
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    string Column = ((char) (65 + i)).ToString();
+                    rg = ObjWorkSheet.get_Range(Column + row, Column + row);
+                    ExcelCell.Add(rg.Text.ToString());
+                }
+                ExcelString.Add(ExcelCell);
+                row++;
+            }
+          
+            ObjExcel.Quit();
+            
+
+        }
+
         public PartialViewResult Shipping(ShippingModel model)
         {
             return PartialView("Shipping", model);
@@ -218,6 +254,8 @@ namespace Forwarder.Controllers
 
 
         }
+
+
        
         public JsonResult ConsumptionView(string id)
         {
