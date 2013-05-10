@@ -219,33 +219,26 @@ namespace Forwarder.Controllers
 
         }
        
-        public JsonResult ConsumptionView()
+        public JsonResult ConsumptionView(string id)
         {
-
-            
-            var listresult1 = new List<ConsumptionModel>();
-            var gridRow1 = new ConsumptionModel() { Loading = 123, Type = "sss", Consumption = 545,Method = "asa" };
-            var gridRow2 = new ConsumptionModel() { Loading = 124, Type = "sas", Consumption = 4554, Method = "sas" };
-            var gridRow3 = new ConsumptionModel() { Loading = 125, Type = "sasa", Consumption = 5454, Method = "wqw" };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
+            int routeId = Int32.Parse(id);
+            List<Expense> expenses = repository.Expenses.Where(o => o.RouteId == routeId).ToList();
 
             var list = new List<object>();
             var counter = 0;
 
-            foreach (var item in listresult1)
+            foreach (var item in expenses)
             {
                 list.Add(new
                 {
                     id = ++counter,
                     cell = new string[]
                             {
-                                counter.ToString(),
-                                item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
-                                item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
+                                //counter.ToString(),
+                                //item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
+                                //!string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
+                                //item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
+                                //!string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
                                
                             }
                 });

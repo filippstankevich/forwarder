@@ -251,7 +251,7 @@
 
         
      $('#route').jqGrid({
-         url: '/Grid/RouteView?id=' +  $('#Id').val(),
+         url: '/Grid/RouteView?id=' + $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Дорога', 'Перевозчик', 'Расход'],
          colModel: [
@@ -263,13 +263,15 @@
          height: 'auto',
          sortorder: "desc",
          caption: "Маршрут",
-         onCellSelect : function(rowid, iCol, cellcontent) {
-             if (iCol == 3) {
-                 
-                      $.get($('#consumpt_dialog').attr('action'), null, function(data) {
-
-             $('#consumpt_dialog').html(data);
-         }, 'html').complete(function() {
+         onCellSelect : function(rowid, iCol, cellcontent, id) {
+             if (iCol == 3) {                 
+                      $.get(
+                      $('#consumpt_dialog').attr('action') + '?id=1', null, 
+                      function(data) 
+                      {
+                            $('#consumpt_dialog').html(data);
+                      }, 'html').complete(
+             function() {
              var lastSel;
              $('#consumption2').jqGrid({                       
                  url: '/Grid/ConsumptionView',
@@ -291,7 +293,7 @@
                          lastSel = id;
                      }
                  },
-                 editurl: '/Grid/EditView'
+                 editurl: '/Grid/EditView' 
              });
              $("#consumpt_dialog").dialog("open");
          });
