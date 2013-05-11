@@ -19,9 +19,8 @@
      });
 
      $('#export_btn').click(function() {
-         alert();
             $.ajax({
-                url: '/Grid/ExportData',
+                url: '/Grid/ExportData?id=' + $('#Id').val(),
                 type: "POST"                
             });
      });      

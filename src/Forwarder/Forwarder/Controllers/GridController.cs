@@ -439,8 +439,10 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public void ExportData()
+        public void ExportData(string id)
         {
+            int transportationId = Int32.Parse(id);
+
             Application ObjExcel = new Application();
             //Открываем книгу.                                                                                                                                                        
             Workbook ObjWorkBook = ObjExcel.Workbooks.Open("D:/loadd2007.xls", 0, false, 5, "", "", false, XlPlatform.xlWindows, "", true, false, 0, true, false, false);
@@ -462,15 +464,13 @@ namespace Forwarder.Controllers
 
                Shipment shipment = new Shipment
                {
-                   Id = row - 1,
-                   //  RegNumber = ExcelString[0],
                    WagonNumber = ExcelString[1],
                    BillNumber = ExcelString[2],
-                   Weight = Int32.Parse(ExcelString[3]),
-                   Capacity = Int32.Parse(ExcelString[4]),
-                   Date = DateTime.Parse(ExcelString[5]),
-                   ArrivalDate = DateTime.Parse(ExcelString[6]),
-                   TransportationId = row - 1
+                   Weight = !string.IsNullOrEmpty(ExcelString[3]) ? Int32.Parse(ExcelString[3]) : 0,
+                   Capacity = !string.IsNullOrEmpty(ExcelString[4]) ? Int32.Parse(ExcelString[4]) : 0,
+                   Date = !string.IsNullOrEmpty(ExcelString[6]) ? DateTime.Parse(ExcelString[6]) : DateTime.Now,
+                   ArrivalDate = !string.IsNullOrEmpty(ExcelString[6]) ? (DateTime?)DateTime.Parse(ExcelString[6]) : null,
+                   TransportationId = transportationId
                };
                 repository.AddNewShipment(shipment);
                 row++;
