@@ -16,9 +16,10 @@ namespace ForwarderDAL.Repositories
         public IQueryable<Carrier> Carriers { get { return context.Carriers; } }
         public IQueryable<Client> Clients { get { return context.Clients; } }
         public IQueryable<Load> Loads { get { return context.Loadings; } }
-        public IQueryable<Expense> Outgoes { get { return context.Outgoes; } }
+        public IQueryable<Expense> Expenses { get { return context.Expenses; } }
         public IQueryable<Road> Roads { get { return context.Roads; } }
         public IQueryable<Route> Routes { get { return context.Routes; } }
+        public IQueryable<Shipment> Shipments { get { return context.Shipments; } }
 
         public int GetTransportCount(Transportation transportation)
         {
@@ -43,6 +44,13 @@ namespace ForwarderDAL.Repositories
             context.SaveChanges();
             return true;
         }
+
+         public bool AddNewShipment(Shipment shipment)
+        {
+            context.Shipments.Add(shipment);
+            context.SaveChanges();
+            return true;
+        } 
 
         public IQueryable<Transportation> Transportations { get { return context.Transportations; } }
     }

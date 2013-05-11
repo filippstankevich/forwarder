@@ -15,12 +15,14 @@ namespace ForwarderDAL.Repositories
         IQueryable<Carrier> Carriers { get; }
         IQueryable<Client> Clients { get; }
         IQueryable<Load> Loads { get; }
-        IQueryable<Expense> Outgoes { get; }
+        IQueryable<Expense> Expenses { get; }
         IQueryable<Road> Roads { get; }
         IQueryable<Route> Routes { get; }
+        IQueryable<Shipment> Shipments { get; }
 
         int GetTransportCount(Transportation transportation);
         bool AddNewStation(Station newStation);
         bool AddNewTransportation(Transportation transportation);
+        bool AddNewShipment(Shipment shipment); 
     }
 }

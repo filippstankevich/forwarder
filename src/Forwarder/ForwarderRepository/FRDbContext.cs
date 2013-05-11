@@ -17,9 +17,10 @@ namespace ForwarderDAL
         public DbSet<Carrier> Carriers { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Load> Loadings { get; set; }
-        public DbSet<Expense> Outgoes { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
         public DbSet<Road> Roads { get; set; }
         public DbSet<Route> Routes { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }  
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

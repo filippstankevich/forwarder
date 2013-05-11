@@ -6,6 +6,7 @@ using Forwarder.Models;
 using ForwarderDAL.Entity;
 using ForwarderDAL.Repositories;
 using Forwarder.Helper;
+using Microsoft.Office.Interop.Excel;
 
 namespace Forwarder.Controllers
 {
@@ -21,7 +22,6 @@ namespace Forwarder.Controllers
         }
 
         public ActionResult Index()
-
         {
             return View();
         }
@@ -31,9 +31,9 @@ namespace Forwarder.Controllers
 
             var model = new ConsumptionModel
             {
-              Consumption = 1,
-              Loading = 2,
-              Method = "123"
+                Consumption = 1,
+                Loading = 2,
+                Method = "123"
             };
 
             return PartialView("Consumption", model);
@@ -64,7 +64,7 @@ namespace Forwarder.Controllers
             {
                 model.Id = Int32.Parse(id);
             }
-            return PartialView("Loader",model);
+            return PartialView("Loader", model);
         }
 
         [HttpPost]
@@ -84,7 +84,7 @@ namespace Forwarder.Controllers
             model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
 
-            return View("TransportationEdit",model);
+            return View("TransportationEdit", model);
         }
 
         [HttpPost]
@@ -134,8 +134,8 @@ namespace Forwarder.Controllers
                     });
                     counter++;
                 }
-            }            
-            
+            }
+
             var result = new JsonResult()
             {
                 Data = new
@@ -153,7 +153,7 @@ namespace Forwarder.Controllers
 
         public JsonResult EditView(string Loading, string Type, string Consumption, string Method)
         {
- 
+
             var modelList = new List<ConsumptionModel>();
             var gridRow1 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
             var gridRow2 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
@@ -161,7 +161,7 @@ namespace Forwarder.Controllers
             modelList.Add(gridRow1);
             modelList.Add(gridRow2);
             modelList.Add(gridRow3);
-            
+
             var list = new List<object>();
             var counter = 0;
 
@@ -181,7 +181,7 @@ namespace Forwarder.Controllers
                             }
                 });
             }
-            
+
             var result = new JsonResult()
             {
                 Data = new
@@ -217,36 +217,27 @@ namespace Forwarder.Controllers
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return result;
         }
-       
-        public JsonResult ConsumptionView()
-        {
 
-            
-            var listresult1 = new List<ConsumptionModel>();
-            var gridRow1 = new ConsumptionModel() { Loading = 123, Type = "sss", Consumption = 545,Method = "asa" };
-            var gridRow2 = new ConsumptionModel() { Loading = 124, Type = "sas", Consumption = 4554, Method = "sas" };
-            var gridRow3 = new ConsumptionModel() { Loading = 125, Type = "sasa", Consumption = 5454, Method = "wqw" };
-            listresult1.Add(gridRow1);
-            listresult1.Add(gridRow2);
-            listresult1.Add(gridRow3);
+        public JsonResult ConsumptionView(string id)
+        {
+            int routeId = Int32.Parse(id);
+            List<Expense> expenses = repository.Expenses.Where(o => o.RouteId == routeId).ToList();
 
             var list = new List<object>();
-            var counter = 0;
-            foreach (var item in listresult1)
+            var counter = 1;
+            foreach (var item in expenses)
             {
                 list.Add(new
                 {
-                    id = ++counter,
+                    id = item.Id,
                     cell = new string[]
                             {
                                 counter.ToString(),
-                                item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
-                                item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
-                               
+                                item.ExpenseType != null ? item.ExpenseType.Name : string.Empty,
+                                item.Value.ToString()                               
                             }
                 });
+                counter++;
             }
 
             var result = new JsonResult()
@@ -261,34 +252,34 @@ namespace Forwarder.Controllers
             };
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;          
+            return result;
         }
 
         public JsonResult RouteView(string id)
         {
-               var list = new List<object>();
-               if (!string.IsNullOrEmpty(id))
-               {
-                   int transportationId = Int32.Parse(id);
-                   List<Route> routes = repository.Routes.Where(o => o.TransportationId == transportationId).ToList();
+            var list = new List<object>();
+            if (!string.IsNullOrEmpty(id))
+            {
+                int transportationId = Int32.Parse(id);
+                List<Route> routes = repository.Routes.Where(o => o.TransportationId == transportationId).ToList();
 
-                   var counter = 1;
-                   foreach (var item in routes)
-                   {
-                       list.Add(new
-                       {
-                           id = item.Id,
-                           cell = new string[]
+                var counter = 1;
+                foreach (var item in routes)
+                {
+                    list.Add(new
+                    {
+                        id = item.Id,
+                        cell = new string[]
                             {
                                 counter.ToString(),
                                 item.Road != null ? item.Road.ShortName : string.Empty,
                                 item.Carrier != null ? item.Carrier.ShortName: string.Empty,
                                 item.Expenses.Sum(o=>o.Value).ToString()
                             }
-                       });
-                   }
-               }
-         
+                    });
+                }
+            }
+
             var result = new JsonResult()
             {
                 Data = new
@@ -301,7 +292,7 @@ namespace Forwarder.Controllers
             };
 
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return result;        
+            return result;
         }
 
         public JsonResult GridView(string RegNumber, string DispatchStation, string ArriveStattion,
@@ -393,12 +384,12 @@ namespace Forwarder.Controllers
             //TODO: Временно посмтавил выбор первых 100 значений
             IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
             model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-            
+
             IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
             model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
             IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
-            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });            
+            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
             return View(model);
         }
@@ -425,6 +416,48 @@ namespace Forwarder.Controllers
             repository.AddNewTransportation(transportation);
 
             return View("Index");
+        }
+
+        [HttpPost]
+        public void ExportData()
+        {
+            Application ObjExcel = new Application();
+            //Открываем книгу.                                                                                                                                                        
+            Workbook ObjWorkBook = ObjExcel.Workbooks.Open("D:/loadd2007.xls", 0, false, 5, "", "", false, XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+            //Выбираем таблицу(лист).
+            Worksheet ObjWorkSheet = (Worksheet)ObjWorkBook.Sheets[1];
+            Range rg = null;
+
+            Int32 row = 2;
+            List<String> ExcelString = new List<string>();
+
+            while (row < 10)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    string Column = ((char)(65 + i)).ToString();
+                    rg = ObjWorkSheet.get_Range(Column + row, Column + row);
+                    ExcelString.Add(rg.Text.ToString());
+                }
+
+               Shipment shipment = new Shipment
+               {
+                   Id = row - 1,
+                   //  RegNumber = ExcelString[0],
+                   WagonNumber = ExcelString[1],
+                   BillNumber = ExcelString[2],
+                   Weight = Int32.Parse(ExcelString[3]),
+                   Capacity = Int32.Parse(ExcelString[4]),
+                   Date = DateTime.Parse(ExcelString[5]),
+                   ArrivalDate = DateTime.Parse(ExcelString[6]),
+                   TransportationId = row - 1
+               };
+                repository.AddNewShipment(shipment);
+                row++;
+                ExcelString.Clear();
+            }
+
+            ObjExcel.Quit();
         }
     }
 }
