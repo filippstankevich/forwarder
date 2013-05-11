@@ -7,6 +7,7 @@ using ForwarderDAL.Entity;
 using ForwarderDAL.Repositories;
 using Forwarder.Helper;
 using Microsoft.Office.Interop.Excel;
+using System.Web;
 
 
 namespace Forwarder.Controllers
@@ -440,20 +441,48 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public void ExportData(string id,string filename)
+        public PartialViewResult ExportData(HttpPostedFileBase file, string id)
         {
             int transportationId = Int32.Parse(id);
 
+            //Filipp Stankevich TODO: Workaroud to send file name into ExcelImporter
+            string tempFileName = "C:/Windows/Temp/" + DateTime.Now.Millisecond.ToString() + ".xls";
+
+            file.SaveAs(tempFileName);
+
             ExcelImporter importer = new ExcelImporter();
-
-
-            List<Shipment> shipments = importer.Import(filename);
-
-            foreach (Shipment shipment in shipments)
-            {
-                shipment.TransportationId = transportationId;
-                repository.AddNewShipment(shipment);
+            List<Shipment> shipments;
+            try
+            {             
+                shipments = importer.Import(tempFileName);               
             }
+            finally
+            {
+                TryToDeleteFile(tempFileName);               
+            }
+
+            if (shipments != null)
+            {
+                foreach (Shipment shipment in shipments)
+                {
+                    shipment.TransportationId = transportationId;
+                    repository.AddNewShipment(shipment);
+                }
+            }
+
+            return PartialView("Shipping", new ShippingModel() { Id = transportationId.ToString() }); 
        }
+
+        private void TryToDeleteFile(string fileName)
+        {
+            try
+            {
+                System.IO.File.Delete(fileName);
+            }
+            catch
+            {
+                //Nothing to do
+            }
+        }
     }
 }

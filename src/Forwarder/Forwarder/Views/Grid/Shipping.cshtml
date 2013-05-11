@@ -53,11 +53,15 @@
         </div>
         <div class="container">        
             <div class="row">
-                @Html.HiddenFor(m=>m.Id)
-                <table id = "shipping"></table>
-                <!--   <div id ="export_btn" class="btn btn-primary controls">Импорт</div> -->
-                <input type="file" name="filename" id= "loader">
                 @Html.ActionLink("Назад", "TransportationEdit", new { id = Model.Id })
-            </div>
+                <!--   <div id ="export_btn" class="btn btn-primary controls">Импорт</div> -->
+                @using (Html.BeginForm("ExportData", "Grid", FormMethod.Post, new {id = "upload_form", enctype = "multipart/form-data"}))
+                {
+                    <label>Импорт из Excel</label>                    
+                    <input type="file" name='file' id="file"  onchange="submit"/><br /> 
+                    @Html.HiddenFor(m => m.Id)                 
+                }
+                </div>
+                <table id = "shipping"></table>
         </div>
 </body>

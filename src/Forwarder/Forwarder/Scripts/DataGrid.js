@@ -18,12 +18,8 @@
          },
      });
 
-     $('#loader').change(function() {
-         alert($('#loader').val());
-         $.ajax({
-             url: '/Grid/ExportData?id=' + $('#Id').val() + '&filename=' + $('#loader').val(),
-             type: "POST"
-         });
+    $('#file').change(function() {
+          $('#upload_form').submit()
      });
 
       $("#shipping_dialog").dialog({       
