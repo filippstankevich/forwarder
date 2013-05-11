@@ -25,5 +25,9 @@ namespace Forwarder.Models
         public int PlannedExpense { get; set; }
         public int PlannedPrice { get; set; }
         public int PlannedProfit { get; set; }
+
+        public int RealExpense { get; set; }
+        public int RealPrice { get; set; }
+        public int RealProfit { get; set; }
     }
 }

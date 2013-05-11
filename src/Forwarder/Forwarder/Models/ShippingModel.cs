@@ -7,6 +7,8 @@ namespace Forwarder.Models
 {
     public class ShippingModel
     {
+        public string Id { get; set; }
+
         public string RegNumber { get; set; }
         public string ContainerNumber  { get; set; }
         public string InvoiceNumber  { get; set; } 

@@ -80,6 +80,10 @@
      
      });
 
+     $('#shipments_btn').click(function() { 
+        document.location = '/Grid/Shipping?id=' + $('#Id').val()
+     });
+
      $('#add_consumpt').click(function() {
             
                  $.ajax({
@@ -343,12 +347,11 @@
      });
      
      $('#shipping').jqGrid({                       
-                 url: '/Grid/ShippingView',
+                 url: '/Grid/ShippingView?id=' + $('#Id').val(),
                  datatype: "json",
-                 colNames: ['№', 'Рег.номер', 'Номер вагона', 'Номер накладной', 'Вес','Грузоподъемность','Дата','Дата прибытия'],
+                 colNames: ['№', 'Номер вагона', 'Номер накладной', 'Вес','Грузоподъемность','Дата','Дата прибытия'],
                  colModel: [
                      { name: 'Id', index: 'id', align: "center",width: 30 },
-                     { name: 'RegNumber', index: 'RegNumber', align: "center"  },
                      { name: 'ContainerNumber', index: 'ContainerNumber', align: "center" },
                      { name: 'InvoiceNumber', index: 'InvoiceNumber', align: "center",width:180 },
                      { name: 'Weight', index: 'Weight', align: "center",width:50 },

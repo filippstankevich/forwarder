@@ -57,7 +57,7 @@
        }
     </div>
     </div>
-    <div class="left">
+    <div class="middle">
         <div class="span3">
             <div class="control-group">
                 <label class="span3 text-left">Планируемый расход</label>
@@ -79,6 +79,28 @@
             </div>
        </div>
     </div>
+    <div class="middle">
+        <div class="span3">
+            <div class="control-group">
+                <label class="span3 text-left">Фактический расход</label>
+                    <div class="controls">   
+                        @Html.TextBoxFor(m=>m.RealExpense, new { @readonly = "true" })
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="span3 text-left">Фактическая сумма с клиента</label>
+                    <div class="controls">   
+                        @Html.TextBoxFor(m => m.RealPrice, new { @readonly = "true" })
+                    </div>
+            </div>
+             <div class="control-group">
+                <label class="span3 text-left">Фактическая прибыль</label>
+                    <div class="controls">   
+                        @Html.TextBoxFor(m => m.RealProfit, new { @readonly = "true" })
+                    </div>
+            </div>
+       </div>
+    </div>
  </div>
 <div>
    <div id="pager2"></div> 
@@ -87,12 +109,15 @@
     <div id ="add_loading" class="btn btn-primary controls">+</div>
     <div id ="delete_loading" class="btn btn-primary controls">-</div>
 
+
     <table id = "route"></table>
     <div id ="add_route" class="btn btn-primary controls">+</div>
-    <div id ="delete_route" class="btn btn-primary controls">-</div>    
+    <div id ="delete_route" class="btn btn-primary controls">-</div>  
 
-     @Html.ActionLink("Отгрузка", "Shipping")
-     @Html.ActionLink("Печать","#")
+     <div class="control-group" >
+        <div id ="shipments_btn" class="btn btn-primary controls">Отгрузка</div>
+         @Html.ActionLink("Печать","#")
+     </div>  
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>
     <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Grid")></div>

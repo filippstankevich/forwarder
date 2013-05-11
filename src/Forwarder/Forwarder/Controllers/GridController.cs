@@ -197,12 +197,32 @@ namespace Forwarder.Controllers
             return result;
         }
 
-        public JsonResult ShippingView()
+        public JsonResult ShippingView(string id)
         {
-            var shipments = new List<ShippingModel>();
+            int transportationId = Int32.Parse(id);
+            List<Shipment> shipments = repository.Shipments.Where(o => o.TransportationId == transportationId).ToList();
 
+            var counter = 1;
             var list = new List<object>();
-
+            foreach (var item in shipments)
+            {
+                list.Add(new
+                {
+                    id = item.Id,
+                    cell = new string[]
+                            {
+                                counter.ToString(),                     
+                                item.WagonNumber,
+                                item.BillNumber,
+                                item.Weight.ToString(),
+                                item.Capacity.ToString(),
+                                item.Date.ToShortDateString(),
+                                item.ArrivalDate != null ? item.ArrivalDate.Value.ToShortDateString() : string.Empty
+                            }
+                });
+                counter++;
+            }
+            
             var result = new JsonResult()
             {
                 Data = new
