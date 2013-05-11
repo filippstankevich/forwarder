@@ -18,12 +18,13 @@
          },
      });
 
-     $('#export_btn').click(function() {
-            $.ajax({
-                url: '/Grid/ExportData?id=' + $('#Id').val(),
-                type: "POST"                
-            });
-     });      
+     $('#loader').change(function() {
+         alert($('#loader').val());
+         $.ajax({
+             url: '/Grid/ExportData?id=' + $('#Id').val() + '&filename=' + $('#loader').val(),
+             type: "POST"
+         });
+     });
 
       $("#shipping_dialog").dialog({       
          autoOpen: false,

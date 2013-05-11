@@ -8,6 +8,7 @@ using ForwarderDAL.Repositories;
 using Forwarder.Helper;
 using Microsoft.Office.Interop.Excel;
 
+
 namespace Forwarder.Controllers
 {
     public class GridController : Controller
@@ -439,12 +440,14 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public void ExportData(string id)
+        public void ExportData(string id,string filename)
         {
             int transportationId = Int32.Parse(id);
 
             ExcelImporter importer = new ExcelImporter();
-            List<Shipment> shipments = importer.Import("D:/loadd2007.xls");
+
+
+            List<Shipment> shipments = importer.Import(filename);
 
             foreach (Shipment shipment in shipments)
             {
