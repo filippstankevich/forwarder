@@ -28,49 +28,55 @@ namespace Forwarder.Controllers
             return View();
         }
 
-        public PartialViewResult Consumption()
-        {
-
-            var model = new ConsumptionModel
-            {
-                Consumption = 1,
-                Loading = 2,
-                Method = "123"
-            };
-
+        public PartialViewResult Consumption(ExpenseModel model)
+        { 
             return PartialView("Consumption", model);
         }
 
-        public PartialViewResult Shipping(ShippingModel model)
+        public PartialViewResult Shipping(ShipmentModel model)
         {
             return PartialView("Shipping", model);
         }
 
-        public PartialViewResult Route(RouterModel model, string id)
+        public PartialViewResult Route(RouteModel model, string id)
         {
             if (!string.IsNullOrEmpty(id))
             {
                 model.Id = Int32.Parse(id);
             }
+
+            IEnumerable<Carrier> carriers = repository.Carriers.ToList();
+            model.Carriers = carriers.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Road> roads = repository.Roads.ToList();
+            model.Roads = roads.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
             return PartialView("Route", model);
         }
-        public PartialViewResult Consumpt(ConsumptionModel model)
+
+        public PartialViewResult Consumpt(ExpenseModel model)
         {
             return PartialView("ConsumptEdit", model);
         }
 
         [HttpPost]
-        public PartialViewResult Loader(LoaderModel model, string id)
+        public PartialViewResult Loader(LoadModel model, string id)
         {
             if (!string.IsNullOrEmpty(id))
             {
                 model.Id = Int32.Parse(id);
             }
+
+            model.Methods = new SelectListItem[] {
+                new SelectListItem() { Value = "false", Text = "За вагон" },
+                new SelectListItem() { Value = "true", Text = "За тонну" }
+            };
+
             return PartialView("Loader", model);
         }
 
         [HttpPost]
-        public ViewResult LoaderData(LoaderModel loadermodel, string id)
+        public ViewResult LoaderData(LoadModel loadermodel, string id)
         {
             TransportationModel model = new TransportationModel();
 
@@ -90,7 +96,7 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public ViewResult RouterData(RouterModel routermodel)
+        public ViewResult RouterData(RouteModel routermodel)
         {
             TransportationModel model = new TransportationModel();
 
@@ -153,16 +159,16 @@ namespace Forwarder.Controllers
             return result;
         }
 
-        public JsonResult EditView(string Loading, string Type, string Consumption, string Method)
+        public JsonResult EditView(string Load, string Type, string Consumption, string Method)
         {
 
-            var modelList = new List<ConsumptionModel>();
-            var gridRow1 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
-            var gridRow2 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
-            var gridRow3 = new ConsumptionModel() { Loading = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
-            modelList.Add(gridRow1);
-            modelList.Add(gridRow2);
-            modelList.Add(gridRow3);
+            var modelList = new List<ExpenseModel>();
+            //var gridRow1 = new ExpenseModel() { Load = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
+            //var gridRow2 = new ExpenseModel() { Load = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
+            //var gridRow3 = new ExpenseModel() { Load = int.Parse(Loading), Type = Type, Consumption = int.Parse(Consumption), Method = Method };
+            //modelList.Add(gridRow1);
+            //modelList.Add(gridRow2);
+            //modelList.Add(gridRow3);
 
             var list = new List<object>();
             var counter = 0;
@@ -174,11 +180,11 @@ namespace Forwarder.Controllers
                     id = ++counter,
                     cell = new string[]
                             {
-                                counter.ToString(),
-                                item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
-                                item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
-                                !string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
+                                //counter.ToString(),
+                                //item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
+                                //!string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
+                                //item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
+                                //!string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
                                
                             }
                 });
@@ -256,7 +262,8 @@ namespace Forwarder.Controllers
                             {
                                 counter.ToString(),
                                 item.ExpenseType != null ? item.ExpenseType.Name : string.Empty,
-                                item.Value.ToString()                               
+                                item.Value.ToString(),
+                                item.Method.ToString()
                             }
                 });
                 counter++;
@@ -470,7 +477,7 @@ namespace Forwarder.Controllers
                 }
             }
 
-            return PartialView("Shipping", new ShippingModel() { Id = transportationId.ToString() }); 
+            return PartialView("Shipping", new ShipmentModel() { Id = transportationId.ToString() }); 
        }
 
         private void TryToDeleteFile(string fileName)

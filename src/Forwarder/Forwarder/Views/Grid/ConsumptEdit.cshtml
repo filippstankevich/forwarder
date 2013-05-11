@@ -1,4 +1,4 @@
-﻿@model Forwarder.Models.ConsumptionModel
+﻿@model Forwarder.Models.ExpenseModel
  
 @using (Html.BeginForm("Consumpt", "Grid", "Post"))
 {    
@@ -8,19 +8,19 @@
                 <div class="control-group">
                     <label class="span3 text-left">Тип</label>
                     <div class="controls">              
-                        @Html.TextBoxFor(m => m.Type)
+                         @Html.DropDownListFor(m => m.ExpenseTypeId, Model.ExpenseTypes)
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="span3 text-left">Расход</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Consumption)
+                        @Html.TextBoxFor(m => m.Expense)
                     </div>
                 </div>   
                 <div class="control-group">
                     <label class="span3 text-left">Метод расчета</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Method)
+                         @Html.DropDownListFor(m => m.Method, Model.Methods)
                     </div>
                 </div>      
            

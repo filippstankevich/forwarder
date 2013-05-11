@@ -285,7 +285,7 @@
                  colModel: [
                      { name: 'Id', index: 'id', align: "center" },
                      { name: 'Type', index: 'Type', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
-                     { name: 'Consumption', index: 'Consumption', align: "center", editable: true, edittype: "text" },
+                     { name: 'Expense', index: 'Expense', align: "center", editable: true, edittype: "text" },
                      { name: 'Method', index: 'Method', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
                  ],
                  height: 'auto',

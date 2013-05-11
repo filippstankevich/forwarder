@@ -92,12 +92,12 @@
     <Compile Include="Helper\ExcelImporter.cs" />
     <Compile Include="Helper\TransportationHelper.cs" />
     <Compile Include="IoCContainer.cs" />
-    <Compile Include="Models\ConsumptionModel.cs" />
+    <Compile Include="Models\ExpenseModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\GridModel.cs" />
     <Compile Include="Models\LoaderModel.cs" />
-    <Compile Include="Models\RouterModel.cs" />
-    <Compile Include="Models\ShippingModel.cs" />
+    <Compile Include="Models\RouteModel.cs" />
+    <Compile Include="Models\ShipmentModel.cs" />
     <Compile Include="Models\StationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TransportationModel.cs" />

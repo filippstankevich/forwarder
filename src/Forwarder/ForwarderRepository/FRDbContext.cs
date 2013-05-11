@@ -20,7 +20,8 @@ namespace ForwarderDAL
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Road> Roads { get; set; }
         public DbSet<Route> Routes { get; set; }
-        public DbSet<Shipment> Shipments { get; set; }  
+        public DbSet<Shipment> Shipments { get; set; }
+        public DbSet<ExpenseType> ExpenseTypes { get; set; }  
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

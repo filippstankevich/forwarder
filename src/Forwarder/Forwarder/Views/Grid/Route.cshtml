@@ -1,7 +1,8 @@
-﻿@model Forwarder.Models.RouterModel
+﻿@model Forwarder.Models.RouteModel
  
 @using (Html.BeginForm("RouterData", "Grid", "Post"))
 {    
+    @Html.HiddenFor(m => m.Id)
     <div class="row">
         <div class="span3">
                 <div class="control-group">
@@ -13,13 +14,13 @@
                 <div class="control-group">
                     <label class="span3 text-left">Дорога</label>
                     <div class="controls">              
-                        @Html.TextBoxFor(m => m.Road)
+                        @Html.DropDownListFor(m => m.RoadId, Model.Roads)
                     </div>
                 </div>  
                 <div class="control-group">
                     <label class="span3 text-left">Перевозчик</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Carrier)
+                         @Html.DropDownListFor(m => m.CarrierId, Model.Carriers)
                     </div>
                 </div>
            
