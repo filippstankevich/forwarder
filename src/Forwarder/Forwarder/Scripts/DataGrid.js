@@ -17,15 +17,6 @@
              duration: 100
          },
      });
-
-     $('#export_btn').click(function() {
-         alert();
-            $.ajax({
-                 url: '/Grid/ExportData',
-                 type: "POST",
-                 
-             });
-     });
      
 
       $("#shipping_dialog").dialog({       
@@ -243,9 +234,9 @@
                  type: "POST",
                  data: {
                      Id: $('#loaders').jqGrid('getCell',id,'Id'),
-                     Volume: $('#loaders').jqGrid('getCell', id, 'Volume'),
+                     Loading: $('#loaders').jqGrid('getCell', id, 'Volume'),
                      Rate: $('#loaders').jqGrid('getCell', id, 'Rate'),
-                     Expense: $('#loaders').jqGrid('getCell', id, 'Expense'),
+                     Сonsumption: $('#loaders').jqGrid('getCell', id, 'Expense'),
                      Method: $('#loaders').jqGrid('getCell', id, 'Method'),
                      Count: $('#loaders').jqGrid('getCell', id, 'Count')
                  },
@@ -260,7 +251,7 @@
 
         
      $('#route').jqGrid({
-         url: '/Grid/RouteView?id=' + $('#Id').val(),
+         url: '/Grid/RouteView?id=' +  $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Дорога', 'Перевозчик', 'Расход'],
          colModel: [
@@ -272,18 +263,16 @@
          height: 'auto',
          sortorder: "desc",
          caption: "Маршрут",
-         onCellSelect : function(id, iCol, cellcontent) {
-             if (iCol == 3) {                 
-                      $.get(
-                      $('#consumpt_dialog').attr('action'), null, 
-                      function(data) 
-                      {
-                            $('#consumpt_dialog').html(data);
-                      }, 'html').complete(
-             function() {
+         onCellSelect : function(rowid, iCol, cellcontent) {
+             if (iCol == 3) {
+                 
+                      $.get($('#consumpt_dialog').attr('action'), null, function(data) {
+
+             $('#consumpt_dialog').html(data);
+         }, 'html').complete(function() {
              var lastSel;
              $('#consumption2').jqGrid({                       
-                 url: '/Grid/ConsumptionView?id=' + id,
+                 url: '/Grid/ConsumptionView',
                  datatype: "json",
                  colNames: ['№', 'Тип', 'Расход', 'Метод расчета'],
                  colModel: [
@@ -302,7 +291,7 @@
                          lastSel = id;
                      }
                  },
-                 editurl: '/Grid/EditView' 
+                 editurl: '/Grid/EditView'
              });
              $("#consumpt_dialog").dialog("open");
          });

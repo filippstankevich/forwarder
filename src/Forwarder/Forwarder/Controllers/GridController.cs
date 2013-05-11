@@ -39,42 +39,6 @@ namespace Forwarder.Controllers
             return PartialView("Consumption", model);
         }
 
-        [HttpPost]
-        public void ExportData()
-        {
-
-            ShippingModel model = new ShippingModel();
-
-            Microsoft.Office.Interop.Excel.Application ObjExcel = new Microsoft.Office.Interop.Excel.Application();
-            //Открываем книгу.                                                                                                                                                        
-            Microsoft.Office.Interop.Excel.Workbook ObjWorkBook = ObjExcel.Workbooks.Open("D:/loadd2007.xls", 0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "", true, false, 0, true, false, false);
-            //Выбираем таблицу(лист).
-            Microsoft.Office.Interop.Excel.Worksheet ObjWorkSheet;
-            ObjWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ObjWorkBook.Sheets[1];
-            Microsoft.Office.Interop.Excel.Range rg = null;
-
-
-            Int32 row = 1;
-            List<String> ExcelCell = new List<string>();
-            List<List<string>> ExcelString = new List<List<string>>();
-            
-            while ( row < 10 )
-            {
-                for (int i = 0; i < 7; i++)
-                {
-                    string Column = ((char) (65 + i)).ToString();
-                    rg = ObjWorkSheet.get_Range(Column + row, Column + row);
-                    ExcelCell.Add(rg.Text.ToString());
-                }
-                ExcelString.Add(ExcelCell);
-                row++;
-            }
-          
-            ObjExcel.Quit();
-            
-
-        }
-
         public PartialViewResult Shipping(ShippingModel model)
         {
             return PartialView("Shipping", model);
@@ -253,29 +217,36 @@ namespace Forwarder.Controllers
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return result;
         }
-
-
        
-        public JsonResult ConsumptionView(string id)
+        public JsonResult ConsumptionView()
         {
-            int routeId = Int32.Parse(id);
-            List<Expense> expenses = repository.Expenses.Where(o => o.RouteId == routeId).ToList();
+
+            
+            var listresult1 = new List<ConsumptionModel>();
+            var gridRow1 = new ConsumptionModel() { Loading = 123, Type = "sss", Consumption = 545,Method = "asa" };
+            var gridRow2 = new ConsumptionModel() { Loading = 124, Type = "sas", Consumption = 4554, Method = "sas" };
+            var gridRow3 = new ConsumptionModel() { Loading = 125, Type = "sasa", Consumption = 5454, Method = "wqw" };
+            listresult1.Add(gridRow1);
+            listresult1.Add(gridRow2);
+            listresult1.Add(gridRow3);
 
             var list = new List<object>();
-            var counter = 1;
-            foreach (var item in expenses)
+            var counter = 0;
+            foreach (var item in listresult1)
             {
                 list.Add(new
                 {
-                    id = item.Id,
+                    id = ++counter,
                     cell = new string[]
                             {
                                 counter.ToString(),
-                                item.ExpenseType != null ? item.ExpenseType.Name : string.Empty,
-                                item.Value.ToString()
+                                item.Loading!= null ? item.Loading.Value.ToString() : string.Empty,
+                                !string.IsNullOrEmpty(item.Type) ? item.Type.ToString() : string.Empty,
+                                item.Consumption!= null ? item.Consumption.Value.ToString() : string.Empty,
+                                !string.IsNullOrEmpty(item.Method) ? item.Method.ToString() : string.Empty,
+                               
                             }
                 });
-                counter++;
             }
 
             var result = new JsonResult()

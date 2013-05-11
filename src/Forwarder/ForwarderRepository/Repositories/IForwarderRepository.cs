@@ -15,7 +15,7 @@ namespace ForwarderDAL.Repositories
         IQueryable<Carrier> Carriers { get; }
         IQueryable<Client> Clients { get; }
         IQueryable<Load> Loads { get; }
-        IQueryable<Expense> Expenses { get; }
+        IQueryable<Expense> Outgoes { get; }
         IQueryable<Road> Roads { get; }
         IQueryable<Route> Routes { get; }
 
