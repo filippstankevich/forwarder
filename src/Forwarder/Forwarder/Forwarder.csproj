@@ -354,6 +354,7 @@
     <Content Include="Scripts\jquery.jqGrid.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\jquery.ocupload-1.1.2.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -370,6 +371,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\CustomCSS\stankevich.css" />
+    <Content Include="Scripts\upclick-min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -441,7 +443,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.9.1.min.map">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Views\Grid\FilterView.cshtml" />
     <Content Include="Views\Grid\Consumption.cshtml" />

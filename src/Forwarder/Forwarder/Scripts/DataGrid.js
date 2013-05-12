@@ -19,8 +19,8 @@
      });
 
     $('#file').change(function() {
-          $('#upload_form').submit()
-     });
+        $('#upload_form').submit(); 
+    });
 
       $("#shipping_dialog").dialog({       
          autoOpen: false,
@@ -277,30 +277,42 @@
 
              $('#consumpt_dialog').html(data);
          }, 'html').complete(function() {
-             var lastSel;
+             $("#consumpt_dialog").dialog("open");
+             
              $('#consumption2').jqGrid({                       
                  url: '/Grid/ConsumptionView?id=' + id,
                  datatype: "json",
                  colNames: ['№', 'Тип', 'Расход', 'Метод расчета'],
                  colModel: [
                      { name: 'Id', index: 'id', align: "center" },
-                     { name: 'Type', index: 'Type', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
-                     { name: 'Consumption', index: 'Consumption', align: "center", editable: true, edittype: "text" },
-                     { name: 'Method', index: 'Method', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
+                     { name: 'Type', index: 'Type', align: "center" },
+                     { name: 'Consumption', index: 'Consumption', align: "center"},
+                     { name: 'Method', index: 'Method', align: "center" },
                  ],
                  height: 'auto',
                  sortorder: "desc",
                  sortname: 'id',
                  ondblClickRow: function(id) {
-                     if (id && id != lastSel) {
-                         jQuery("#consumption2").restoreRow(lastSel);
-                         jQuery("#consumption2").editRow(id, true);
-                         lastSel = id;
-                     }
+                      
+                    $.ajax({
+                        url: $('#consumpt_edit').attr('action'),
+                        type: "POST",
+                        data: {
+                              Id: $('#consumption2').jqGrid('getCell', id, 'Id'),
+                              Type: $('#consumption2').jqGrid('getCell', id, 'Type'),
+                              Consumption: $('#consumption2').jqGrid('getCell', id, 'Consumption'),
+                              Method: $('#consumption2').jqGrid('getCell', id, 'Method')
+                          },
+                    success: function(data) {
+                     $('#consumpt_edit').html(data);
+                     $('#consumpt_edit').dialog("open");
+                    }
+                 });
+
                  },
-                 editurl: '/Grid/EditView'
+                
              });
-             $("#consumpt_dialog").dialog("open");
+             
          });
              }
 
