@@ -27,5 +27,7 @@ namespace ForwarderDAL.Repositories
         bool AddNewShipment(Shipment shipment);
 
         bool SaveLoad(Load load);
+        bool SaveRoute(Route route);
+        bool SaveExpense(Expense expense);
     }
 }

@@ -114,24 +114,45 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public ViewResult RouterData(RouteModel routermodel)
+        public ViewResult RouterData(RouteModel model)
         {
-            TransportationModel model = new TransportationModel();
+            
+            Route route = new Route()
+            {
+                Id = model.Id.Value,
+                TransportationId = model.TransportationId,
+                RoadId = Int32.Parse(model.RoadId),
+                CarrierId = Int32.Parse(model.CarrierId),
+            };
 
-            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
-            //TODO: Временно посмтавил выбор первых 100 значений
-            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
-            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+            repository.SaveRoute(route);
 
-            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
-            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
-            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
-            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
-
-            return View("TransportationEdit", model);
+            TransportationModel transportationModel = CreateTransporatationModel();
+            FillTransportationModel(transportationModel, model.TransportationId);
+            return View("TransportationEdit", transportationModel);
         }
+
+        [HttpPost]
+        public ViewResult ExpenseData(ExpenseModel model)
+        {
+
+            Expense expense = new Expense
+            {
+                Id  =  model.Id,
+                RouteId = model.RouteId,
+                LoadId = model.LoadId,
+                ExpenseTypeId = Int32.Parse(model.ExpenseTypeId),
+                Method  = bool.Parse(model.Method),
+                Value = model.Value
+            };
+
+            repository.SaveExpense(expense);
+
+            TransportationModel transportationModel = CreateTransporatationModel();
+            FillTransportationModel(transportationModel, Int32.Parse(model.ExpenseTypeId));
+            return View("TransportationEdit", transportationModel);
+        }
+
 
 
         public JsonResult LoadersView(string id)

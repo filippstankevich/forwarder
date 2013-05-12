@@ -8,6 +8,8 @@ namespace Forwarder.Models
 {
     public class RouteModel
     {
+        public int TransportationId { get; set; }
+        
         public int? Id { get; set; }
         public int? Expense { get; set; }
 

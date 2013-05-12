@@ -10,6 +10,10 @@ namespace Forwarder.Models
     {
         public int Id { get; set; }
 
+        public int RouteId { get; set; }
+
+        public int LoadId { get; set; }
+
         public int? Load { get; set; }
 
         public string ExpenseTypeId { get; set; }
@@ -17,6 +21,8 @@ namespace Forwarder.Models
         public int? Expense { get; set; }
 
         public string Method { get; set; }
+
+        public int Value { get; set; }
 
         public IEnumerable<SelectListItem> ExpenseTypes { get; set; }
         public IEnumerable<SelectListItem> Methods { get; set; }

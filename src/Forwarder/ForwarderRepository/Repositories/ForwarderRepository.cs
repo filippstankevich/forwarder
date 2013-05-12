@@ -60,7 +60,7 @@ namespace ForwarderDAL.Repositories
             if (load.Id > 0)
             {
                 Load storedLoad = context.Loads.First(o => o.Id == load.Id);
-
+               
                 storedLoad.Rate = load.Rate;
                 storedLoad.Method = load.Method;
                 storedLoad.Volume = load.Volume;
@@ -76,5 +76,51 @@ namespace ForwarderDAL.Repositories
 
             return true;
         }
+
+
+        public bool SaveRoute(Route route)
+        {
+            if (route.Id > 0)
+            {
+                Route storedRoute = context.Routes.First(o => o.Id == route.Id);
+
+                storedRoute.RoadId = storedRoute.RoadId;
+                storedRoute.CarrierId = route.CarrierId;
+                storedRoute.TransportationId = route.TransportationId;
+
+                context.Routes.Add(storedRoute);
+            }
+            else
+            {
+                context.Routes.Add(route);
+            }
+            context.SaveChanges();
+
+            return true;
+        }
+
+        public bool SaveExpense(Expense expense)
+        {
+            if (expense.Id > 0)
+            {
+                Expense storedExpense = context.Expenses.First(o => o.Id == expense.Id);
+
+                storedExpense.RouteId = expense.RouteId;
+                storedExpense.Method = expense.Method;
+                storedExpense.LoadId = expense.LoadId;
+                storedExpense.ExpenseTypeId = expense.ExpenseTypeId;
+                storedExpense.Value = expense.Value;
+
+                context.Expenses.Add(storedExpense);
+            }
+            else
+            {
+                context.Expenses.Add(expense);
+            }
+            context.SaveChanges();
+
+            return true;
+        }
+
     }
 }
