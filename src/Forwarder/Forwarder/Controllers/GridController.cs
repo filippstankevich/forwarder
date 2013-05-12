@@ -29,7 +29,15 @@ namespace Forwarder.Controllers
         }
 
         public PartialViewResult Consumption(ExpenseModel model)
-        { 
+        {
+            IEnumerable<ExpenseType> expenseTypes = repository.ExpenseTypes.ToList();
+            model.ExpenseTypes = expenseTypes.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            model.Methods = new SelectListItem[] {
+                new SelectListItem() { Value = "false", Text = "За вагон" },
+                new SelectListItem() { Value = "true", Text = "За тонну" }
+            };
+
             return PartialView("Consumption", model);
         }
 
@@ -56,6 +64,14 @@ namespace Forwarder.Controllers
 
         public PartialViewResult Consumpt(ExpenseModel model)
         {
+            IEnumerable<ExpenseType> expenseTypes = repository.ExpenseTypes.ToList();
+            model.ExpenseTypes = expenseTypes.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            model.Methods = new SelectListItem[] {
+                new SelectListItem() { Value = "false", Text = "За вагон" },
+                new SelectListItem() { Value = "true", Text = "За тонну" }
+            };
+
             return PartialView("ConsumptEdit", model);
         }
 
@@ -159,7 +175,8 @@ namespace Forwarder.Controllers
             return result;
         }
 
-        public JsonResult EditView(string Load, string Type, string Consumption, string Method)
+        [HttpPost]
+        public JsonResult EditView(string Load, string Type, string Expense, string Method)
         {
 
             var modelList = new List<ExpenseModel>();

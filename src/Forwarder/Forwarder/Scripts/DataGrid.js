@@ -329,17 +329,14 @@
          colNames: ['№', 'Загрузка', 'Тип', 'Расход', 'Метод расчета'],
          colModel: [
              { name: 'Id', width: 20, align: "center" },
-             { name: 'Loading', width: 20, align: "center" },
+             { name: 'Load', width: 20, align: "center" },
              { name: 'Type', width: 150, align: "center" },
-             { name: 'Consumption', width: 150, align: "center" },
+             { name: 'Expense', width: 150, align: "center" },
              { name: 'Method', width: 150, align: "center" },
          ],
          height: 'auto',
          sortorder: "desc",
-         caption: "Расход",
-         onSelectRow: function(id) {
-             alert(id);
-         }
+         caption: "Расход"        
      });
      
      $('#shipping').jqGrid({                       
