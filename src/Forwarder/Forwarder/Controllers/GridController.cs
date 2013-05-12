@@ -134,7 +134,6 @@ namespace Forwarder.Controllers
 
         public JsonResult LoadersView(string id)
         {
-            id = "5";
             var list = new List<object>();
             if (!string.IsNullOrEmpty(id))
             {
@@ -304,7 +303,6 @@ namespace Forwarder.Controllers
 
         public JsonResult RouteView(string id)
         {
-            id = "5";
             var list = new List<object>();
             if (!string.IsNullOrEmpty(id))
             {
