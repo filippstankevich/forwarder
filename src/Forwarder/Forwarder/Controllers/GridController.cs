@@ -111,27 +111,26 @@ namespace Forwarder.Controllers
             TransportationModel transportationModel  =  CreateTransporatationModel();
             FillTransportationModel(transportationModel, model.Id);
 
-             return View("TransportationEdit", transportationModel);
+            return View("TransportationEdit", transportationModel);
         }
 
         [HttpPost]
-        public ViewResult RouterData(RouteModel routermodel)
+        public ViewResult RouterData(RouteModel model)
         {
-            TransportationModel model = new TransportationModel();
+            Route route = new Route()
+            {
+                Id = model.RouteId != null ? model.RouteId.Value : 0,
+                TransportationId = model.Id != null ? model.Id.Value : 0,
+                RoadId = model.RoadId != null ? model.RoadId.Value : 0,
+                CarrierId = model.CarrierId != null ? model.CarrierId.Value : 0             
+            };
 
-            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
-            //TODO: Временно посмтавил выбор первых 100 значений
-            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
-            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+           // repository.SaveRoute(route);
 
-            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
-            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+            TransportationModel transportationModel = CreateTransporatationModel();
+            FillTransportationModel(transportationModel, model.Id.Value);
 
-            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
-            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
-
-            return View("TransportationEdit", model);
+            return View("TransportationEdit", transportationModel);
         }
 
 
