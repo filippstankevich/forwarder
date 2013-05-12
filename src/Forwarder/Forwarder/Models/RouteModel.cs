@@ -12,8 +12,8 @@ namespace Forwarder.Models
         public int? Id { get; set; } //TransportationId
         public int? Expense { get; set; }
 
-        public int? RoadId { get; set; }
-        public int? CarrierId { get; set; }
+        public string RoadId { get; set; }
+        public string CarrierId { get; set; }
 
         public IEnumerable<SelectListItem> Roads { get; set; }
         public IEnumerable<SelectListItem> Carriers { get; set; }

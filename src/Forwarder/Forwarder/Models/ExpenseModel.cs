@@ -8,23 +8,22 @@ namespace Forwarder.Models
 {
     public class ExpenseModel
     {
-        public int Id { get; set; }
+        public int Id { get; set; } //Transportation id
+
+        public int ExpenseId { get; set; }
 
         public int RouteId { get; set; }
 
         public int LoadId { get; set; }
 
-        public int? Load { get; set; }
-
         public string ExpenseTypeId { get; set; }
 
         public int? Expense { get; set; }
 
-        public string Method { get; set; }
-
-        public int Value { get; set; }
+        public bool Method { get; set; }
 
         public IEnumerable<SelectListItem> ExpenseTypes { get; set; }
         public IEnumerable<SelectListItem> Methods { get; set; }
+        public IEnumerable<SelectListItem> Loads { get; set; }
     }
 }

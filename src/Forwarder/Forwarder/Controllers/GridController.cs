@@ -30,15 +30,23 @@ namespace Forwarder.Controllers
 
         public PartialViewResult Consumption(ExpenseModel model)
         {
+            return PartialView("Consumption", model);
+        }
+
+        public PartialViewResult Consumpt(ExpenseModel model)
+        {
             IEnumerable<ExpenseType> expenseTypes = repository.ExpenseTypes.ToList();
             model.ExpenseTypes = expenseTypes.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            IEnumerable<Load> loads = repository.Loads.Where(o => o.TransportationId == model.Id);
+            model.Loads = loads.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Volume.ToString() });
 
             model.Methods = new SelectListItem[] {
                 new SelectListItem() { Value = "false", Text = "За вагон" },
                 new SelectListItem() { Value = "true", Text = "За тонну" }
             };
 
-            return PartialView("Consumption", model);
+            return PartialView("ConsumptEdit", model);
         }
 
         public PartialViewResult Shipping(ShipmentModel model)
@@ -53,6 +61,13 @@ namespace Forwarder.Controllers
                 model.Id = Int32.Parse(id);
             }
 
+            if (model.RouteId != null)
+            {
+                Route route = repository.Routes.Where(o => o.Id == model.RouteId.Value).Single();
+                model.RoadId = route.RoadId.ToString();
+                model.CarrierId = route.CarrierId.ToString();
+            }
+
             IEnumerable<Carrier> carriers = repository.Carriers.ToList();
             model.Carriers = carriers.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
@@ -60,19 +75,6 @@ namespace Forwarder.Controllers
             model.Roads = roads.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
             return PartialView("Route", model);
-        }
-
-        public PartialViewResult Consumpt(ExpenseModel model)
-        {
-            IEnumerable<ExpenseType> expenseTypes = repository.ExpenseTypes.ToList();
-            model.ExpenseTypes = expenseTypes.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
-            model.Methods = new SelectListItem[] {
-                new SelectListItem() { Value = "false", Text = "За вагон" },
-                new SelectListItem() { Value = "true", Text = "За тонну" }
-            };
-
-            return PartialView("ConsumptEdit", model);
         }
 
         public PartialViewResult Loader(LoadModel model, string LoadId, string id)
@@ -120,9 +122,9 @@ namespace Forwarder.Controllers
             Route route = new Route()
             {
                 Id = model.RouteId != null ? model.RouteId.Value : 0,
-                TransportationId = model.Id != null ? model.Id.Value : 0,
-                RoadId = model.RoadId != null ? model.RoadId.Value : 0,
-                CarrierId = model.CarrierId != null ? model.CarrierId.Value : 0             
+                TransportationId = model.Id !=null ? model.Id.Value : 0,
+                RoadId = model.RoadId != null ? Int32.Parse(model.RoadId) : 0,
+                CarrierId = model.CarrierId != null ? Int32.Parse(model.CarrierId) : 0
             };
 
             repository.SaveRoute(route);
@@ -130,18 +132,21 @@ namespace Forwarder.Controllers
             TransportationModel transportationModel = CreateTransporatationModel();
             FillTransportationModel(transportationModel, model.Id.Value);
 
+            return View("TransportationEdit", transportationModel);
+        }
+
         [HttpPost]
         public ViewResult ExpenseData(ExpenseModel model)
         {
 
             Expense expense = new Expense
             {
-                Id  =  model.Id,
+                Id  =  model.ExpenseId,
                 RouteId = model.RouteId,
                 LoadId = model.LoadId,
                 ExpenseTypeId = Int32.Parse(model.ExpenseTypeId),
-                Method  = bool.Parse(model.Method),
-                Value = model.Value
+                Method  = model.Method,
+                Value = model.Expense != null ? model.Expense.Value : 0
             };
 
             repository.SaveExpense(expense);
@@ -299,6 +304,7 @@ namespace Forwarder.Controllers
                             {
                                 counter.ToString(),
                                 item.ExpenseType != null ? item.ExpenseType.Name : string.Empty,
+                                item.Load != null ? item.Load.Volume.ToString() : string.Empty,
                                 item.Value.ToString(),
                                 item.Method.ToString()
                             }
@@ -343,6 +349,7 @@ namespace Forwarder.Controllers
                                 item.Expenses.Sum(o=>o.Value).ToString()
                             }
                     });
+                    counter++;
                 }
             }
 
@@ -434,7 +441,7 @@ namespace Forwarder.Controllers
             {
                 Transportation transportation = new Transportation();
                 transportation.CreateDate = DateTime.Now;
-                repository.AddNewTransportation(transportation);
+                repository.SaveTransportation(transportation);
                 model.Id = transportation.Id.ToString();
             }
 
@@ -506,9 +513,10 @@ namespace Forwarder.Controllers
                     DestinationStation =
                         repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
                     Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
-                    Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault()
+                    Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault(),
+                    Comment = model.Comment
                 };
-            repository.AddNewTransportation(transportation);
+            repository.SaveTransportation(transportation);
 
             return View("Index");
         }

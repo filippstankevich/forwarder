@@ -83,7 +83,7 @@
      $('#add_consumpt').click(function() {
             
                  $.ajax({
-                 url: $('#consumpt_edit').attr('action'),
+                 url: $('#consumpt_edit').attr('action') + '?id=' + $('#Id').val() + '&routeId=' +   $('#RouteId').val(),
                  type: "POST",
                  success: function(data) {
                      $('#consumpt_edit').html(data);
@@ -261,10 +261,10 @@
          datatype: "json",
          colNames: ['№', 'Дорога', 'Перевозчик', 'Расход'],
          colModel: [
-             { name: 'Id', width: 20, align: "center" },
+             { name: 'RowNumber', width: 20, align: "center" },
              { name: 'Road', width: 150, align: "center" },
              { name: 'Carrier', width: 150, align: "center" },
-             { name: 'Consumption', width: 150, align: "center" }
+             { name: 'Expense', width: 150, align: "center" }
          ],
          height: 'auto',
          sortorder: "desc",
@@ -272,7 +272,8 @@
          onCellSelect : function(id, iCol, cellcontent) {
              if (iCol == 3) {
                  
-                      $.get($('#consumpt_dialog').attr('action'), null, function(data) {
+                      $.get($('#consumpt_dialog').attr('action') + '?id=' + $('#Id').val() + '&routeId=' + id, 
+                      null, function(data) {
 
              $('#consumpt_dialog').html(data);
          }, 'html').complete(function() {
@@ -281,11 +282,12 @@
              $('#consumption2').jqGrid({                       
                  url: '/Grid/ConsumptionView?id=' + id,
                  datatype: "json",
-                 colNames: ['№', 'Тип', 'Расход', 'Метод расчета'],
+                 colNames: ['№', 'Тип', 'Загрузка', 'Расход', 'Метод расчета'],
                  colModel: [
-                     { name: 'Id', index: 'id', align: "center" },
+                     { name: 'RowNumber', index: 'id', align: "center" },
                      { name: 'Type', index: 'Type', align: "center" },
-                     { name: 'Consumption', index: 'Consumption', align: "center"},
+                     { name: 'Load', index: 'Load', align: "center" },
+                     { name: 'Expense', index: 'Expense', align: "center"},
                      { name: 'Method', index: 'Method', align: "center" },
                  ],
                  height: 'auto',
@@ -294,12 +296,12 @@
                  ondblClickRow: function(id) {
                       
                     $.ajax({
-                        url: $('#consumpt_edit').attr('action'),
+                        url: $('#consumpt_edit').attr('action') + '?id=' + $('#Id').val() + 
+                                                                '&routeId=' +   $('#RouteId').val() + '&expenseId=' + id,
                         type: "POST",
                         data: {
-                              Id: $('#consumption2').jqGrid('getCell', id, 'Id'),
                               Type: $('#consumption2').jqGrid('getCell', id, 'Type'),
-                              Consumption: $('#consumption2').jqGrid('getCell', id, 'Consumption'),
+                              Expense: $('#consumption2').jqGrid('getCell', id, 'Expense'),
                               Method: $('#consumption2').jqGrid('getCell', id, 'Method')
                           },
                     success: function(data) {
@@ -321,7 +323,6 @@
                  url: $('#route_dialog').attr('action') + '?id=' + $('#Id').val() + '&routeId=' + id,
                  type: "POST",
                  data: {
-                     Id: $('#route').jqGrid('getCell',id,'Id'),
                      Road: $('#route').jqGrid('getCell', id, 'Road'),
                      Carrier: $('#route').jqGrid('getCell', id, 'Carrier'),                
                  },

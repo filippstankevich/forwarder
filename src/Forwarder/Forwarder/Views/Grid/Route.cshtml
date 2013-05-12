@@ -1,8 +1,12 @@
 ﻿@model Forwarder.Models.RouteModel
  
-@using (Html.BeginForm("RouterData", "Grid", "Post"))
+
+
+@using (Html.BeginForm("RouterData", "Grid"))
 {    
     @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.RouteId)
+
     <div class="row">
         <div class="span3">
                 <div class="control-group">

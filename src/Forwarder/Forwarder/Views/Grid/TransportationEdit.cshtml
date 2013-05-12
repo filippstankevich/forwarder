@@ -3,32 +3,32 @@
 @{
     ViewBag.Title = "Перевозка";
 }
- 
-  @Html.TextBoxFor(m => m.Id)
 
 <div class="row">
 <div class="right">
     <div class="span3">
        @using (Html.BeginForm())
        {
+           @Html.HiddenFor(m => m.Id)
+           
            <div class = "form-inline">          
 
                <div class="control-group">
                    <label class="span3 text-left">Регистрационный номер</label>
                    <div class="controls">   
-                       @Html.TextBoxFor(m=>m.RegNumber)
+                       @Html.TextBoxFor(m => m.RegNumber)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Груз по ГНГ</label>
                    <div class="controls">   
-                       @Html.DropDownListFor(m=>m.GngId, Model.GngItems)
+                       @Html.DropDownListFor(m => m.GngId, Model.GngItems)
                    </div>
                </div>
                <div class="control-group">
                    <label class="span3 text-left">Груз по ЕТСНГ</label>
                    <div class="controls">   
-                      @Html.DropDownListFor(m=>m.EtsngId, Model.EtsngItems)
+                      @Html.DropDownListFor(m => m.EtsngId, Model.EtsngItems)
                    </div>
                </div>
                <div class="control-group">
@@ -47,7 +47,7 @@
                <div class="control-group">
                    <label class="span3 text-left">Коментарий</label>
                    <div class="controls">   
-                       @Html.TextBoxFor(m=>m.Comment)
+                       @Html.TextBoxFor(m => m.Comment)
                    </div>
                </div>
                <div class="control-group">       
@@ -62,7 +62,7 @@
             <div class="control-group">
                 <label class="span3 text-left">Планируемый расход</label>
                     <div class="controls">   
-                        @Html.TextBoxFor(m=>m.PlannedExpense, new { @readonly = "true" })
+                        @Html.TextBoxFor(m => m.PlannedExpense, new { @readonly = "true" })
                     </div>
             </div>
             <div class="control-group">
@@ -84,7 +84,7 @@
             <div class="control-group">
                 <label class="span3 text-left">Фактический расход</label>
                     <div class="controls">   
-                        @Html.TextBoxFor(m=>m.RealExpense, new { @readonly = "true" })
+                        @Html.TextBoxFor(m => m.RealExpense, new { @readonly = "true" })
                     </div>
             </div>
             <div class="control-group">
@@ -116,7 +116,7 @@
 
      <div class="control-group" >
         <div id ="shipments_btn" class="btn btn-primary controls">Отгрузка</div>
-         @Html.ActionLink("Печать","#")
+         @Html.ActionLink("Печать", "#")
      </div>  
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>

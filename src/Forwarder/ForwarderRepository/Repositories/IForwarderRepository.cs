@@ -23,7 +23,7 @@ namespace ForwarderDAL.Repositories
 
         int GetTransportCount(Transportation transportation);
         bool AddNewStation(Station newStation);
-        bool AddNewTransportation(Transportation transportation);
+        bool SaveTransportation(Transportation transportation);
         bool AddNewShipment(Shipment shipment);
 
         bool SaveLoad(Load load);

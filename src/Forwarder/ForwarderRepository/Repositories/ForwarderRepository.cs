@@ -39,10 +39,29 @@ namespace ForwarderDAL.Repositories
             return true;
         }
 
-        public bool AddNewTransportation(Transportation transportation)
+        public bool SaveTransportation(Transportation transportation)
         {
-            context.Transportations.Add(transportation);
+            if (transportation.Id > 0)
+            {
+                Transportation storedTransportation = context.Transportations.First(o => o.Id == transportation.Id);
+
+                storedTransportation.RegNumber = transportation.RegNumber;
+                storedTransportation.CreateDate = transportation.CreateDate;
+                storedTransportation.Comment = transportation.Comment;
+                storedTransportation.ClientId = transportation.ClientId;
+                storedTransportation.SourceStationId = transportation.SourceStationId;
+                storedTransportation.DestinationStationId = transportation.DestinationStationId;
+                storedTransportation.GngId = transportation.GngId;
+                storedTransportation.EtsngId = transportation.EtsngId;
+
+                context.Transportations.Add(storedTransportation);
+            }
+            else
+            {
+                context.Transportations.Add(transportation);
+            }
             context.SaveChanges();
+
             return true;
         }
 
@@ -84,7 +103,7 @@ namespace ForwarderDAL.Repositories
             {
                 Route storedRoute = context.Routes.First(o => o.Id == route.Id);
 
-                storedRoute.RoadId = storedRoute.RoadId;
+                storedRoute.RoadId = route.RoadId;
                 storedRoute.CarrierId = route.CarrierId;
                 storedRoute.TransportationId = route.TransportationId;
 
