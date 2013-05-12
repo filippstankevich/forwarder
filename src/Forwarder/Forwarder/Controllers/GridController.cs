@@ -75,9 +75,11 @@ namespace Forwarder.Controllers
             return PartialView("ConsumptEdit", model);
         }
 
-        [HttpPost]
-        public PartialViewResult Loader(LoadModel model, string id)
+        public PartialViewResult Loader(LoadModel model, string transportationId, string id)
         {
+         
+            model.TransportationId = Int32.Parse(transportationId);
+
             if (!string.IsNullOrEmpty(id))
             {
                 model.Id = Int32.Parse(id);
@@ -92,23 +94,23 @@ namespace Forwarder.Controllers
         }
 
         [HttpPost]
-        public ViewResult LoaderData(LoadModel loadermodel, string id)
-        {
-            TransportationModel model = new TransportationModel();
+        public ViewResult LoaderData(LoadModel model)
+        { 
+            Load load = new Load()
+            {
+                Id = model.Id,
+                TransportationId = model.TransportationId,
+                Count = model.Count,
+                Method = model.Method,
+                Volume = model.Volume,
+                Rate = model.Rate                
+            };
 
-            //TODO: Тормозит. Добавить кеширование для справочников или проблемы с отрисовкой?
-            //TODO: Временно посмтавил выбор первых 100 значений
-            IEnumerable<Gng> gngList = repository.Gngs.Take(100).ToList();
-            model.GngItems = gngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+            repository.SaveLoad(load);
 
-            IEnumerable<Gng> etsngList = repository.Gngs.Take(100).ToList();
-            model.EtsngItems = etsngList.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
-            IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
-            model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
-
-
-            return View("TransportationEdit", model);
+            TransportationModel transportationModel  =  CreateTransporatationModel();
+            FillTransportationModel(transportationModel, model.TransportationId);
+            return View("TransportationEdit", transportationModel);
         }
 
         [HttpPost]
@@ -374,9 +376,10 @@ namespace Forwarder.Controllers
                                 item.DestinationStation != null ? item.DestinationStation.Name : string.Empty,
                                 item.SourceStation != null ? item.SourceStation.Name : string.Empty,
                                 item.Gng != null ? item.Gng.Code : string.Empty,
-                                item.Etsng != null ? item.Etsng.Code : string.Empty,
-                                item.CreateDate.ToString(),
+                                item.Etsng != null ? item.Etsng.Code : string.Empty,                                
                                 item.Loads != null ? repository.GetTransportCount(item).ToString() : string.Empty,
+                                item.CreateDate.ToString(),
+                                item.Comment
                             }
                     });
                 counter++;
@@ -398,31 +401,31 @@ namespace Forwarder.Controllers
         }
 
 
-        public ViewResult TransportationEdit(string Id, string RegNumber, string GHGClassificator, string ETSNGClassificator,
-                                              string DispatchStation, string ArriveStattion, string Comment)
+        public ViewResult TransportationEdit(string Id, string RegNumber = null, string GHGClassificator = null, string ETSNGClassificator = null,
+                                              string DispatchStation = null, string ArriveStattion = null, string Comment = null)
         {
-            TransportationModel model = new TransportationModel();
+            TransportationModel model = CreateTransporatationModel();
 
             //Подтягивание данных по выбранной перевозке
             if (Id != null && Id.Length > 0)
             {
                 int id = Int32.Parse(Id);
-                Transportation transportation = repository.Transportations.Where(o => o.Id == id).Single();
-                model.RegNumber = transportation.RegNumber;
-                model.EtsngId = transportation.Etsng != null ?
-                    transportation.Etsng.Id.ToString() : string.Empty;
-                model.GngId = transportation.Gng != null ?
-                    transportation.Gng.Id.ToString() : string.Empty;
-                model.SourceStationId = transportation.SourceStation != null ?
-                    transportation.SourceStation.Id.ToString() : string.Empty;
-                model.DestinationStationId = transportation.DestinationStation != null ?
-                    transportation.DestinationStation.Id.ToString() : string.Empty;
-
-                model.PlannedExpense = helper.GetPlannedExpense(transportation);
-                model.PlannedPrice = helper.GetPlannedPrice(transportation);
-                model.PlannedProfit = model.PlannedPrice - model.PlannedExpense;
+                FillTransportationModel(model, id);
+            }
+            else
+            {
+                Transportation transportation = new Transportation();
+                transportation.CreateDate = DateTime.Now;
+                repository.AddNewTransportation(transportation);
+                model.Id = transportation.Id;
             }
 
+            return View(model);
+        }
+
+        private TransportationModel CreateTransporatationModel()
+        {
+            TransportationModel model = new TransportationModel();
 
             //Инициализация справочников
 
@@ -437,7 +440,35 @@ namespace Forwarder.Controllers
             IEnumerable<Station> stations = repository.Stations.Take(100).ToList();
             model.StationItems = stations.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
-            return View(model);
+            return model;
+        }
+
+        private void FillTransportationModel(TransportationModel model,  int id)
+        {
+            if (id > 0)
+            {
+                Transportation transportation = repository.Transportations.Where(o => o.Id == id).Single();
+
+                model.Id = transportation.Id;
+
+                model.RegNumber = transportation.RegNumber;
+                model.EtsngId = transportation.Etsng != null ?
+                    transportation.Etsng.Id.ToString() : string.Empty;
+                model.GngId = transportation.Gng != null ?
+                    transportation.Gng.Id.ToString() : string.Empty;
+                model.SourceStationId = transportation.SourceStation != null ?
+                    transportation.SourceStation.Id.ToString() : string.Empty;
+                model.DestinationStationId = transportation.DestinationStation != null ?
+                    transportation.DestinationStation.Id.ToString() : string.Empty;
+
+                model.PlannedExpense = helper.GetPlannedExpense(transportation);
+                model.PlannedPrice = helper.GetPlannedPrice(transportation);
+                model.PlannedProfit = model.PlannedPrice - model.PlannedExpense;
+
+                model.RealExpense = helper.GetRealExpense(transportation);
+                model.RealPrice = helper.GetRealPrice(transportation);
+                model.RealProfit = model.RealPrice - model.RealExpense;
+            }
         }
 
         [HttpPost]
@@ -450,7 +481,7 @@ namespace Forwarder.Controllers
 
             Transportation transportation = new Transportation()
                 {
-                    Id = !string.IsNullOrEmpty(model.Id) ? Int32.Parse(model.Id) : -1,
+                    Id = model.Id,
                     CreateDate = DateTime.Now,
                     RegNumber = model.RegNumber,
                     SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),

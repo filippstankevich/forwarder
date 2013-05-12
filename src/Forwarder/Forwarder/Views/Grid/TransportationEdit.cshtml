@@ -3,15 +3,15 @@
 @{
     ViewBag.Title = "Перевозка";
 }
+ 
+ @Html.HiddenFor(m=>m.Id)
 
 <div class="row">
 <div class="right">
     <div class="span3">
        @using (Html.BeginForm())
        {
-           <div class = "form-inline">
-
-               @Html.HiddenFor(m=>m.Id)
+           <div class = "form-inline">          
 
                <div class="control-group">
                    <label class="span3 text-left">Регистрационный номер</label>

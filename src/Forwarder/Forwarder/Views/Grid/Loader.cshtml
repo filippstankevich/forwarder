@@ -2,16 +2,9 @@
  
 @using (Html.BeginForm("LoaderData", "Grid", "Post"))
 {    
-     @Html.HiddenFor(m => m.Id)
-    <div class="row">
-        <div class="span3">
-            <div class="control-group">
-                <label class="span3 text-left">№ Загрузки</label>
-                <div class="controls"> 
-                    @Html.TextBoxFor(m => m.Id, new Dictionary<string, object>() { { "readonly", "true" } })
-                </div>
-            </div>
-        </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.TransportationId)
+    <div class="row">       
             <div class="span3">
                 
             <div class="control-group">
@@ -33,7 +26,7 @@
             <div class="control-group">
                 <label class="span3 text-left">Расход</label>
                 <div class="controls">
-                    @Html.TextBoxFor(m => m.Expense)
+                    @Html.TextBoxFor(m => m.Expense, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
             </div>
             <div class="control-group">

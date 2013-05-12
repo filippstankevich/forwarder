@@ -14,7 +14,7 @@ namespace Forwarder.Models
         public IEnumerable<SelectListItem> StationItems { get; set; }
         public LoadModel Loaders;
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string GngId { get; set; }
         public string EtsngId { get; set; }
         public string SourceStationId { get; set; }

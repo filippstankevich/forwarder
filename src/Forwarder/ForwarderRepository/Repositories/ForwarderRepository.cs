@@ -15,7 +15,7 @@ namespace ForwarderDAL.Repositories
         public IQueryable<Etsng> Etsngs { get { return context.Etsngs; } }
         public IQueryable<Carrier> Carriers { get { return context.Carriers; } }
         public IQueryable<Client> Clients { get { return context.Clients; } }
-        public IQueryable<Load> Loads { get { return context.Loadings; } }
+        public IQueryable<Load> Loads { get { return context.Loads; } }
         public IQueryable<Expense> Expenses { get { return context.Expenses; } }
         public IQueryable<Road> Roads { get { return context.Roads; } }
         public IQueryable<Route> Routes { get { return context.Routes; } }
@@ -54,5 +54,27 @@ namespace ForwarderDAL.Repositories
         } 
 
         public IQueryable<Transportation> Transportations { get { return context.Transportations; } }
+
+        public bool SaveLoad(Load load)
+        {
+            if (load.Id > 0)
+            {
+                Load storedLoad = context.Loads.First(o => o.Id == load.Id);
+
+                storedLoad.Rate = load.Rate;
+                storedLoad.Method = load.Method;
+                storedLoad.Volume = load.Volume;
+                storedLoad.Count = load.Count;
+
+                context.Loads.Add(storedLoad);
+            }
+            else
+            {
+                context.Loads.Add(load);
+            }           
+            context.SaveChanges();
+
+            return true;
+        }
     }
 }

@@ -66,7 +66,7 @@
      $('#add_route').click(function() {
      
            $.ajax({
-                 url: $('#route_dialog').attr('action'),
+                 url: $('#route_dialog').attr('action')  + '?transportationId=' + $('#Id').val(),
                  type: "POST",
                  success: function(data) {
                      $('#route_dialog').html(data);
@@ -137,7 +137,7 @@
      $('#list2').jqGrid({
          url: '/Grid/GridView',
          datatype: "json",
-         colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Общий вес перевозки', 'Комментарии', 'Дата регистрации'],
+         colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Дата регистрации', 'Комментарии' ],
          colModel: [                
              { name: 'RowNumber', width: 20, align: "center" },
              { name: 'RegNumber', width: 150, align: "center" },
@@ -146,9 +146,8 @@
              { name: 'GHGClassificator', width: 200, align: "center" },
              { name: 'ETSNGClassificator', width: 200, align: "center" },
              { name: 'TransportCount', width: 200, align: "center" },
-             { name: 'FullWeight', width: 150, align: "center" },
-             { name: 'Comments', width: 150, align: "center" },
-             { name: 'RegDate', width: 150, align: "center" }
+             { name: 'RegDate', width: 150, align: "center" },
+             { name: 'Comments', width: 150, align: "center" }             
          ],
          height: 'auto',
          rowNum: 10,
@@ -188,7 +187,7 @@
      $('#add_loading').click(function() {
                 
                  $.ajax({
-                 url: $('#loader_dialog').attr('action'),
+                 url: $('#loader_dialog').attr('action') + '?transportationId=' + $('#Id').val(),
                  type: "POST",
                  success: function(data) {
                      $('#loader_dialog').html(data);
@@ -237,7 +236,7 @@
          caption: "Загрузки",
          ondblClickRow: function(id) {
              $.ajax({
-                 url: $('#loader_dialog').attr('action') + "?id=" +  id,
+                 url: $('#loader_dialog').attr('action') + "?transportationId=" +  $('#Id').val() + '&id='+ id,
                  type: "POST",
                  data: {
                      Id: $('#loaders').jqGrid('getCell',id,'Id'),

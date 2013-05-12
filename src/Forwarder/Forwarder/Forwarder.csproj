@@ -95,7 +95,7 @@
     <Compile Include="Models\ExpenseModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\GridModel.cs" />
-    <Compile Include="Models\LoaderModel.cs" />
+    <Compile Include="Models\LoadModel.cs" />
     <Compile Include="Models\RouteModel.cs" />
     <Compile Include="Models\ShipmentModel.cs" />
     <Compile Include="Models\StationModel.cs" />

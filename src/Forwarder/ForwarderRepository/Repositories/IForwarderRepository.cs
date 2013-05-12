@@ -24,6 +24,8 @@ namespace ForwarderDAL.Repositories
         int GetTransportCount(Transportation transportation);
         bool AddNewStation(Station newStation);
         bool AddNewTransportation(Transportation transportation);
-        bool AddNewShipment(Shipment shipment); 
+        bool AddNewShipment(Shipment shipment);
+
+        bool SaveLoad(Load load);
     }
 }
