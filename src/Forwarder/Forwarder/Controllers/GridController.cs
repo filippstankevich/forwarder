@@ -75,14 +75,14 @@ namespace Forwarder.Controllers
             return PartialView("ConsumptEdit", model);
         }
 
-        public PartialViewResult Loader(LoadModel model, string transportationId, string id)
+        public PartialViewResult Loader(LoadModel model, string LoadId, string id)
         {
          
-            model.TransportationId = Int32.Parse(transportationId);
+            model.Id = Int32.Parse(id);
 
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(LoadId))
             {
-                model.Id = Int32.Parse(id);
+                model.LoadId = Int32.Parse(LoadId);
             }
 
             model.Methods = new SelectListItem[] {
@@ -98,8 +98,8 @@ namespace Forwarder.Controllers
         { 
             Load load = new Load()
             {
-                Id = model.Id,
-                TransportationId = model.TransportationId,
+                Id = model.LoadId,
+                TransportationId = model.Id,
                 Count = model.Count,
                 Method = model.Method,
                 Volume = model.Volume,
@@ -109,8 +109,9 @@ namespace Forwarder.Controllers
             repository.SaveLoad(load);
 
             TransportationModel transportationModel  =  CreateTransporatationModel();
-            FillTransportationModel(transportationModel, model.TransportationId);
-            return View("TransportationEdit", transportationModel);
+            FillTransportationModel(transportationModel, model.Id);
+
+             return View("TransportationEdit", transportationModel);
         }
 
         [HttpPost]
@@ -134,13 +135,13 @@ namespace Forwarder.Controllers
         }
 
 
-        public JsonResult LoadersView(string id)
+        public JsonResult LoadersView(string id, string transportationId)
         {
             var list = new List<object>();
             if (!string.IsNullOrEmpty(id))
             {
-                int transportationId = Int32.Parse(id);
-                List<Load> loads = repository.Loads.Where(o => o.TransportationId == transportationId).ToList();
+                int transpId = Int32.Parse(id);
+                List<Load> loads = repository.Loads.Where(o => o.TransportationId == transpId).ToList();
 
                 var counter = 1;
                 foreach (var item in loads)
@@ -417,7 +418,7 @@ namespace Forwarder.Controllers
                 Transportation transportation = new Transportation();
                 transportation.CreateDate = DateTime.Now;
                 repository.AddNewTransportation(transportation);
-                model.Id = transportation.Id;
+                model.Id = transportation.Id.ToString();
             }
 
             return View(model);
@@ -449,7 +450,7 @@ namespace Forwarder.Controllers
             {
                 Transportation transportation = repository.Transportations.Where(o => o.Id == id).Single();
 
-                model.Id = transportation.Id;
+                model.Id = transportation.Id.ToString();
 
                 model.RegNumber = transportation.RegNumber;
                 model.EtsngId = transportation.Etsng != null ?
@@ -481,7 +482,7 @@ namespace Forwarder.Controllers
 
             Transportation transportation = new Transportation()
                 {
-                    Id = model.Id,
+                    Id =  !string.IsNullOrEmpty(model.Id) ? Int32.Parse(model.Id) : 0,
                     CreateDate = DateTime.Now,
                     RegNumber = model.RegNumber,
                     SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),

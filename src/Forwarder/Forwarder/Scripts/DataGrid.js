@@ -66,7 +66,7 @@
      $('#add_route').click(function() {
      
            $.ajax({
-                 url: $('#route_dialog').attr('action')  + '?transportationId=' + $('#Id').val(),
+                 url: $('#route_dialog').attr('action')  + '?id=' + $('#Id').val(),
                  type: "POST",
                  success: function(data) {
                      $('#route_dialog').html(data);
@@ -187,7 +187,7 @@
      $('#add_loading').click(function() {
                 
                  $.ajax({
-                 url: $('#loader_dialog').attr('action') + '?transportationId=' + $('#Id').val(),
+                 url: $('#loader_dialog').attr('action') + '?id=' + $('#Id').val(),
                  type: "POST",
                  success: function(data) {
                      $('#loader_dialog').html(data);
@@ -236,7 +236,7 @@
          caption: "Загрузки",
          ondblClickRow: function(id) {
              $.ajax({
-                 url: $('#loader_dialog').attr('action') + "?transportationId=" +  $('#Id').val() + '&id='+ id,
+                 url: $('#loader_dialog').attr('action') + "?id=" +  $('#Id').val() + '&id='+ id,
                  type: "POST",
                  data: {
                      Id: $('#loaders').jqGrid('getCell',id,'Id'),
