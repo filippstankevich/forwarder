@@ -8,9 +8,9 @@ namespace Forwarder.Models
 {
     public class LoadModel
     {
-        public int TransportationId { get; set; }
+        public int Id { get; set; } //TransportationId
 
-        public int Id { get; set; }
+        public int LoadId { get; set; }
 
         public int Volume { get; set; }
         public int Rate { get; set; }
