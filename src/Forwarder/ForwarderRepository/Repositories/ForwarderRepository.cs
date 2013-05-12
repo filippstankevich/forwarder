@@ -20,6 +20,7 @@ namespace ForwarderDAL.Repositories
         public IQueryable<Road> Roads { get { return context.Roads; } }
         public IQueryable<Route> Routes { get { return context.Routes; } }
         public IQueryable<Shipment> Shipments { get { return context.Shipments; } }
+        public IQueryable<ExpenseType> ExpenseTypes { get { return context.ExpenseTypes; } }
 
         public int GetTransportCount(Transportation transportation)
         {

@@ -6,15 +6,19 @@ using System.Web.Mvc;
 
 namespace Forwarder.Models
 {
-    public class LoadModel
+    public class ExpenseModel
     {
-        public int? Id { get; set; }
-        public int? Volume { get; set; }
-        public int? Rate { get; set; }
-        public int? Expense { get; set; }
-        public string Method { get; set; }
-        public int? Count { get; set; }
+        public int Id { get; set; }
 
+        public int? Load { get; set; }
+
+        public string ExpenseTypeId { get; set; }
+
+        public int? Expense { get; set; }
+
+        public string Method { get; set; }
+
+        public IEnumerable<SelectListItem> ExpenseTypes { get; set; }
         public IEnumerable<SelectListItem> Methods { get; set; }
     }
 }

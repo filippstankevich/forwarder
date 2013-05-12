@@ -19,6 +19,7 @@ namespace ForwarderDAL.Repositories
         IQueryable<Road> Roads { get; }
         IQueryable<Route> Routes { get; }
         IQueryable<Shipment> Shipments { get; }
+        IQueryable<ExpenseType> ExpenseTypes { get; }
 
         int GetTransportCount(Transportation transportation);
         bool AddNewStation(Station newStation);
