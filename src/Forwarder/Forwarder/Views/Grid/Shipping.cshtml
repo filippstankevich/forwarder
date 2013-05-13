@@ -1,4 +1,4 @@
-﻿@model Forwarder.Models.ShippingModel
+﻿@model Forwarder.Models.ShipmentModel
 
         <title>@ViewBag.Title</title>
         <link  href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css"/>
@@ -51,11 +51,17 @@
                 <h2>Экспедитор</h2>
             </div>
         </div>
-        <div class="container">
+        <div class="container">        
             <div class="row">
+                @Html.ActionLink("Назад", "TransportationEdit", new { id = Model.Id })
+                <!--   <div id ="export_btn" class="btn btn-primary controls">Импорт</div> -->
+                @using (Html.BeginForm("ExportData", "Grid", FormMethod.Post, new {id = "upload_form", enctype = "multipart/form-data"}))
+                {
+                    <label>Импорт из Excel</label>                    
+                    <input type="file" name='file' id="file"  onchange="submit"/><br /> 
+                    @Html.HiddenFor(m => m.Id)                 
+                }
+                </div>
                 <table id = "shipping"></table>
-                <div id ="export_btn" class="btn btn-primary controls">Экспорт</div>
-                @Html.ActionLink("Назад", "TransportationEdit")
-            </div>
         </div>
 </body>

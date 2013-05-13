@@ -1,25 +1,24 @@
-﻿@model Forwarder.Models.RouterModel
+﻿@model Forwarder.Models.RouteModel
  
-@using (Html.BeginForm("RouterData", "Grid", "Post"))
+
+
+@using (Html.BeginForm("RouterData", "Grid"))
 {    
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.RouteId)
+
     <div class="row">
         <div class="span3">
                 <div class="control-group">
-                    <label class="span3 text-left">№ Маршрута</label>
-                    <div class="controls">              
-                        @Html.TextBoxFor(m => m.Id, new Dictionary<string, object>() { { "readonly", "true" } })
-                    </div>
-                </div>
-                <div class="control-group">
                     <label class="span3 text-left">Дорога</label>
                     <div class="controls">              
-                        @Html.TextBoxFor(m => m.Road)
+                        @Html.DropDownListFor(m => m.RoadId, Model.Roads)
                     </div>
                 </div>  
                 <div class="control-group">
                     <label class="span3 text-left">Перевозчик</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Carrier)
+                         @Html.DropDownListFor(m => m.CarrierId, Model.Carriers)
                     </div>
                 </div>
            

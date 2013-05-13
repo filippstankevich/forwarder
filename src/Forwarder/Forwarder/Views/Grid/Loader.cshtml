@@ -1,16 +1,11 @@
-﻿@model Forwarder.Models.LoaderModel
+﻿@model Forwarder.Models.LoadModel
  
 @using (Html.BeginForm("LoaderData", "Grid", "Post"))
 {    
-    <div class="row">
-        <div class="span3">
-            <div class="control-group">
-                <label class="span3 text-left">№ Загрузки</label>
-                <div class="controls"> 
-                    @Html.TextBoxFor(m => m.Id, new Dictionary<string, object>() { { "readonly", "true" } })
-                </div>
-            </div>
-        </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.LoadId)
+
+    <div class="row">       
             <div class="span3">
                 
             <div class="control-group">
@@ -32,13 +27,13 @@
             <div class="control-group">
                 <label class="span3 text-left">Расход</label>
                 <div class="controls">
-                    @Html.TextBoxFor(m => m.Expense)
+                    @Html.TextBoxFor(m => m.Expense, new Dictionary<string, object>() { { "readonly", "true" } })
                 </div>
             </div>
             <div class="control-group">
                 <label class="span3 text-left">Метод расчета</label>
                 <div class="controls">
-                    @Html.TextBoxFor(m => m.Method)
+                    @Html.DropDownListFor(m => m.Method, Model.Methods)
                 </div>
             </div>
         

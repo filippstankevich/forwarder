@@ -1,8 +1,11 @@
-﻿@model Forwarder.Models.ConsumptionModel
+﻿@model Forwarder.Models.ExpenseModel
            
 <script src="@Url.Content("~/Scripts/DataGrid.js")" type="text/javascript"></script>  
 
-<table id = "consumption2"></table>
+  @Html.HiddenFor(m => m.Id)
+  @Html.HiddenFor(m => m.RouteId)
+
+ <table id = "consumption2"></table>
  <div id ="add_consumpt" class="btn btn-primary controls">+</div>
  <div id ="delete_consumpt" class="btn btn-primary controls">-</div>
 

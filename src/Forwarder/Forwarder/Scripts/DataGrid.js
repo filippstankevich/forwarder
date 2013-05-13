@@ -17,7 +17,10 @@
              duration: 100
          },
      });
-     
+
+    $('#file').change(function() {
+        $('#upload_form').submit(); 
+    });
 
       $("#shipping_dialog").dialog({       
          autoOpen: false,
@@ -63,7 +66,7 @@
      $('#add_route').click(function() {
      
            $.ajax({
-                 url: $('#route_dialog').attr('action'),
+                 url: $('#route_dialog').attr('action')  + '?id=' + $('#Id').val(),
                  type: "POST",
                  success: function(data) {
                      $('#route_dialog').html(data);
@@ -73,10 +76,14 @@
      
      });
 
+     $('#shipments_btn').click(function() { 
+        document.location = '/Grid/Shipping?id=' + $('#Id').val()
+     });
+
      $('#add_consumpt').click(function() {
             
                  $.ajax({
-                 url: $('#consumpt_edit').attr('action'),
+                 url: $('#consumpt_edit').attr('action') + '?id=' + $('#Id').val() + '&routeId=' +   $('#RouteId').val(),
                  type: "POST",
                  success: function(data) {
                      $('#consumpt_edit').html(data);
@@ -130,7 +137,7 @@
      $('#list2').jqGrid({
          url: '/Grid/GridView',
          datatype: "json",
-         colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Общий вес перевозки', 'Комментарии', 'Дата регистрации'],
+         colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Дата регистрации', 'Комментарии' ],
          colModel: [                
              { name: 'RowNumber', width: 20, align: "center" },
              { name: 'RegNumber', width: 150, align: "center" },
@@ -139,9 +146,8 @@
              { name: 'GHGClassificator', width: 200, align: "center" },
              { name: 'ETSNGClassificator', width: 200, align: "center" },
              { name: 'TransportCount', width: 200, align: "center" },
-             { name: 'FullWeight', width: 150, align: "center" },
-             { name: 'Comments', width: 150, align: "center" },
-             { name: 'RegDate', width: 150, align: "center" }
+             { name: 'RegDate', width: 150, align: "center" },
+             { name: 'Comments', width: 150, align: "center" }             
          ],
          height: 'auto',
          rowNum: 10,
@@ -181,7 +187,7 @@
      $('#add_loading').click(function() {
                 
                  $.ajax({
-                 url: $('#loader_dialog').attr('action'),
+                 url: $('#loader_dialog').attr('action') + '?id=' + $('#Id').val(),
                  type: "POST",
                  success: function(data) {
                      $('#loader_dialog').html(data);
@@ -230,7 +236,7 @@
          caption: "Загрузки",
          ondblClickRow: function(id) {
              $.ajax({
-                 url: $('#loader_dialog').attr('action') + "?id=" +  id,
+                 url: $('#loader_dialog').attr('action') + "?id=" +  $('#Id').val() + '&loadId='+ id,
                  type: "POST",
                  data: {
                      Id: $('#loaders').jqGrid('getCell',id,'Id'),
@@ -251,61 +257,72 @@
 
         
      $('#route').jqGrid({
-         url: '/Grid/RouteView?id=' + $('#Id').val(),
+         url: '/Grid/RouteView?id=' +  $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Дорога', 'Перевозчик', 'Расход'],
          colModel: [
-             { name: 'Id', width: 20, align: "center" },
+             { name: 'RowNumber', width: 20, align: "center" },
              { name: 'Road', width: 150, align: "center" },
              { name: 'Carrier', width: 150, align: "center" },
-             { name: 'Consumption', width: 150, align: "center" }
+             { name: 'Expense', width: 150, align: "center" }
          ],
          height: 'auto',
          sortorder: "desc",
          caption: "Маршрут",
          onCellSelect : function(id, iCol, cellcontent) {
-             if (iCol == 3) {                 
-                      $.get(
-                      $('#consumpt_dialog').attr('action'), null, 
-                      function(data) 
-                      {
-                            $('#consumpt_dialog').html(data);
-                      }, 'html').complete(
-             function() {
-             var lastSel;
+             if (iCol == 3) {
+                 
+                      $.get($('#consumpt_dialog').attr('action') + '?id=' + $('#Id').val() + '&routeId=' + id, 
+                      null, function(data) {
+
+             $('#consumpt_dialog').html(data);
+         }, 'html').complete(function() {
+             $("#consumpt_dialog").dialog("open");
+             
              $('#consumption2').jqGrid({                       
                  url: '/Grid/ConsumptionView?id=' + id,
                  datatype: "json",
-                 colNames: ['№', 'Тип', 'Расход', 'Метод расчета'],
+                 colNames: ['№', 'Тип', 'Загрузка', 'Расход', 'Метод расчета'],
                  colModel: [
-                     { name: 'Id', index: 'id', align: "center" },
-                     { name: 'Type', index: 'Type', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
-                     { name: 'Consumption', index: 'Consumption', align: "center", editable: true, edittype: "text" },
-                     { name: 'Method', index: 'Method', align: "center", editable: true, edittype:'select', editoptions:{value:"1"} },
+                     { name: 'RowNumber', index: 'id', align: "center" },
+                     { name: 'Type', index: 'Type', align: "center" },
+                     { name: 'Load', index: 'Load', align: "center" },
+                     { name: 'Expense', index: 'Expense', align: "center"},
+                     { name: 'Method', index: 'Method', align: "center" },
                  ],
                  height: 'auto',
                  sortorder: "desc",
                  sortname: 'id',
                  ondblClickRow: function(id) {
-                     if (id && id != lastSel) {
-                         jQuery("#consumption2").restoreRow(lastSel);
-                         jQuery("#consumption2").editRow(id, true);
-                         lastSel = id;
-                     }
+                      
+                    $.ajax({
+                        url: $('#consumpt_edit').attr('action') + '?id=' + $('#Id').val() + 
+                                                                '&routeId=' +   $('#RouteId').val() + '&expenseId=' + id,
+                        type: "POST",
+                        data: {
+                              Type: $('#consumption2').jqGrid('getCell', id, 'Type'),
+                              Expense: $('#consumption2').jqGrid('getCell', id, 'Expense'),
+                              Method: $('#consumption2').jqGrid('getCell', id, 'Method')
+                          },
+                    success: function(data) {
+                     $('#consumpt_edit').html(data);
+                     $('#consumpt_edit').dialog("open");
+                    }
+                 });
+
                  },
-                 editurl: '/Grid/EditView' 
+                
              });
-             $("#consumpt_dialog").dialog("open");
+             
          });
              }
 
          },
             ondblClickRow: function(id) {
              $.ajax({
-                 url: $('#route_dialog').attr('action'),
+                 url: $('#route_dialog').attr('action') + '?id=' + $('#Id').val() + '&routeId=' + id,
                  type: "POST",
                  data: {
-                     Id: $('#route').jqGrid('getCell',id,'Id'),
                      Road: $('#route').jqGrid('getCell', id, 'Road'),
                      Carrier: $('#route').jqGrid('getCell', id, 'Carrier'),                
                  },
@@ -324,26 +341,22 @@
          colNames: ['№', 'Загрузка', 'Тип', 'Расход', 'Метод расчета'],
          colModel: [
              { name: 'Id', width: 20, align: "center" },
-             { name: 'Loading', width: 20, align: "center" },
+             { name: 'Load', width: 20, align: "center" },
              { name: 'Type', width: 150, align: "center" },
-             { name: 'Consumption', width: 150, align: "center" },
+             { name: 'Expense', width: 150, align: "center" },
              { name: 'Method', width: 150, align: "center" },
          ],
          height: 'auto',
          sortorder: "desc",
-         caption: "Расход",
-         onSelectRow: function(id) {
-             alert(id);
-         }
+         caption: "Расход"        
      });
      
      $('#shipping').jqGrid({                       
-                 url: '/Grid/ShippingView',
+                 url: '/Grid/ShippingView?id=' + $('#Id').val(),
                  datatype: "json",
-                 colNames: ['№', 'Рег.номер', 'Номер вагона', 'Номер накладной', 'Вес','Грузоподъемность','Дата','Дата прибытия'],
+                 colNames: ['№', 'Номер вагона', 'Номер накладной', 'Вес','Грузоподъемность','Дата','Дата прибытия'],
                  colModel: [
                      { name: 'Id', index: 'id', align: "center",width: 30 },
-                     { name: 'RegNumber', index: 'RegNumber', align: "center"  },
                      { name: 'ContainerNumber', index: 'ContainerNumber', align: "center" },
                      { name: 'InvoiceNumber', index: 'InvoiceNumber', align: "center",width:180 },
                      { name: 'Weight', index: 'Weight', align: "center",width:50 },

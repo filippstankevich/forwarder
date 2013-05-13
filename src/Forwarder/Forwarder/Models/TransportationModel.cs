@@ -12,7 +12,7 @@ namespace Forwarder.Models
         public IEnumerable<SelectListItem> GngItems { get; set; }
         public IEnumerable<SelectListItem> EtsngItems { get; set; }
         public IEnumerable<SelectListItem> StationItems { get; set; }
-        public LoaderModel Loaders;
+        public LoadModel Loaders;
 
         public string Id { get; set; }
         public string GngId { get; set; }
@@ -21,5 +21,13 @@ namespace Forwarder.Models
         public string DestinationStationId { get; set; }
         public string RegNumber {get; set;}
         public string Comment {get; set;}
+
+        public int PlannedExpense { get; set; }
+        public int PlannedPrice { get; set; }
+        public int PlannedProfit { get; set; }
+
+        public int RealExpense { get; set; }
+        public int RealPrice { get; set; }
+        public int RealProfit { get; set; }
     }
 }
