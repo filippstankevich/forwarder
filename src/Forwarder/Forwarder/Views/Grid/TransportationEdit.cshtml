@@ -7,7 +7,7 @@
 <div class="row">
 <div class="right">
     <div class="span3">
-       @using (Html.BeginForm())
+       @using (Html.BeginForm("TransportationEdit","Grid"))
        {
            @Html.HiddenFor(m => m.Id)
 @*           @Html.HiddenFor(m=> m.OpenDialogEx)
