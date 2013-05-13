@@ -29,5 +29,9 @@ namespace Forwarder.Models
         public int RealExpense { get; set; }
         public int RealPrice { get; set; }
         public int RealProfit { get; set; }
+
+        //// Добавлены в виде хаков
+        //public bool OpenDialogEx { get; set; }
+        //public int RoutId { get; set; }
     }
 }

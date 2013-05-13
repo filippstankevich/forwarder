@@ -1,6 +1,13 @@
  $(document).ready(function() {
-
-     $("#spoilerClick").click(function() {
+     
+//     if ($('#OpenDialogEx').val() == 'True') {
+//         var urlStr = $('#consumpt_dialog').attr('action') + '?id=' + $('#Id').val() + '&routeId=' + $('#RoutId').val();
+//         $.get(urlStr , null, function(data) { $('#consumpt_dialog').html(data); }, 'html').complete(function() {
+//                 $("#consumpt_dialog").dialog("open");
+//             });
+//     }
+     
+     $("#spoilerClick").dblclick(function() {
          $("#spoiler").toggle("slow");
      });
 
@@ -239,7 +246,7 @@
                  url: $('#loader_dialog').attr('action') + "?id=" +  $('#Id').val() + '&loadId='+ id,
                  type: "POST",
                  data: {
-                     Id: $('#loaders').jqGrid('getCell',id,'Id'),
+                     
                      Volume: $('#loaders').jqGrid('getCell', id, 'Volume'),
                      Rate: $('#loaders').jqGrid('getCell', id, 'Rate'),
                      Expense: $('#loaders').jqGrid('getCell', id, 'Expense'),

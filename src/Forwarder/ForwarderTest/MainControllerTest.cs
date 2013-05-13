@@ -72,28 +72,28 @@ namespace TestFor
         #endregion
 
 
-        /// <summary>
-        ///Тест для StationAdd
-        ///</summary>
-        [TestMethod()]
-        public void MainControllerMenuTest()
-        {
-            Mock<IForwarderRepository> mock = new Mock<IForwarderRepository>();
-            mock.Setup(m => m.Stations).Returns(new Station[] {
-                new Station {Id = 1, Code = "KRG", Name = "Karagandy"},
-                new Station {Id = 2, Code = "MSK", Name = "Moscow"},
-                new Station {Id = 3, Code = "NSK", Name = "Novosibirsk"},
-                new Station {Id = 4, Code = "AST", Name = "Astana"},
-            }.AsQueryable());
+        ///// <summary>
+        /////Тест для StationAdd
+        /////</summary>
+        //[TestMethod()]
+        //public void MainControllerMenuTest()
+        //{
+        //    Mock<IForwarderRepository> mock = new Mock<IForwarderRepository>();
+        //    mock.Setup(m => m.Stations).Returns(new Station[] {
+        //        new Station {Id = 1, Code = "KRG", Name = "Karagandy"},
+        //        new Station {Id = 2, Code = "MSK", Name = "Moscow"},
+        //        new Station {Id = 3, Code = "NSK", Name = "Novosibirsk"},
+        //        new Station {Id = 4, Code = "AST", Name = "Astana"},
+        //    }.AsQueryable());
 
-            var target = new MainController(mock.Object);
+        //    var target = new MainController(mock.Object);
 
-            TestModel results = (TestModel)target.Menu().Model;
-            var stationt = results.Stations.ToArray();
+        //    TestModel results = (TestModel)target.Menu().Model;
+        //    var stationt = results.Stations.ToArray();
 
-            Assert.AreEqual(stationt.Length, 4);
-            Assert.AreEqual(stationt[0], "Karagandy");
-            Assert.AreEqual(stationt[1], "Moscow");
-        }
+        //    Assert.AreEqual(stationt.Length, 4);
+        //    Assert.AreEqual(stationt[0], "Karagandy");
+        //    Assert.AreEqual(stationt[1], "Moscow");
+        //}
     }
 }

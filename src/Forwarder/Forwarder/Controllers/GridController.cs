@@ -112,7 +112,6 @@ namespace Forwarder.Controllers
 
             TransportationModel transportationModel  =  CreateTransporatationModel();
             FillTransportationModel(transportationModel, model.Id);
-
             return View("TransportationEdit", transportationModel);
         }
 
@@ -152,7 +151,10 @@ namespace Forwarder.Controllers
             repository.SaveExpense(expense);
 
             TransportationModel transportationModel = CreateTransporatationModel();
-            FillTransportationModel(transportationModel, Int32.Parse(model.ExpenseTypeId));
+            FillTransportationModel(transportationModel, model.Id);
+            //transportationModel.OpenDialogEx = true;
+            //transportationModel.RoutId = model.RouteId;
+            //RedirectToAction("TransportationEdit", transportationModel);
             return View("TransportationEdit", transportationModel);
         }
 
@@ -509,10 +511,14 @@ namespace Forwarder.Controllers
                     Id =  !string.IsNullOrEmpty(model.Id) ? Int32.Parse(model.Id) : 0,
                     CreateDate = DateTime.Now,
                     RegNumber = model.RegNumber,
+                    SourceStationId = sourceStationId,
+                    DestinationStationId = destinationStationId,
                     SourceStation = repository.Stations.Where(s => s.Id == sourceStationId).SingleOrDefault(),
                     DestinationStation =
                         repository.Stations.Where(s => s.Id == destinationStationId).SingleOrDefault(),
                     Gng = repository.Gngs.Where(s => s.Id == gngId).SingleOrDefault(),
+                    GngId = gngId,
+                    EtsngId = etsngId,
                     Etsng = repository.Etsngs.Where(s => s.Id == etsngId).SingleOrDefault(),
                     Comment = model.Comment
                 };

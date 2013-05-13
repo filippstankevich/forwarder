@@ -49,12 +49,11 @@ namespace ForwarderDAL.Repositories
                 storedTransportation.CreateDate = transportation.CreateDate;
                 storedTransportation.Comment = transportation.Comment;
                 storedTransportation.ClientId = transportation.ClientId;
-                storedTransportation.SourceStationId = transportation.SourceStationId;
-                storedTransportation.DestinationStationId = transportation.DestinationStationId;
+                storedTransportation.SourceStationId = transportation.SourceStation.Id;
+                storedTransportation.DestinationStationId = transportation.DestinationStation.Id;
                 storedTransportation.GngId = transportation.GngId;
                 storedTransportation.EtsngId = transportation.EtsngId;
-
-                context.Transportations.Add(storedTransportation);
+                context.Entry(storedTransportation);
             }
             else
             {
@@ -85,7 +84,7 @@ namespace ForwarderDAL.Repositories
                 storedLoad.Volume = load.Volume;
                 storedLoad.Count = load.Count;
 
-                context.Loads.Add(storedLoad);
+                context.Entry(storedLoad);
             }
             else
             {
@@ -107,7 +106,7 @@ namespace ForwarderDAL.Repositories
                 storedRoute.CarrierId = route.CarrierId;
                 storedRoute.TransportationId = route.TransportationId;
 
-                context.Routes.Add(storedRoute);
+                context.Entry(storedRoute);
             }
             else
             {
@@ -130,7 +129,7 @@ namespace ForwarderDAL.Repositories
                 storedExpense.ExpenseTypeId = expense.ExpenseTypeId;
                 storedExpense.Value = expense.Value;
 
-                context.Expenses.Add(storedExpense);
+                context.Entry(storedExpense);
             }
             else
             {
