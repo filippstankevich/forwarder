@@ -479,5 +479,10 @@ namespace Forwarder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public ViewResult ReportPage()
+        {
+            return View("ReportPage");
+        }
     }
 }

@@ -67,13 +67,9 @@
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="FRDbContext.cs" />
-    <Compile Include="Migrations\201305150440265_Forwarder.cs" />
-    <Compile Include="Migrations\201305150440265_Forwarder.Designer.cs">
-      <DependentUpon>201305150440265_Forwarder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201305150507020_Forwarder1.cs" />
-    <Compile Include="Migrations\201305150507020_Forwarder1.Designer.cs">
-      <DependentUpon>201305150507020_Forwarder1.cs</DependentUpon>
+    <Compile Include="Migrations\201305151543018_1.cs" />
+    <Compile Include="Migrations\201305151543018_1.Designer.cs">
+      <DependentUpon>201305151543018_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
@@ -83,13 +79,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Error.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201305150440265_Forwarder.resx">
-      <DependentUpon>201305150440265_Forwarder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201305150507020_Forwarder1.resx">
-      <DependentUpon>201305150507020_Forwarder1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201305151543018_1.resx">
+      <DependentUpon>201305151543018_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

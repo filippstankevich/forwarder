@@ -21,6 +21,12 @@ namespace Forwarder
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapPageRoute(
+                "ReportForm", // Route name
+                "{reportname}", // URL
+                "~/{reportname}.aspx" // File
+                );
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
