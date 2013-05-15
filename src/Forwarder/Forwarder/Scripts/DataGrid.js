@@ -17,12 +17,12 @@
 
          show: {
              effect: "blind",
-             duration: 100,
+             duration: 100
          },
          hide: {
              effect: "explode",
              duration: 100
-         },
+         }
      });
 
     $('#file').change(function() {
@@ -35,12 +35,12 @@
 
          show: {
              effect: "blind",
-             duration: 100,
+             duration: 100
          },
          hide: {
              effect: "explode",
              duration: 100
-         },
+         }
      });
 
      $('#consumpt_edit').dialog({
@@ -84,7 +84,7 @@
      });
 
      $('#shipments_btn').click(function() { 
-        document.location = '/Grid/Shipping?id=' + $('#Id').val()
+        document.location = '/Transportation/Shipping?id=' + $('#Id').val()
      });
 
      $('#add_consumpt').click(function() {
@@ -107,7 +107,7 @@
 
          show: {
              effect: "blind",
-             duration: 100,
+             duration: 100
          },
          hide: {
              effect: "explode",
@@ -132,27 +132,27 @@
          autoOpen: false,
          show: {
              effect: "blind",
-             duration: 100,
+             duration: 100
          },
          hide: {
              effect: "explode",
              duration: 100
-         },
+         }
      });
 
 
      $('#list2').jqGrid({
-         url: '/Grid/GridView',
+         url: '/Transportation/GridView',
          datatype: "json",
-         colNames: ['№', 'Регистрационный номер', 'Станция отправления', 'Станция прибытия', 'Классификатор груза по ГНГ', 'Классификатор груза по ЕТСНГ', 'Количество транспортных средств', 'Дата регистрации', 'Комментарии' ],
+         colNames: ['№', 'Рег. номер', 'Станция отправления', 'Станция прибытия', 'ГНГ', 'ЕТСНГ', 'Кол-во', 'Дата', 'Комментарий' ],
          colModel: [                
              { name: 'RowNumber', width: 20, align: "center" },
-             { name: 'RegNumber', width: 150, align: "center" },
+             { name: 'RegNumber', width: 100, align: "center" },
              { name: 'DispatchStation', width: 150, align: "center" },
              { name: 'ArriveStattion', width: 150, align: "center" },
-             { name: 'GHGClassificator', width: 200, align: "center" },
-             { name: 'ETSNGClassificator', width: 200, align: "center" },
-             { name: 'TransportCount', width: 200, align: "center" },
+             { name: 'GHGClassificator', width: 150, align: "center" },
+             { name: 'ETSNGClassificator', width: 150, align: "center" },
+             { name: 'TransportCount', width: 100, align: "center" },
              { name: 'RegDate', width: 150, align: "center" },
              { name: 'Comments', width: 150, align: "center" }             
          ],
@@ -165,27 +165,16 @@
          sortorder: "desc",
          caption: "Перевозка",
          ondblClickRow: function(id) {
-
-             var RegNumber = $('#list2').jqGrid('getCell', id, 'RegNumber');
-             var Gng = $('#list2').jqGrid('getCell', id, 'GHGClassificator');
-             var ETSNG = $('#list2').jqGrid('getCell', id, 'ETSNGClassificator');
-             var SourceStation = $('#list2').jqGrid('getCell', id, 'DispatchStation');
-             var DestinationStation = $('#list2').jqGrid('getCell', id, 'ArriveStattion');
-             var Comment = $('#list2').jqGrid('getCell', id, 'Comments');
+//             var RegNumber = $('#list2').jqGrid('getCell', id, 'RegNumber');
              
-             var url = '/Grid/TransportationEdit?' +  'id=' + id; /*+
-                                                      '&RegNumber=' +  RegNumber + 
-                                                      '&GHGClassificator=' + Gng + 
-                                                      '&ETSNGClassificator=' + ETSNG +
-                                                      '&DispatchStation=' + SourceStation +
-                                                      '&ArriveStattion=' + DestinationStation +
-                                                       '&Comment=' + Comment;*/
+             var url = '/Transportation/TransportationEdit?' +  'id=' + id; 
+//                                                                + '&RegNumber=' +  RegNumber;
              document.location = url;
          }
      });
 
      $('#search_btn').click(function() {
-         var url = '/Grid/GridView?' + 'RegNumber=' + $('#RegNumber').val() + '&DispatchStation=' + $('#DispatchStation').val() + '&ArriveStation=' + $('#ArriveStation').val() +
+         var url = '/Transportation/GridView?' + 'RegNumber=' + $('#RegNumber').val() + '&DispatchStation=' + $('#DispatchStation').val() + '&ArriveStation=' + $('#ArriveStation').val() +
              '&GHGClassificator=' + $('#GHGClassificator').val() + '&ETSNGClassificator=' + $('#ETSNGClassificator').val() + '&RegDate=' + $('#RegDate').val();
          $('#list2').jqGrid('setGridParam', { url: url });
          $('#list2').trigger('reloadGrid');
@@ -221,13 +210,13 @@
          {}, // Опции окон добавления
          {}, // Опции окон удаления
          {
-             width: 700,
+             width: 700
          }  // Опции окон поиска
         
      );
 
      $('#loaders').jqGrid({
-         url: '/Grid/LoadersView?id=' +  $('#Id').val(),
+         url: '/Transportation/LoadersView?id=' +  $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Загрузка', 'Ставка', 'Расход', 'Метод расчета', 'Количество'],
          colModel: [
@@ -258,25 +247,25 @@
                      $("#loader_dialog").dialog("open");
                  }
              });
-         },
+         }
       
      });
 
         
      $('#route').jqGrid({
-         url: '/Grid/RouteView?id=' +  $('#Id').val(),
+         url: '/Transportation/RouteView?id=' +  $('#Id').val(),
          datatype: "json",
          colNames: ['№', 'Дорога', 'Перевозчик', 'Расход'],
          colModel: [
-             { name: 'RowNumber', width: 20, align: "center" },
-             { name: 'Road', width: 150, align: "center" },
-             { name: 'Carrier', width: 150, align: "center" },
-             { name: 'Expense', width: 150, align: "center" }
+             { name: 'RowNumber', width: 30, align: "center" },
+             { name: 'Road', width: 200, align: "center" },
+             { name: 'Carrier', width: 200, align: "center" },
+             { name: 'Expense', width: 200, align: "center" }
          ],
          height: 'auto',
          sortorder: "desc",
          caption: "Маршрут",
-         onCellSelect : function(id, iCol, cellcontent) {
+         onCellSelect : function(id, iCol) {
              if (iCol == 3) {
                  
                       $.get($('#consumpt_dialog').attr('action') + '?id=' + $('#Id').val() + '&routeId=' + id, 
@@ -287,7 +276,7 @@
              $("#consumpt_dialog").dialog("open");
              
              $('#consumption2').jqGrid({                       
-                 url: '/Grid/ConsumptionView?id=' + id,
+                 url: '/Transportation/ConsumptionView?id=' + id,
                  datatype: "json",
                  colNames: ['№', 'Тип', 'Загрузка', 'Расход', 'Метод расчета'],
                  colModel: [
@@ -317,7 +306,7 @@
                     }
                  });
 
-                 },
+                 }
                 
              });
              
@@ -331,19 +320,19 @@
                  type: "POST",
                  data: {
                      Road: $('#route').jqGrid('getCell', id, 'Road'),
-                     Carrier: $('#route').jqGrid('getCell', id, 'Carrier'),                
+                     Carrier: $('#route').jqGrid('getCell', id, 'Carrier')              
                  },
                  success: function(data) {
                      $('#route_dialog').html(data);
                      $("#route_dialog").dialog("open");
                  }
              });
-         },
+         }
          
      });
 
      $('#consumption').jqGrid({
-         url: '/Grid/ConsumptionView',
+         url: '/Transportation/ConsumptionView',
          datatype: "json",
          colNames: ['№', 'Загрузка', 'Тип', 'Расход', 'Метод расчета'],
          colModel: [
@@ -359,7 +348,7 @@
      });
      
      $('#shipping').jqGrid({                       
-                 url: '/Grid/ShippingView?id=' + $('#Id').val(),
+                 url: '/Transportation/ShippingView?id=' + $('#Id').val(),
                  datatype: "json",
                  colNames: ['№', 'Номер вагона', 'Номер накладной', 'Вес','Грузоподъемность','Дата','Дата прибытия'],
                  colModel: [
@@ -374,7 +363,7 @@
                  height: 'auto',
                  sortorder: "desc",
                  sortname: 'id',
-                 caption: "Отгрузка",
+                 caption: "Отгрузка"
              });
 
           
