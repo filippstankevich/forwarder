@@ -27,13 +27,13 @@ namespace ForwarderDAL
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Transportation>()
-                        .HasRequired(t => t.SourceStation)
+                        .HasOptional(t => t.SourceStation)
                         .WithMany(s => s.TransportationsBySourceStation)
                         .HasForeignKey(t => t.SourceStationId)
                         .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Transportation>()
-                        .HasRequired(t => t.DestinationStation)
+                        .HasOptional(t => t.DestinationStation)
                         .WithMany(s => s.TransportationsByDestinationStation)
                         .HasForeignKey(t => t.DestinationStationId)
                         .WillCascadeOnDelete(false);

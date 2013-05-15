@@ -49,8 +49,8 @@ namespace ForwarderDAL.Repositories
                 storedTransportation.CreateDate = transportation.CreateDate;
                 storedTransportation.Comment = transportation.Comment;
                 storedTransportation.ClientId = transportation.ClientId;
-                storedTransportation.SourceStationId = transportation.SourceStation.Id;
-                storedTransportation.DestinationStationId = transportation.DestinationStation.Id;
+                storedTransportation.SourceStationId = transportation.SourceStationId;
+                storedTransportation.DestinationStationId = transportation.DestinationStationId;
                 storedTransportation.GngId = transportation.GngId;
                 storedTransportation.EtsngId = transportation.EtsngId;
                 context.Entry(storedTransportation);

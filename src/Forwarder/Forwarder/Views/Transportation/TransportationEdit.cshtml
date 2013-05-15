@@ -4,10 +4,11 @@
     ViewBag.Title = "Перевозка";
 }
 
+<div style="margin-top: 20px">
 <div class="row">
 <div class="right">
     <div class="span3">
-       @using (Html.BeginForm())
+       @using (Html.BeginForm("TransportationEdit", "Transportation"))
        {
            @Html.HiddenFor(m => m.Id)
 @*           @Html.HiddenFor(m=> m.OpenDialogEx)
@@ -105,27 +106,32 @@
     </div>
  </div>
 <div>
+</div>
    <div id="pager2"></div> 
                 
     <table id = "loaders"></table>
-    <div id ="add_loading" class="btn btn-primary controls">+</div>
-    <div id ="delete_loading" class="btn btn-primary controls">-</div>
-
+    <div style="margin-bottom: 20px">
+        <div id ="add_loading" class="btn btn-primary controls">+</div>
+        <div id ="delete_loading" class="btn btn-primary controls">-</div>
+    </div>
 
     <table id = "route"></table>
-    <div id ="add_route" class="btn btn-primary controls">+</div>
-    <div id ="delete_route" class="btn btn-primary controls">-</div>  
+    <div style="margin-bottom: 20px">
+        <div id ="add_route" class="btn btn-primary controls">+</div>
+        <div id ="delete_route" class="btn btn-primary controls">-</div>  
+    </div>
 
      <div class="control-group" >
         <div id ="shipments_btn" class="btn btn-primary controls">Отгрузка</div>
-         @Html.ActionLink("Печать", "#")
+        <div id ="prinet_btn" class="btn btn-primary controls">Печать</div>
+@*         @Html.ActionLink("Печать", "#")*@
      </div>  
 
-    <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Grid")></div>
-    <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Grid")></div>
-    <div id="route_dialog" title="Маршрут" action = @Url.Action("Route", "Grid")></div>
-    <div id="consumpt_edit" title="Расход" action = @Url.Action("Consumpt", "Grid")></div>
-    <div id="shipping_dialog" title="Отгрузка" action = @Url.Action("Shipping", "Grid")></div>
+    <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Transportation")></div>
+    <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Transportation")></div>
+    <div id="route_dialog" title="Маршрут" action = @Url.Action("Route", "Transportation")></div>
+    <div id="consumpt_edit" title="Расход" action = @Url.Action("Consumpt", "Transportation")></div>
+    <div id="shipping_dialog" title="Отгрузка" action = @Url.Action("Shipping", "Transportation")></div>
     <div id="delno_dialog" title="Подтвердите удаление данных"></div>     
 
  </div>
