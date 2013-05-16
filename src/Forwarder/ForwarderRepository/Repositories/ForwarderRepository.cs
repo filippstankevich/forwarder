@@ -59,6 +59,8 @@ namespace ForwarderDAL.Repositories
             {
                 context.Transportations.Add(transportation);
             }
+            
+            
             context.SaveChanges();
 
             return true;

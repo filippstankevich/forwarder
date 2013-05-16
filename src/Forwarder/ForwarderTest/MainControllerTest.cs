@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Web;
 using ForwarderDAL.Repositories;
+using Forwarder.Helper;
 using Forwarder.Models;
 using System.Web.Mvc;
 using Moq;
@@ -19,7 +20,7 @@ namespace TestFor
     ///находиться все модульные тесты MainControllerTest
     ///</summary>
     [TestClass()]
-    public class MainControllerTest
+    public class EntitiesTest
     {
 
 
@@ -72,28 +73,80 @@ namespace TestFor
         #endregion
 
 
-        ///// <summary>
-        /////Тест для StationAdd
-        /////</summary>
-        //[TestMethod()]
-        //public void MainControllerMenuTest()
-        //{
-        //    Mock<IForwarderRepository> mock = new Mock<IForwarderRepository>();
-        //    mock.Setup(m => m.Stations).Returns(new Station[] {
-        //        new Station {Id = 1, Code = "KRG", Name = "Karagandy"},
-        //        new Station {Id = 2, Code = "MSK", Name = "Moscow"},
-        //        new Station {Id = 3, Code = "NSK", Name = "Novosibirsk"},
-        //        new Station {Id = 4, Code = "AST", Name = "Astana"},
-        //    }.AsQueryable());
+        [TestMethod()]
+        public void AddNewStationTest()
+        {
+            var target = new Station {Code = "KRG", Name = "Karagandy"};
+            IForwarderRepository repo = new ForwarderRepository();
+            
+            Assert.IsTrue(repo.AddNewStation(target));
+        }
 
-        //    var target = new MainController(mock.Object);
+        [TestMethod()]
+        public void StationEntityTest()
+        {
+            var stations = new List<Station>();
 
-        //    TestModel results = (TestModel)target.Menu().Model;
-        //    var stationt = results.Stations.ToArray();
+            stations.Add(new Station { Id = 1, Code = "KRG", Name = "Karagandy" });
+            stations.Add(new Station { Id = 2, Code = "MSK", Name = "Moscow" });
+            stations.Add(new Station { Id = 3, Code = "NSK", Name = "Novosibirsk" });
+            stations.Add(new Station { Id = 4, Code = "AST", Name = "Astana" });
 
-        //    Assert.AreEqual(stationt.Length, 4);
-        //    Assert.AreEqual(stationt[0], "Karagandy");
-        //    Assert.AreEqual(stationt[1], "Moscow");
-        //}
+            var target = "KRG";
+
+            var result = stations.Single(o => o.Id == 1).Code;
+
+            
+            Assert.AreEqual(target, result);
+
+
+        }
+
+        [TestMethod()]
+        public void RoadEntityTest()
+        {
+            var roads = new List<Road>();
+
+            roads.Add(new Road {Id = 1, Name = "Казахстанская", ShortName = "КАЗ"});
+            roads.Add(new Road {Id = 2, Name = "Кыргызстанская", ShortName = "КГЗ"});
+
+            var target = 2;
+
+            var result = roads.Count();
+
+            Assert.AreEqual(target, result);
+        }
+
+        [TestMethod()]
+        public void GNGEntityTest()
+        {
+            var gngs = new List<Gng>();
+
+            gngs.Add(new Gng { Id = 1, Name = "Абрикосы консервированные для кратковременного хранения", Code = "08129010" });
+            gngs.Add(new Gng { Id = 2, Name = "Абрикосы прочие, содержащие спиртовые добавки в первичных упаковках нетто-массой более 1 кг", Code = "20085031" });
+            gngs.Add(new Gng { Id = 3, Name = "Абрикосы прочие, содержащие спиртовые добавки в первичных упаковках нетто-массой более 1 кг с фактической концентрацией спирта не более 11,85 мас.%", Code = "20085031" });
+
+            var target = 2;
+
+            var result = gngs.Count(o => o.Code.Contains("200"));
+
+            Assert.AreEqual(result, target);
+        }
+
+        [TestMethod()]
+        public void ExpenseTypeEntityTest()
+        {
+            var expTypes = new List<ExpenseType>();
+
+            expTypes.Add(new ExpenseType { Id = 1, Name = "Перегруз"});
+            expTypes.Add(new ExpenseType { Id = 2, Name = "Штраф" });
+            expTypes.Add(new ExpenseType { Id = 3, Name = "Телеграмма" });
+
+            var target = "Перегруз";
+
+            var result = expTypes.SingleOrDefault(o => o.Name.Contains("Пере")).Name;
+
+            Assert.AreEqual(result, target);
+        }
     }
 }
