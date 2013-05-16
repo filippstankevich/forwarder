@@ -1,29 +1,31 @@
 ﻿@model Forwarder.Models.LoadModel
+
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
  
-@using (Html.BeginForm("LoaderData", "Transportation"))
+@using (Html.BeginForm("LoaderData", "Transportation", new { id = "my-form" }))
 {    
     @Html.HiddenFor(m => m.Id)
     @Html.HiddenFor(m => m.LoadId)
-
     <div class="row">       
-            <div class="span3">
-                
+        <div class="span3">
             <div class="control-group">
                 <label class="span3 text-left">Загрузка</label>
                 <div class="controls">              
                     @Html.TextBoxFor(m => m.Volume)
+                    @Html.ValidationMessageFor(m => m.Volume)
                 </div>
             </div>
             <div class="control-group">
                 <label class="span3 text-left">Ставка</label>
                 <div class="controls">
                     @Html.TextBoxFor(m => m.Rate)
+                    @Html.ValidationMessageFor(m => m.Rate)
                 </div>
             </div>
-           
         </div>
+
         <div class="span3">
-           
             <div class="control-group">
                 <label class="span3 text-left">Расход</label>
                 <div class="controls">
@@ -34,21 +36,21 @@
                 <label class="span3 text-left">Метод расчета</label>
                 <div class="controls">
                     @Html.DropDownListFor(m => m.Method, Model.Methods)
+                    @Html.ValidationMessageFor(m => m.Method)
                 </div>
             </div>
-        
         </div>
+
         <div class="span3">
-           
             <div class="control-group">
                 <label class="span3 text-left">Количество</label>
                 <div class="controls">
                     @Html.TextBoxFor(m => m.Count)
+                    @Html.ValidationMessageFor(m => m.Count)
                 </div>
             </div>
-
-          
         </div>
+
         <div class="form-actions">
             <button type = "submit" id = "save_btn" style="margin: 0 0 0 100px;">Сохранить</button>
         </div>

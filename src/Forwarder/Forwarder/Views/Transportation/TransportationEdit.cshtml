@@ -4,111 +4,104 @@
     ViewBag.Title = "Перевозка";
 }
 
-<div style="margin-top: 20px">
-<div class="row">
-<div class="right">
-    <div class="span3">
-       @using (Html.BeginForm("TransportationEdit", "Transportation"))
-       {
-           @Html.HiddenFor(m => m.Id)
-@*           @Html.HiddenFor(m=> m.OpenDialogEx)
-           @Html.HiddenFor(m=>m.RoutId)*@
-           
-           <div class = "form-inline">          
+<div class="form-actions" style="margin-top: 20px">
+    <div class="row">
+        <div class="right">
+            <div class="span3">
+                @using (Html.BeginForm("TransportationEdit", "Transportation"))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    <div class = "form-inline"> 
+                        <div class="control-group">
+                            <label class="span3 text-left">Регистрационный номер</label>
+                            <div class="controls">   
+                                @Html.TextBoxFor(m => m.RegNumber)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="span3 text-left">Груз по ГНГ</label>
+                            <div class="controls">   
+                                @Html.DropDownListFor(m => m.GngId, Model.GngItems)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="span3 text-left">Груз по ЕТСНГ</label>
+                            <div class="controls">   
+                                @Html.DropDownListFor(m => m.EtsngId, Model.EtsngItems)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="span3 text-left">Станция назначения</label>
+                            <div class="controls">   
+                                @Html.DropDownListFor(m => m.SourceStationId, Model.StationItems)
 
-               <div class="control-group">
-                   <label class="span3 text-left">Регистрационный номер</label>
-                   <div class="controls">   
-                       @Html.TextBoxFor(m => m.RegNumber)
-                   </div>
-               </div>
-               <div class="control-group">
-                   <label class="span3 text-left">Груз по ГНГ</label>
-                   <div class="controls">   
-                       @Html.DropDownListFor(m => m.GngId, Model.GngItems)
-                   </div>
-               </div>
-               <div class="control-group">
-                   <label class="span3 text-left">Груз по ЕТСНГ</label>
-                   <div class="controls">   
-                      @Html.DropDownListFor(m => m.EtsngId, Model.EtsngItems)
-                   </div>
-               </div>
-               <div class="control-group">
-                   <label class="span3 text-left">Станция назначения</label>
-                   <div class="controls">   
-                       @Html.DropDownListFor(m => m.SourceStationId, Model.StationItems)
-
-                   </div>
-               </div>
-               <div class="control-group">
-                   <label class="span3 text-left">Станция прибытия</label>
-                   <div class="controls">   
-                      @Html.DropDownListFor(m => m.DestinationStationId, Model.StationItems)
-                   </div>
-               </div>
-               <div class="control-group">
-                   <label class="span3 text-left">Коментарий</label>
-                   <div class="controls">   
-                       @Html.TextBoxFor(m => m.Comment)
-                   </div>
-               </div>
-               <div class="control-group">       
-                    <button type="submit" class="btn btn-primary">Сохранить</button>          
-               </div>
-           </div>
-       }
-    </div>
-    </div>
-    <div class="middle">
-        <div class="span3">
-            <div class="control-group">
-                <label class="span3 text-left">Планируемый расход</label>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="span3 text-left">Станция прибытия</label>
+                            <div class="controls">   
+                                @Html.DropDownListFor(m => m.DestinationStationId, Model.StationItems)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="span3 text-left">Коментарий</label>
+                            <div class="controls">   
+                                @Html.TextBoxFor(m => m.Comment)
+                            </div>
+                        </div>
+                        <div class="control-group">       
+                            <button type="submit" class="btn btn-primary">Сохранить</button>          
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="middle">
+            <div class="span3">
+                <div class="control-group">
+                    <label class="span3 text-left">Планируемый расход</label>
                     <div class="controls">   
                         @Html.TextBoxFor(m => m.PlannedExpense, new { @readonly = "true" })
                     </div>
-            </div>
-            <div class="control-group">
-                <label class="span3 text-left">Планируемая сумма с клиента</label>
+                </div>
+                <div class="control-group">
+                    <label class="span3 text-left">Планируемая сумма с клиента</label>
                     <div class="controls">   
                         @Html.TextBoxFor(m => m.PlannedPrice, new { @readonly = "true" })
                     </div>
-            </div>
-             <div class="control-group">
-                <label class="span3 text-left">Планируемая прибыль</label>
+                </div>
+                <div class="control-group">
+                    <label class="span3 text-left">Планируемая прибыль</label>
                     <div class="controls">   
                         @Html.TextBoxFor(m => m.PlannedProfit, new { @readonly = "true" })
                     </div>
+                </div>
             </div>
-       </div>
-    </div>
-    <div class="middle">
-        <div class="span3">
-            <div class="control-group">
-                <label class="span3 text-left">Фактический расход</label>
+        </div>
+        <div class="middle">
+            <div class="span3">
+                <div class="control-group">
+                    <label class="span3 text-left">Фактический расход</label>
                     <div class="controls">   
                         @Html.TextBoxFor(m => m.RealExpense, new { @readonly = "true" })
                     </div>
-            </div>
-            <div class="control-group">
-                <label class="span3 text-left">Фактическая сумма с клиента</label>
+                </div>
+                <div class="control-group">
+                    <label class="span3 text-left">Фактическая сумма с клиента</label>
                     <div class="controls">   
                         @Html.TextBoxFor(m => m.RealPrice, new { @readonly = "true" })
                     </div>
-            </div>
-             <div class="control-group">
-                <label class="span3 text-left">Фактическая прибыль</label>
+                </div>
+                <div class="control-group">
+                    <label class="span3 text-left">Фактическая прибыль</label>
                     <div class="controls">   
                         @Html.TextBoxFor(m => m.RealProfit, new { @readonly = "true" })
                     </div>
+                </div>
             </div>
-       </div>
+        </div>
     </div>
- </div>
-<div>
-</div>
-   <div id="pager2"></div> 
-                
+
     <table id = "loaders"></table>
     <div style="margin-bottom: 20px">
         <div id ="add_loading" class="btn btn-primary controls">+</div>
@@ -121,9 +114,9 @@
         <div id ="delete_route" class="btn btn-primary controls" action="@Url.Action("DeleteRoute")">-</div>  
     </div>
 
-     <div class="control-group" >
+    <div class="control-group" >
         <div id ="shipments_btn" class="btn btn-primary controls">Отгрузка</div>
-     </div>  
+    </div>  
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Transportation")></div>
     <div id="loader_dialog" title="Загрузка" action = @Url.Action("Loader", "Transportation")></div>
@@ -134,6 +127,3 @@
     <div id="delRoute_dialog" title="Подтвердите удаление данных"><p class="btn-danger" id="infoRouteDel"></p></div>     
 
 </div>
-
-
-    
