@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -67,6 +67,11 @@
     <Compile Include="Entity\Station.cs" />
     <Compile Include="Entity\Transportation.cs" />
     <Compile Include="FRDbContext.cs" />
+    <Compile Include="Migrations\201305151543018_1.cs" />
+    <Compile Include="Migrations\201305151543018_1.Designer.cs">
+      <DependentUpon>201305151543018_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ForwarderRepository.cs" />
     <Compile Include="Repositories\IForwarderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +79,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shared\Error.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201305151543018_1.resx">
+      <DependentUpon>201305151543018_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

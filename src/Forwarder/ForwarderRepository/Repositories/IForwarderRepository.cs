@@ -29,5 +29,9 @@ namespace ForwarderDAL.Repositories
         bool SaveLoad(Load load);
         bool SaveRoute(Route route);
         bool SaveExpense(Expense expense);
+
+        bool DeleteRouteById(int routeId);
+
+        bool DeleteLoaderById(int loaderId);
     }
 }

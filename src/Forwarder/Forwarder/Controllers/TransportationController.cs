@@ -479,5 +479,20 @@ namespace Forwarder.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public ViewResult ReportPage()
+        {
+            return View("ReportPage");
+        }
+
+        public bool DeleteLoader(int loaderId)
+        {
+            return  repository.DeleteLoaderById(loaderId);
+        }
+
+        public bool DeleteRoute(int routeId)
+        {
+            return repository.DeleteRouteById(routeId);
+        }
     }
 }
