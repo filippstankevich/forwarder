@@ -84,6 +84,8 @@ namespace ForwarderTest
 
             List<Shipment> shipments = importer.Import(file.FullName);
 
+            Console.WriteLine(shipments.Count);
+
             Assert.AreEqual(expectedCount, shipments.Count);
         }
 
