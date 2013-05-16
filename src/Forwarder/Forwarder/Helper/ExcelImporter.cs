@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using ForwarderDAL.Entity;
 using Microsoft.Office.Interop.Excel;
@@ -11,9 +12,14 @@ namespace Forwarder.Helper
     {
         public List<Shipment> Import(string fileName)
         {
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException();
+            }
+
             Application objExcel = new Application();
             //Открываем книгу.                                                                                                                                                        
-            Workbook objWorkBook = objExcel.Workbooks.Open(fileName, 0, false, 5, "", "", false, XlPlatform.xlWindows, "", true, false, 0, true, false, false);
+            Workbook objWorkBook = objExcel.Workbooks.Open(fileName);
             //Выбираем таблицу(лист).
             Worksheet objWorkSheet = (Worksheet)objWorkBook.Sheets[1];
 
