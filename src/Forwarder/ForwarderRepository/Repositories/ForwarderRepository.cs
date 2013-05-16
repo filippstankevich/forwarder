@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ForwarderDAL.Entity;
 
 namespace ForwarderDAL.Repositories
@@ -66,7 +67,7 @@ namespace ForwarderDAL.Repositories
             return true;
         }
 
-         public bool AddNewShipment(Shipment shipment)
+        public bool AddNewShipment(Shipment shipment)
         {
             context.Shipments.Add(shipment);
             context.SaveChanges();
@@ -121,24 +122,60 @@ namespace ForwarderDAL.Repositories
 
         public bool SaveExpense(Expense expense)
         {
-            if (expense.Id > 0)
+            try
             {
-                Expense storedExpense = context.Expenses.First(o => o.Id == expense.Id);
+                if (expense.Id > 0)
+                {
+                    Expense storedExpense = context.Expenses.First(o => o.Id == expense.Id);
 
-                storedExpense.RouteId = expense.RouteId;
-                storedExpense.Method = expense.Method;
-                storedExpense.LoadId = expense.LoadId;
-                storedExpense.ExpenseTypeId = expense.ExpenseTypeId;
-                storedExpense.Value = expense.Value;
+                    storedExpense.RouteId = expense.RouteId;
+                    storedExpense.Method = expense.Method;
+                    storedExpense.LoadId = expense.LoadId;
+                    storedExpense.ExpenseTypeId = expense.ExpenseTypeId;
+                    storedExpense.Value = expense.Value;
 
-                context.Entry(storedExpense);
+                    context.Entry(storedExpense);
+                }
+                else
+                {
+                    context.Expenses.Add(expense);
+                }
+                context.SaveChanges();
             }
-            else
+            catch (Exception e)
             {
-                context.Expenses.Add(expense);
+                return false;
             }
-            context.SaveChanges();
+            return true;
+        }
 
+        public bool DeleteRouteById(int routeId)
+        {
+            try
+            {
+                Route route = Routes.Single(r => r.Id == routeId);
+                context.Routes.Remove(route);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool DeleteLoaderById(int loaderId)
+        {
+            try
+            {
+                Load load = Loads.Single(r => r.Id == loaderId);
+                context.Loads.Remove(load);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
             return true;
         }
 

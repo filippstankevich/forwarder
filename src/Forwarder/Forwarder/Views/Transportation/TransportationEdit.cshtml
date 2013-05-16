@@ -112,19 +112,17 @@
     <table id = "loaders"></table>
     <div style="margin-bottom: 20px">
         <div id ="add_loading" class="btn btn-primary controls">+</div>
-        <div id ="delete_loading" class="btn btn-primary controls">-</div>
+        <div id ="delete_loading" class="btn btn-primary controls" action="@Url.Action("DeleteLoader")">-</div>
     </div>
 
     <table id = "route"></table>
     <div style="margin-bottom: 20px">
         <div id ="add_route" class="btn btn-primary controls">+</div>
-        <div id ="delete_route" class="btn btn-primary controls">-</div>  
+        <div id ="delete_route" class="btn btn-primary controls" action="@Url.Action("DeleteRoute")">-</div>  
     </div>
 
      <div class="control-group" >
         <div id ="shipments_btn" class="btn btn-primary controls">Отгрузка</div>
-        <div id ="prinet_btn" class="btn btn-primary controls" >@Html.ActionLink("Печать", "ReportPage")Печать</div>
-@*         *@
      </div>  
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Transportation")></div>
@@ -132,9 +130,10 @@
     <div id="route_dialog" title="Маршрут" action = @Url.Action("Route", "Transportation")></div>
     <div id="consumpt_edit" title="Расход" action = @Url.Action("Consumpt", "Transportation")></div>
     <div id="shipping_dialog" title="Отгрузка" action = @Url.Action("Shipping", "Transportation")></div>
-    <div id="delno_dialog" title="Подтвердите удаление данных"></div>     
+    <div id="delno_dialog" title="Подтвердите удаление данных"><p class="btn-danger" id="infoLoadDel"></p></div>     
+    <div id="delRoute_dialog" title="Подтвердите удаление данных"><p class="btn-danger" id="infoRouteDel"></p></div>     
 
- </div>
+</div>
 
 
     

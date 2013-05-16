@@ -11,7 +11,7 @@
     <div>
 			<br>
 			<br>
-			<cc1:StiWebViewer id="StiWebViewer1" runat="server" Width="100%" Height="309px"
+			<cc1:StiWebViewer id="StiWebViewer1" runat="server" Width="100%" Height="100%"
 				ToolBarBackColor="WhiteSmoke" ImagesPath="Images/"></cc1:StiWebViewer>
 
     </div>
