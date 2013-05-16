@@ -68,26 +68,24 @@ namespace ForwarderTest
         #endregion
 
 
-        /// <summary>
-        ///Тест для Import
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem(@"data\loadd2007.XLS")]
-        public void ImportTestCount()
-        {
-            const string fileName = "loadd2007.XLS";
+        ///// <summary>
+        /////Тест для Import
+        /////</summary>
+        //[TestMethod()]
+        //[DeploymentItem(@"data\loadd2007.XLS")]
+        //public void ImportTestCount()
+        //{
+        //    const string fileName = "loadd2007.XLS";
 
-            const int expectedCount = 4;
+        //    const int expectedCount = 4;
 
-            FileInfo file = new FileInfo(fileName);
-            ExcelImporter importer = new ExcelImporter();
+        //    FileInfo file = new FileInfo(fileName);
+        //    ExcelImporter importer = new ExcelImporter();
 
-            List<Shipment> shipments = importer.Import(file.FullName);
+        //    List<Shipment> shipments = importer.Import(file.FullName);
 
-            Console.WriteLine(shipments.Count);
-
-            Assert.AreEqual(expectedCount, shipments.Count);
-        }
+        //    Assert.AreEqual(expectedCount, shipments.Count);
+        //}
 
         /// <summary>
         ///Тест для Import
