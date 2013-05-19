@@ -16,31 +16,35 @@
                             <label class="span3 text-left">Регистрационный номер</label>
                             <div class="controls">   
                                 @Html.TextBoxFor(m => m.RegNumber)
+                                @Html.ValidationMessageFor(m=>m.RegNumber)
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="span3 text-left">Груз по ГНГ</label>
                             <div class="controls">   
                                 @Html.DropDownListFor(m => m.GngId, Model.GngItems)
+                                @Html.ValidationMessageFor(m=>m.GngId)
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="span3 text-left">Груз по ЕТСНГ</label>
                             <div class="controls">   
                                 @Html.DropDownListFor(m => m.EtsngId, Model.EtsngItems)
+                                @Html.ValidationMessageFor(m=>m.EtsngId)
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="span3 text-left">Станция назначения</label>
                             <div class="controls">   
                                 @Html.DropDownListFor(m => m.SourceStationId, Model.StationItems)
-
+                                @Html.ValidationMessageFor(m=>m.SourceStationId)
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="span3 text-left">Станция прибытия</label>
                             <div class="controls">   
                                 @Html.DropDownListFor(m => m.DestinationStationId, Model.StationItems)
+                                @Html.ValidationMessageFor(m=>m.DestinationStationId)
                             </div>
                         </div>
                         <div class="control-group">
@@ -115,7 +119,9 @@
     </div>
 
     <div class="control-group" >
-        <div id ="shipments_btn" class="btn btn-primary controls">Отгрузка</div>
+        <div class="btn btn-link controls" style="border-color: #0044cc; border-radius: 4px" >
+            @Html.ActionLink("Отгрузка", "Shipping",  new { id = Model.Id })
+        </div>
     </div>  
 
     <div id="consumpt_dialog" title="Расход" action = @Url.Action("Consumption", "Transportation")></div>

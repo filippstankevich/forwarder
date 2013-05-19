@@ -1,5 +1,7 @@
 ﻿@model Forwarder.Models.ExpenseModel  
-
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+ 
 <script src="@Url.Content("~/Scripts/DataGrid.js")" type="text/javascript"></script>  
 
 @using (Html.BeginForm("ExpenseData", "Transportation"))
@@ -14,24 +16,28 @@
                     <label class="span3 text-left">Тип</label>
                     <div class="controls">              
                          @Html.DropDownListFor(m => m.ExpenseTypeId, Model.ExpenseTypes)
+                         @Html.ValidationMessageFor(m => m.ExpenseTypeId)
                     </div>
                 </div>
                  <div class="control-group">
                     <label class="span3 text-left">Загрузка</label>
                     <div class="controls">
                         @Html.DropDownListFor(m => m.LoadId, Model.Loads)
+                        @Html.ValidationMessageFor(m => m.LoadId)
                     </div>
                 </div>   
                 <div class="control-group">
                     <label class="span3 text-left">Расход</label>
                     <div class="controls">
                         @Html.TextBoxFor(m => m.Expense)
+                        @Html.ValidationMessageFor(m => m.Expense)
                     </div>
                 </div>   
                 <div class="control-group">
                     <label class="span3 text-left">Метод расчета</label>
                     <div class="controls">
                          @Html.DropDownListFor(m => m.Method, Model.Methods)
+                         @Html.ValidationMessageFor(m => m.Method)
                     </div>
                 </div>      
            
