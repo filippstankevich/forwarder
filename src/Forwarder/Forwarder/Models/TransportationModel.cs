@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,10 +16,15 @@ namespace Forwarder.Models
         public LoadModel Loaders;
 
         public string Id { get; set; }
+        [Required(ErrorMessage = "Выберите значение")]
         public string GngId { get; set; }
+        [Required(ErrorMessage = "Выберите значение")]
         public string EtsngId { get; set; }
+        [Required(ErrorMessage = "Выберите станцию отправления")]
         public string SourceStationId { get; set; }
+        [Required(ErrorMessage = "Выберите станцию назначения")]
         public string DestinationStationId { get; set; }
+        [Required(ErrorMessage = "Введите регистрацинный номер")]
         public string RegNumber {get; set;}
         public string Comment {get; set;}
 

@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataAnnotationsExtensions">
+      <HintPath>..\packages\DataAnnotationsExtensions.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAnnotationsExtensions.ClientValidation">
+      <HintPath>..\packages\DataAnnotationsExtensions.MVC3.1.1.0.0\lib\NETFramework40\DataAnnotationsExtensions.ClientValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -91,8 +97,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.2.0.0\lib\NETFramework40\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -107,7 +117,6 @@
     <Compile Include="Models\RouteModel.cs" />
     <Compile Include="Models\ShipmentModel.cs" />
     <Compile Include="Models\StationModel.cs" />
-    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TransportationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportForm.aspx.cs">
@@ -348,15 +357,9 @@
     <Content Include="Scripts\i18n\grid.locale-vi.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\jquery-1.9.1-vsdoc.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\jquery-1.9.1.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\jquery-1.9.1.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Scripts\jquery-2.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
+    <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\jquery-migrate-1.1.1.js" />
     <Content Include="Scripts\jquery-migrate-1.1.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.1.js">
@@ -371,15 +374,9 @@
     <Content Include="Scripts\jquery.jqGrid.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\jquery.validate-vsdoc.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\jquery.validate.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\jquery.validate.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -429,7 +426,9 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -455,17 +454,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Scripts\jquery-1.9.1.min.map">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Views\Transportation\FilterView.cshtml" />
     <Content Include="Views\Transportation\Consumption.cshtml" />
     <Content Include="Views\Transportation\Loader.cshtml" />
     <Content Include="Views\Transportation\TransportationEdit.cshtml" />
-    <Content Include="Views\Transportation\Shipping.cshtml" />
     <Content Include="Views\Transportation\Route.cshtml" />
     <Content Include="Views\Transportation\ConsumptEdit.cshtml" />
     <Content Include="Views\Transportation\ReportPage.cshtml" />
+    <None Include="Scripts\jquery-2.0.0.min.map" />
+    <Content Include="Views\Transportation\Shipping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForwarderRepository\ForwarderDAL.csproj">

@@ -83,10 +83,6 @@ $(document).ready(function () {
 
     });
 
-    $('#shipments_btn').click(function () {
-        document.location = '/Transportation/Shipping?id=' + $('#Id').val()
-    });
-
     $('#add_consumpt').click(function () {
 
         $.ajax({

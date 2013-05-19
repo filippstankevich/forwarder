@@ -103,7 +103,7 @@ namespace Forwarder.Controllers
 
         [HttpPost]
         public ViewResult LoaderData(LoadModel model)
-        { 
+        {
             Load load = new Load()
             {
                 Id = model.LoadId,
