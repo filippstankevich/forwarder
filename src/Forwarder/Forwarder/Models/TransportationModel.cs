@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataAnnotationsExtensions;
 using ForwarderDAL.Entity;
 
 namespace Forwarder.Models
@@ -24,6 +25,7 @@ namespace Forwarder.Models
         public string SourceStationId { get; set; }
         [Required(ErrorMessage = "Выберите станцию назначения")]
         public string DestinationStationId { get; set; }
+        [Numeric(ErrorMessage = "Регистрационный номер должен быть числом")]
         [Required(ErrorMessage = "Введите регистрацинный номер")]
         public string RegNumber {get; set;}
         public string Comment {get; set;}
