@@ -19,7 +19,7 @@ namespace Forwarder.Helper
 
             Application objExcel = new Application();
             //Открываем книгу.                                                                                                                                                        
-            Workbook objWorkBook = objExcel.Workbooks.Open(fileName, 0, false, 5, "", "", false, XlPlatform.xlWindows, "", true, false, 0, true, false, false); 
+            Workbook objWorkBook = objExcel.Workbooks.Open(fileName); 
             //Выбираем таблицу(лист).
             Worksheet objWorkSheet = (Worksheet)objWorkBook.Sheets[1];
 

@@ -451,9 +451,10 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\forwarder - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\forwarder - Web Deploy.pubxml" />
-    <None Include="Report.mrt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="Report.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.min.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -7,6 +7,7 @@ using ForwarderDAL.Entity;
 using ForwarderDAL.Repositories;
 using Forwarder.Helper;
 using System.Web;
+using System.IO;
 
 
 namespace Forwarder.Controllers
@@ -184,7 +185,7 @@ namespace Forwarder.Controllers
                                 item.Volume.ToString(),
                                 item.Rate.ToString(),
                                 item.Expenses != null ? item.Expenses.Sum(o=>o.Value).ToString() : "0",
-                                item.Method.ToString(),
+                                item.Method ? "За тонну" : "За вагон",
                                 item.Count.ToString()    
                             }
                     });
@@ -426,7 +427,7 @@ namespace Forwarder.Controllers
             int transportationId = Int32.Parse(id);
 
             //Filipp Stankevich TODO: Workaroud to send file name into ExcelImporter
-            string tempFileName = "C:/Windows/Temp/" + DateTime.Now.Millisecond.ToString() + ".xls";
+            string tempFileName = Path.Combine(Server.MapPath("~") ,  DateTime.Now.Millisecond.ToString() + ".xls");
 
             file.SaveAs(tempFileName);
 
